@@ -1,23 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
     text-align: center;
-    margin: 50px;
-    background-color: #f5f5f5;
-}
-header {
-    background-color: #4CAF50;
-    padding: 20px;
+    padding: 40px 20px;
     color: white;
-    font-size: 24px;
 }
-button {
-    padding: 10px 20px;
+
+.header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
     font-size: 16px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
+    opacity: 0.9;
 }
-button:hover {
-    background-color: #0056b3;
+
+.container {
+    flex: 1;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    color: #5a67d8;
+}
+
+.btn {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: #5a67d8;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: #434190;
+    transform: scale(1.05);
+}
+
+.hidden {
+    display: none;
+}
+
+#message {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.footer {
+    text-align: center;
+    padding: 15px;
+    color: white;
+    font-size: 14px;
 }
