@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
-   <script src="https://dev-d.sc-shutto-translation.com/trans.js?id=574"></script>
 <meta charset="UTF-8">
-<title>自動翻訳設定デモ</title>
+<title>Auto Translation Setting Demo</title>
 
 <style>
 body {
@@ -59,27 +58,27 @@ button:hover {
 
 <div class="container">
 
-<h1>自動翻訳設定</h1>
+<h1>Automatic Translation Settings</h1>
 
 <p>
-この設定では、数字や記号のみで構成されたテキストを自動翻訳に含めるかどうかを選択できます。<br>
-たとえば、サービス名やスケジュールなど英語のみの単語、または数字のみのテキストの場合、<br>
-翻訳対象外にすると元のテキストがそのまま表示されます。
+This setting allows you to choose whether to include text consisting only of numbers and symbols in automatic translation.<br>
+For example, if the source website contains only English words such as service names or schedules,<br>
+or text consisting only of numbers, the original source text will be displayed unchanged when excluded.
 </p>
 
 <label>
   <input type="checkbox" id="toggle">
-  数字・記号のみのテキストも翻訳する
+  Include numeric and symbol-only text in translation
 </label>
 
 <div class="box">
   <div class="sample" data-type="number">1234567890</div>
   <div class="sample" data-type="symbol">2026/03/17 10:30</div>
   <div class="sample" data-type="text">Service Calendar</div>
-  <div class="sample" data-type="jp">予約受付中</div>
+  <div class="sample" data-type="jp">Reservation Open</div>
 </div>
 
-<button onclick="translate()">翻訳実行</button>
+<button onclick="translate()">Run Translation</button>
 
 </div>
 
@@ -96,11 +95,11 @@ function translate() {
     const original = el.textContent;
 
     if (!includeNumeric && isNumericOrSymbol(original)) {
-      // giữ nguyên
+      // keep original
       el.textContent = original;
     } else {
-      // giả lập "dịch"
-      el.textContent = "【翻訳】" + original;
+      // simulate "translation"
+      el.textContent = "[Translated] " + original;
     }
   });
 }
