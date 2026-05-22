@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1411"></script>
+  <link rel="canonical" href="https://lanlt6782.github.io/my-website/about" />
+  <meta charset="UTF-8">
+  <title>自動翻訳設定デモ</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 40px;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+h1 {
+  margin-top: 0;
+}
+
+.box {
+  margin: 20px 0;
+  padding: 20px;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.sample {
+  font-size: 22px;
+  margin: 12px 0;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: #0078ff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #005fcc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>自動翻訳設定</h1>
+
+<p>
+約5.1g。この設定では、数字と記号のみで構成されたテキストを
+自動翻訳に含めるかどうかを選択できます。<br>
+たとえば、元サイトにサービス名やスケジュールなどの英語のみの単語、
+または数字のみのテキストが含まれている場合、<br>
+除外設定時には元のテキストがそのまま表示されます。
+</p>
+
+<label>
+  <input type="checkbox" id="toggle">
+  数字・記号のみのテキストを翻訳対象に含める
+</label>
+
+<div class="box">
+  <div class="sample" data-type="number">1234567890</div>
+  <div class="sample" data-type="symbol">12/13/2026 10:30</div>
+  <div class="sample" data-type="text">サービスカレンダー</div>
+  <div class="sample" data-type="jp">予約受付中</div>
+   <div class="sample" data-type="number">9/24 100%</div>
+     <div class="sample" data-type="text">Version 1.0!</div>
+  <div class="sample" data-type="text">約5.1g</div>
+</div>
+
+<button onclick="translate()">翻訳実行</button>
+
+</div>
+
+<script>
+function isNumericOrSymbol(text) {
+  return /^[0-9\s\/:.\-]+$/.test(text);
+}
+
+function translate() {
+  const includeNumeric = document.getElementById("toggle").checked;
+  const items = document.querySelectorAll(".sample");
+
+  items.forEach(el => {
+    const original = el.textContent;
+
+    if (!includeNumeric && isNumericOrSymbol(original)) {
+      // 元のまま表示
+      el.textContent = original;
+    } else {
+      // 翻訳シミュレーション
+      el.textContent = "[翻訳済み] " + original;
+    }
+  });
+}
+</script>
+
+</body>
+</html>
