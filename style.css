@@ -1,102 +1,347 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+/* ===================================================
+   RESET
+=================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
+
+/* ===================================================
+   BODY
+=================================================== */
+
+body{
+
+    font-family:"Yu Gothic","Meiryo","Segoe UI",sans-serif;
+
+    background:linear-gradient(180deg,#dff7ff 0%,#edfaff 40%,#fff7fb 100%);
+
+    color:#444;
+
+    line-height:1.8;
+
+}
+
+/* ===================================================
+   HEADER
+=================================================== */
+
 .header{
-    text-align: center;
+
+    text-align:center;
+
+    padding:40px 20px;
+
 }
 
-.vietnam-flag{
-    width: 180px;
-    display: block;
-    margin: 0 auto 20px auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+.flag{
+
+    width:180px;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+    margin-bottom:25px;
+
 }
 
-body {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #333;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+.header h1{
+
+    color:#1b8de4;
+
+    font-size:40px;
+
+    margin-bottom:25px;
+
+    text-shadow:1px 1px 3px rgba(255,255,255,.8);
+
 }
 
-.header {
-    text-align: center;
-    padding: 40px 20px;
-    color: white;
+/* ===================================================
+   SUBTITLE
+=================================================== */
+
+.subtitle{
+
+    display:inline-block;
+
+    margin:8px;
+
+    padding:12px 22px;
+
+    background:white;
+
+    border-radius:50px;
+
+    border:2px solid #b9ecff;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    transition:.3s;
+
 }
 
-.header h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
+.subtitle:hover{
+
+    transform:translateY(-3px);
+
+    background:#f7ffff;
+
 }
 
-.subtitle {
-    font-size: 16px;
-    opacity: 0.9;
+/* ===================================================
+   CONTAINER
+=================================================== */
+
+.container{
+
+    width:90%;
+
+    max-width:1100px;
+
+    margin:auto;
+
+    padding-bottom:60px;
+
 }
 
-.container {
-    flex: 1;
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
+/* ===================================================
+   CARD
+=================================================== */
+
+.card{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:30px;
+
+    margin:35px 0;
+
+    border:3px solid #d8f5ff;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+
 }
 
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+.card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+
 }
 
-.card:hover {
-    transform: translateY(-5px);
+/* ===================================================
+   TITLE
+=================================================== */
+
+.card h2{
+
+    color:#1f8cff;
+
+    margin-bottom:20px;
+
+    padding-left:15px;
+
+    border-left:8px solid #67d3ff;
+
 }
 
-.card h2 {
-    margin-bottom: 15px;
-    color: #5a67d8;
+/* ===================================================
+   TẤT CẢ TEXT ĐỀU CÓ KHUNG
+=================================================== */
+
+.card p{
+
+    background:#f8fdff;
+
+    border:1px solid #d8efff;
+
+    border-radius:15px;
+
+    padding:18px;
+
+    margin-bottom:18px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.05);
+
+    transition:.25s;
+
 }
 
-.btn {
-    display: block;
-    margin: 20px auto;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    background: #5a67d8;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.card p:hover{
+
+    background:#ffffff;
+
 }
 
-.btn:hover {
-    background: #434190;
-    transform: scale(1.05);
+/* ===================================================
+   INPUT
+=================================================== */
+
+input{
+
+    width:100%;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    border:2px solid #bcecff;
+
+    outline:none;
+
+    font-size:16px;
+
+    transition:.3s;
+
+    margin-top:10px;
+
 }
 
-.hidden {
-    display: none;
+input:focus{
+
+    border-color:#45c3ff;
+
+    box-shadow:0 0 10px rgba(69,195,255,.25);
+
 }
 
-#message {
-    text-align: center;
-    margin-top: 20px;
-    font-weight: bold;
-    color: white;
+/* ===================================================
+   BUTTON
+=================================================== */
+
+.btn{
+
+    margin-top:20px;
+
+    padding:14px 35px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:linear-gradient(90deg,#55d8ff,#5ab2ff);
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:0 8px 20px rgba(80,180,255,.3);
+
 }
 
-.footer {
-    text-align: center;
-    padding: 15px;
-    color: white;
-    font-size: 14px;
+.btn:hover{
+
+    transform:translateY(-3px);
+
+    background:linear-gradient(90deg,#38cfff,#409cff);
+
+}
+
+/* ===================================================
+   RESULT
+=================================================== */
+
+#result{
+
+    margin-top:25px;
+
+    min-height:80px;
+
+    background:#fffdf4;
+
+    border:2px dashed #ffd966;
+
+    border-radius:15px;
+
+    padding:18px;
+
+    white-space:pre-wrap;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.05);
+
+}
+
+/* ===================================================
+   FOOTER
+=================================================== */
+
+footer{
+
+    margin-top:40px;
+
+    background:linear-gradient(90deg,#56cfff,#7cb9ff);
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px;
+
+    font-size:16px;
+
+}
+
+/* ===================================================
+   HIDDEN
+=================================================== */
+
+.hidden{
+
+    display:none;
+
+}
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+
+@media(max-width:768px){
+
+.header h1{
+
+    font-size:30px;
+
+}
+
+.card{
+
+    padding:20px;
+
+}
+
+.subtitle{
+
+    display:block;
+
+    margin:10px auto;
+
+    width:90%;
+
+}
+
+.flag{
+
+    width:140px;
+
+}
+
+.btn{
+
+    width:100%;
+
+}
+
 }
