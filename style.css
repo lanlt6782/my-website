@@ -16,7 +16,7 @@ body{
 
     font-family:"Yu Gothic","Meiryo","Segoe UI",sans-serif;
 
-    background:linear-gradient(180deg,#dff7ff 0%,#edfaff 40%,#fff7fb 100%);
+    background:linear-gradient(135deg,#FFE082,#FFB74D,#FF9800);
 
     color:#444;
 
@@ -32,7 +32,7 @@ body{
 
     text-align:center;
 
-    padding:40px 20px;
+    padding:50px 20px;
 
 }
 
@@ -40,23 +40,27 @@ body{
 
     width:180px;
 
-    border-radius:15px;
+    border-radius:18px;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    border:6px solid white;
 
-    margin-bottom:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+    margin-bottom:30px;
 
 }
 
 .header h1{
 
-    color:#1b8de4;
+    color:white;
 
-    font-size:40px;
+    font-size:42px;
 
     margin-bottom:25px;
 
-    text-shadow:1px 1px 3px rgba(255,255,255,.8);
+    font-weight:bold;
+
+    text-shadow:3px 3px 8px rgba(0,0,0,.25);
 
 }
 
@@ -72,13 +76,17 @@ body{
 
     padding:12px 22px;
 
-    background:white;
+    background:#FFF8E1;
 
-    border-radius:50px;
+    border:3px solid #FFA726;
 
-    border:2px solid #b9ecff;
+    border-radius:40px;
 
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    color:#E65100;
+
+    font-weight:bold;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
 
     transition:.3s;
 
@@ -86,9 +94,9 @@ body{
 
 .subtitle:hover{
 
-    transform:translateY(-3px);
+    background:#FFD54F;
 
-    background:#f7ffff;
+    transform:scale(1.05);
 
 }
 
@@ -122,9 +130,9 @@ body{
 
     margin:35px 0;
 
-    border:3px solid #d8f5ff;
+    border:4px solid #FFB300;
 
-    box-shadow:0 12px 30px rgba(0,0,0,.08);
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
 
     transition:.35s;
 
@@ -132,9 +140,9 @@ body{
 
 .card:hover{
 
-    transform:translateY(-6px);
+    transform:translateY(-8px);
 
-    box-shadow:0 20px 40px rgba(0,0,0,.12);
+    box-shadow:0 25px 45px rgba(0,0,0,.22);
 
 }
 
@@ -144,25 +152,27 @@ body{
 
 .card h2{
 
-    color:#1f8cff;
+    color:#E65100;
+
+    font-size:30px;
 
     margin-bottom:20px;
 
-    padding-left:15px;
+    border-left:10px solid #FF9800;
 
-    border-left:8px solid #67d3ff;
+    padding-left:15px;
 
 }
 
 /* ===================================================
-   TẤT CẢ TEXT ĐỀU CÓ KHUNG
+   TEXT BOX
 =================================================== */
 
 .card p{
 
-    background:#f8fdff;
+    background:#FFF8E1;
 
-    border:1px solid #d8efff;
+    border:2px solid #FFD54F;
 
     border-radius:15px;
 
@@ -170,15 +180,15 @@ body{
 
     margin-bottom:18px;
 
-    box-shadow:0 3px 10px rgba(0,0,0,.05);
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
 
-    transition:.25s;
+    transition:.3s;
 
 }
 
 .card p:hover{
 
-    background:#ffffff;
+    background:#FFF3CD;
 
 }
 
@@ -192,13 +202,15 @@ input{
 
     padding:15px;
 
+    font-size:16px;
+
     border-radius:12px;
 
-    border:2px solid #bcecff;
+    border:3px solid #FFB300;
+
+    background:white;
 
     outline:none;
-
-    font-size:16px;
 
     transition:.3s;
 
@@ -208,9 +220,9 @@ input{
 
 input:focus{
 
-    border-color:#45c3ff;
+    border-color:#F57C00;
 
-    box-shadow:0 0 10px rgba(69,195,255,.25);
+    box-shadow:0 0 18px rgba(255,152,0,.4);
 
 }
 
@@ -222,31 +234,33 @@ input:focus{
 
     margin-top:20px;
 
-    padding:14px 35px;
+    padding:15px 35px;
 
     border:none;
 
-    border-radius:50px;
+    border-radius:40px;
 
-    background:linear-gradient(90deg,#55d8ff,#5ab2ff);
+    background:linear-gradient(90deg,#FF9800,#FF5722);
 
     color:white;
 
-    font-size:16px;
+    font-size:18px;
+
+    font-weight:bold;
 
     cursor:pointer;
 
     transition:.3s;
 
-    box-shadow:0 8px 20px rgba(80,180,255,.3);
+    box-shadow:0 8px 20px rgba(255,87,34,.35);
 
 }
 
 .btn:hover{
 
-    transform:translateY(-3px);
+    transform:scale(1.06);
 
-    background:linear-gradient(90deg,#38cfff,#409cff);
+    background:linear-gradient(90deg,#F57C00,#E64A19);
 
 }
 
@@ -260,9 +274,9 @@ input:focus{
 
     min-height:80px;
 
-    background:#fffdf4;
+    background:#FFFDE7;
 
-    border:2px dashed #ffd966;
+    border:3px dashed #FF9800;
 
     border-radius:15px;
 
@@ -270,7 +284,7 @@ input:focus{
 
     white-space:pre-wrap;
 
-    box-shadow:0 3px 10px rgba(0,0,0,.05);
+    font-size:16px;
 
 }
 
@@ -280,9 +294,9 @@ input:focus{
 
 footer{
 
-    margin-top:40px;
+    margin-top:50px;
 
-    background:linear-gradient(90deg,#56cfff,#7cb9ff);
+    background:#E65100;
 
     color:white;
 
@@ -290,7 +304,9 @@ footer{
 
     padding:25px;
 
-    font-size:16px;
+    font-size:18px;
+
+    font-weight:bold;
 
 }
 
@@ -316,9 +332,9 @@ footer{
 
 }
 
-.card{
+.flag{
 
-    padding:20px;
+    width:140px;
 
 }
 
@@ -326,15 +342,15 @@ footer{
 
     display:block;
 
-    margin:10px auto;
-
     width:90%;
+
+    margin:10px auto;
 
 }
 
-.flag{
+.card{
 
-    width:140px;
+    padding:20px;
 
 }
 
