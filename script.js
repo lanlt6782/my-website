@@ -215,221 +215,267 @@ if (loadBtn) {
 
 });
 /* ===================================================
-   Existing Function
+   Infinite Scroll
 =================================================== */
 
-function showMessage() {
+const infiniteContainer = document.getElementById("infiniteContainer");
 
-    document
-        .getElementById("message")
-        .classList
-        .toggle("hidden");
+let infiniteIndex = 1;
+
+function createInfiniteItem() {
+
+    const div = document.createElement("div");
+
+    div.className = "infinite-item";
+
+    div.innerHTML = `
+        <h4>商品 ${infiniteIndex}</h4>
+        <p>これはInfinite Scrollで追加されたテキストです。</p>
+        <p>${new Date().toLocaleTimeString()}</p>
+    `;
+
+    infiniteContainer.appendChild(div);
+
+    infiniteIndex++;
 
 }
 
-/* ===================================================
-   Translation Demo
-=================================================== */
+if (infiniteContainer) {
 
-const submitBtn = document.getElementById("submitBtn");
+    for (let i = 0; i < 8; i++) {
 
-if (submitBtn) {
+        createInfiniteItem();
 
-    submitBtn.addEventListener("click", () => {
+    }
 
-        const input = document.getElementById("textInput");
+    infiniteContainer.addEventListener("scroll", () => {
 
-        const result = document.getElementById("result");
+        if (
+            infiniteContainer.scrollTop +
+            infiniteContainer.clientHeight >=
+            infiniteContainer.scrollHeight - 5
+        ) {
 
-        const value = input.value.trim();
+            setTimeout(() => {
 
-        if (value === "") {
+                for (let i = 0; i < 5; i++) {
 
-            result.innerHTML = "<p>入力してください。</p>";
+                    createInfiniteItem();
 
-            return;
+                }
+
+            }, 800);
 
         }
 
-        result.innerHTML = `
-            <p>${value}</p>
-        `;
+    });
+
+}
+
+/* ===================================================
+   Search Ajax
+=================================================== */
+
+const searchInput = document.getElementById("searchInput");
+
+const searchResult = document.getElementById("searchResult");
+
+const products = [
+
+    "MacBook Pro",
+    "MacBook Air",
+    "iPhone 16",
+    "iPhone 16 Pro",
+    "Apple Watch",
+    "AirPods Pro",
+    "QA Testing Book",
+    "Chrome Extension Guide",
+    "JavaScript Book",
+    "Playwright TypeScript"
+
+];
+
+if (searchInput) {
+
+    searchInput.addEventListener("input", () => {
+
+        searchResult.innerHTML = "<p>検索中...</p>";
+
+        setTimeout(() => {
+
+            const keyword = searchInput.value.toLowerCase();
+
+            searchResult.innerHTML = "";
+
+            const result = products.filter(item =>
+
+                item.toLowerCase().includes(keyword)
+
+            );
+
+            if (result.length === 0) {
+
+                searchResult.innerHTML =
+
+                    "<p>検索結果がありません。</p>";
+
+                return;
+
+            }
+
+            result.forEach(item => {
+
+                const p = document.createElement("p");
+
+                p.textContent = item;
+
+                searchResult.appendChild(p);
+
+            });
+
+        }, 500);
 
     });
 
 }
 
 /* ===================================================
-   Popup
+   Duplicate Text
 =================================================== */
 
-const popup = document.getElementById("popup");
+const duplicateBtn = document.getElementById("duplicateBtn");
 
-const popupBtn = document.getElementById("popupBtn");
+const duplicateArea = document.getElementById("duplicateArea");
 
-const closePopup = document.getElementById("closePopup");
+if (duplicateBtn) {
 
-if (popupBtn) {
+    duplicateBtn.addEventListener("click", () => {
 
-    popupBtn.addEventListener("click", () => {
+        const p = document.createElement("p");
 
-        popup.classList.remove("hidden");
+        p.textContent =
 
-    });
+            "この文章は毎回同じ内容です。";
 
-}
-
-if (closePopup) {
-
-    closePopup.addEventListener("click", () => {
-
-        popup.classList.add("hidden");
+        duplicateArea.appendChild(p);
 
     });
 
 }
 
 /* ===================================================
-   Modal
+   Replace Text
 =================================================== */
 
-const modal = document.getElementById("modal");
+const replaceBtn = document.getElementById("replaceBtn");
 
-const modalBtn = document.getElementById("modalBtn");
+const replaceText = document.getElementById("replaceText");
 
-const closeModal = document.getElementById("closeModal");
+let replaceIndex = 1;
 
-if (modalBtn) {
+if (replaceBtn) {
 
-    modalBtn.addEventListener("click", () => {
+    replaceBtn.addEventListener("click", () => {
 
-        modal.classList.remove("hidden");
+        replaceText.textContent =
 
-    });
+            `更新された文章 ${replaceIndex} (${new Date().toLocaleTimeString()})`;
 
-}
-
-if (closeModal) {
-
-    closeModal.addEventListener("click", () => {
-
-        modal.classList.add("hidden");
+        replaceIndex++;
 
     });
 
 }
 
 /* ===================================================
-   Accordion
+   Remove DOM
 =================================================== */
 
-const accordion = document.querySelector(".accordion");
+const removeBtn = document.getElementById("removeBtn");
 
-if (accordion) {
+const removeArea = document.getElementById("removeArea");
 
-    accordion.addEventListener("click", () => {
+if (removeBtn) {
 
-        const content = accordion.nextElementSibling;
+    removeBtn.addEventListener("click", () => {
 
-        content.classList.toggle("show");
+        if (removeArea.firstElementChild) {
+
+            removeArea.firstElementChild.remove();
+
+        }
 
     });
 
 }
 
 /* ===================================================
-   Ajax Tab
+   Dropdown Ajax
 =================================================== */
 
-const tabContent = document.getElementById("tabContent");
+const categorySelect = document.getElementById("categorySelect");
 
-const tabs = document.querySelectorAll(".tab-btn");
+const categoryResult = document.getElementById("categoryResult");
 
-const tabData = {
+const categoryData = {
 
-    1: `
-        <h3>商品情報</h3>
-        <p>Apple MacBook Pro M5</p>
-        <p>価格：250,000円</p>
-        <p>発売日：2026年3月</p>
+    book: `
+
+        <h4>本一覧</h4>
+
+        <p>Playwright実践ガイド</p>
+
+        <p>JavaScript完全入門</p>
+
+        <p>QAテスト設計</p>
+
     `,
 
-    2: `
-        <h3>レビュー</h3>
-        <p>★★★★★</p>
-        <p>非常に高速です。</p>
-        <p>翻訳品質確認用レビュー。</p>
+    pc: `
+
+        <h4>パソコン一覧</h4>
+
+        <p>MacBook Pro</p>
+
+        <p>ThinkPad X1</p>
+
+        <p>Surface Laptop</p>
+
     `,
 
-    3: `
-        <h3>QA情報</h3>
-        <p>MutationObserver Test</p>
-        <p>Dynamic Content Test</p>
-        <p>Chrome Extension Test</p>
+    food: `
+
+        <h4>食品一覧</h4>
+
+        <p>寿司</p>
+
+        <p>ラーメン</p>
+
+        <p>カレーライス</p>
+
     `
 
 };
 
-tabs.forEach(btn => {
+if (categorySelect) {
 
-    btn.addEventListener("click", () => {
+    categorySelect.addEventListener("change", () => {
 
-        const id = btn.dataset.tab;
+        categoryResult.innerHTML =
 
-        tabContent.innerHTML = "<p>Loading...</p>";
-
-        setTimeout(() => {
-
-            tabContent.innerHTML = tabData[id];
-
-        }, 1000);
-
-    });
-
-});
-
-/* ===================================================
-   Load More
-=================================================== */
-
-const loadBtn = document.getElementById("loadMoreBtn");
-
-const loadContainer = document.getElementById("loadContainer");
-
-let loadCount = 1;
-
-if (loadBtn) {
-
-    loadBtn.addEventListener("click", () => {
-
-        loadBtn.disabled = true;
-
-        loadBtn.innerText = "Loading...";
+            "<p>Loading...</p>";
 
         setTimeout(() => {
 
-            for (let i = 1; i <= 5; i++) {
+            categoryResult.innerHTML =
 
-                const p = document.createElement("p");
+                categoryData[categorySelect.value] || "";
 
-                p.textContent =
-                    `追加データ ${loadCount}-${i} （${new Date().toLocaleTimeString()}）`;
-
-                loadContainer.appendChild(p);
-
-            }
-
-            loadCount++;
-
-            loadBtn.disabled = false;
-
-            loadBtn.innerText = "Load More";
-
-        }, 1200);
+        }, 700);
 
     });
 
-});
+}
 
 /* ===================================================
    Auto Update
@@ -661,4 +707,3 @@ setInterval(() => {
 =================================================== */
 
 console.log("Dynamic Test Page Ready.");
-
