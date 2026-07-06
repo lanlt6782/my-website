@@ -1,500 +1,584 @@
-<!-- ================= Dynamic Test Area ================= -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<section class="card">
+<title>ランのポートフォリオ</title>
 
-    <h2>🚀 Dynamic Content Test Area</h2>
+<script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1418"></script>
 
-    <p>
-        Chrome ExtensionのDynamic Content収集テスト用ページです。
-    </p>
+<style>
 
-</section>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-<!-- ================= Popup ================= -->
+body{
 
-<section class="card">
+    font-family:"Yu Gothic","Meiryo",sans-serif;
 
-    <h2>Popup Test</h2>
+    background:linear-gradient(180deg,#dff6ff,#eefcff,#fefcff);
 
-    <p>
-        Popupを表示して、新しいテキストを生成します。
-    </p>
+    color:#444;
 
-    <button
-        class="btn"
-        id="popupBtn">
+    line-height:1.8;
 
-        Popup表示
+}
 
-    </button>
+/*========================*/
 
-</section>
+.container{
 
-<!-- ================= Modal ================= -->
+    width:90%;
+    max-width:1000px;
 
-<section class="card">
+    margin:auto;
 
-    <h2>Modal Test</h2>
+    padding:30px 0 60px;
 
-    <p>
+}
 
-        Modalを表示します。
+/*========================*/
 
-    </p>
+.header{
 
-    <button
-        class="btn"
-        id="modalBtn">
+    text-align:center;
 
-        Modal表示
+    padding:40px 20px;
 
-    </button>
+}
 
-</section>
+.header img{
 
-<!-- ================= Accordion ================= -->
+    width:160px;
 
-<section class="card">
+    border-radius:12px;
 
-    <h2>Accordion Test</h2>
+    box-shadow:0 6px 15px rgba(0,0,0,.15);
 
-    <button class="accordion">
+    margin-bottom:20px;
 
-        QAテストについて
+}
 
-    </button>
+.header h1{
 
-    <div class="accordion-content">
+    color:#1976d2;
 
-        <p>
+    margin-bottom:15px;
 
-            この文章はAccordionを開いた時だけ表示されます。
+    font-size:34px;
 
+}
+
+.subtitle{
+
+    display:inline-block;
+
+    background:white;
+
+    padding:12px 18px;
+
+    margin:8px;
+
+    border-radius:30px;
+
+    border:2px solid #b3e5fc;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+
+}
+
+/*========================*/
+
+.card{
+
+    background:white;
+
+    margin-top:30px;
+
+    border-radius:20px;
+
+    padding:28px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    border:2px solid #d7f0ff;
+
+}
+
+.card h2{
+
+    color:#2196f3;
+
+    margin-bottom:20px;
+
+    border-left:8px solid #4fc3f7;
+
+    padding-left:12px;
+
+}
+
+.card p{
+
+    background:#f8fdff;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    border:1px solid #d8efff;
+
+    margin-bottom:15px;
+
+}
+
+/*========================*/
+
+input{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:10px;
+
+    border:2px solid #b2ebf2;
+
+    font-size:16px;
+
+    margin-top:10px;
+
+    margin-bottom:18px;
+
+}
+
+input:focus{
+
+    outline:none;
+
+    border-color:#29b6f6;
+
+}
+
+/*========================*/
+
+.btn{
+
+    background:#4fc3f7;
+
+    color:white;
+
+    border:none;
+<head>
+
+    padding:14px 30px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    border-radius:30px;
+    <title>ランのポートフォリオ</title>
+
+    font-size:16px;
+    <!-- Shutto Translation -->
+    <script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1418"></script>
+
+    cursor:pointer;
+    <link rel="stylesheet" href="style.css">
+
+    transition:.3s;
+</head>
+
+}
+<body>
+
+.btn:hover{
+    <!-- ================= Header ================= -->
+
+    background:#29b6f6;
+    <header class="header">
+
+    transform:translateY(-2px);
+        <img
+            class="flag"
+            src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg"
+            alt="ベトナム国旗">
+
+}
+        <h1>
+            ランのポートフォリオサイトへようこそ
+        </h1>
+
+/*========================*/
+        <p class="subtitle">
+            QAテスター・ランの公式ウェブサイト
         </p>
 
-        <p>
-
-            Dynamic Contentの収集確認用テキストです。
-
+#result{
+        <p class="subtitle">
+            翻訳サイトに新しいフレーズを追加する
         </p>
 
-    </div>
-
-</section>
-
-<!-- ================= Ajax Tabs ================= -->
-
-<section class="card">
-
-    <h2>Ajax Tab Test</h2>
-
-    <div class="tabs">
-
-        <button
-            class="tab-btn"
-            data-tab="1">
-
-            商品情報
-
-        </button>
-
-        <button
-            class="tab-btn"
-            data-tab="2">
-
-            レビュー
-
-        </button>
-
-        <button
-            class="tab-btn"
-            data-tab="3">
-
-            QA情報
-
-        </button>
-
-    </div>
-
-    <div
-        id="tabContent"
-        class="tab-content">
-
-        商品情報を表示しています。
-
-    </div>
-
-</section>
-
-<!-- ================= Load More ================= -->
-
-<section class="card">
-
-    <h2>Load More Test</h2>
-
-    <div id="loadContainer">
-
-        <p>
-
-            初期データ１
-
+    margin-top:20px;
+        <p class="subtitle">
+            翻訳サイトに新しいフレーズを追加する12345
         </p>
 
-        <p>
-
-            初期データ２
-
+    min-height:70px;
+        <p class="subtitle">
+            翻訳サイト666666666666666
         </p>
 
-    </div>
-
-    <button
-        class="btn"
-        id="loadMoreBtn">
-
-        Load More
-
-    </button>
-
-</section>
-
-<!-- ================= Infinite Scroll ================= -->
-
-<section class="card">
-
-    <h2>
-
-        Infinite Scroll Test
-
-    </h2>
-
-    <div
-        id="infiniteContainer">
-
-    </div>
-
-</section>
-
-<!-- ================= Search Ajax ================= -->
-
-<section class="card">
-
-    <h2>
-
-        Search Ajax Test
-
-    </h2>
-
-    <input
-
-        id="searchInput"
-
-        type="text"
-
-        placeholder="商品名を入力してください">
-
-    <div
-
-        id="searchResult">
-
-    </div>
-
-</section>
-
-<!-- ================= Duplicate Text ================= -->
-
-<section class="card">
-
-    <h2>
-
-        Duplicate Text Test
-
-    </h2>
-
-    <button
-
-        class="btn"
-
-        id="duplicateBtn">
-
-        同じテキストを追加
-
-    </button>
-
-    <div
-
-        id="duplicateArea">
-
-    </div>
-
-</section>
-
-<!-- ================= Replace Text ================= -->
-
-<section class="card">
-
-    <h2>
-
-        Replace Text Test
-
-    </h2>
-
-    <button
-
-        class="btn"
-
-        id="replaceBtn">
-
-        テキスト変更
-
-    </button>
-
-    <p
-
-        id="replaceText">
-
-        初期テキストです。
-
-    </p>
-
-</section>
-
-<!-- ================= Remove DOM ================= -->
-
-<section class="card">
-
-    <h2>
-
-        Remove DOM Test
-
-    </h2>
-
-    <button
-
-        class="btn"
-
-        id="removeBtn">
-
-        DOM削除
-
-    </button>
-
-    <div
-
-        id="removeArea">
-
-        <p>
-
-            この文章は削除されます。
-
+    background:#fffdf6;
+        <p class="subtitle">
+            日本語はいいです。
         </p>
 
-    </div>
-
-</section>
-
-<!-- ================= Auto Update ================= -->
-
-<section class="card">
-
-    <h2>
-
-        Auto Update Test
-
-    </h2>
-
-    <button
-
-        class="btn"
-
-        id="autoBtn">
-
-        自動追加開始
-
-    </button>
-
-    <div
-
-        id="autoArea">
-
-    </div>
-
-</section>
-
-<!-- ================= Dropdown Ajax ================= -->
-
-<section class="card">
-
-    <h2>
-
-        Dropdown Ajax Test
-
-    </h2>
-
-    <select
-
-        id="categorySelect">
-
-        <option value="">選択してください</option>
-
-        <option value="book">本</option>
-
-        <option value="pc">パソコン</option>
-
-        <option value="food">食品</option>
-
-    </select>
-
-    <div
-
-        id="categoryResult">
-
-    </div>
-
-</section>
-
-<!-- ================= Toast ================= -->
-
-<section class="card">
-
-    <h2>
-
-        Toast Notification Test
-
-    </h2>
-
-    <button
-
-        class="btn"
-
-        id="toastBtn">
-
-        Toast表示
-
-    </button>
-
-</section>
-
-<!-- ================= Fake SPA ================= -->
-
-<section class="card">
-
-    <h2>
-
-        SPA Routing Test
-
-    </h2>
-
-    <button
-
-        class="btn"
-
-        id="page1Btn">
-
-        Page 1
-
-    </button>
-
-    <button
-
-        class="btn"
-
-        id="page2Btn">
-
-        Page 2
-
-    </button>
-
-    <div
-
-        id="spaContent">
-
-        現在はPage1です。
-
-    </div>
-
-</section>
-
-<!-- ================= Popup ================= -->
-
-<div
-
-    id="popup"
-
-    class="popup hidden">
-
-    <div class="popup-box">
-
-        <h3>
-
-            Popup
-
-        </h3>
-
-        <p>
-
-            この文章はPopup表示時のみ存在します。
-
+    border:2px dashed #ffd54f;
+        <p class="subtitle">
+            日本語はいいです1234567890。
         </p>
 
-        <button
+    border-radius:12px;
+    </header>
 
-            class="btn"
+    padding:18px;
+    <!-- ================= Main ================= -->
 
-            id="closePopup">
+    white-space:pre-wrap;
+    <main class="container">
 
-            閉じる
+}
+        <!-- ================= 自己紹介 ================= -->
 
-        </button>
+/*========================*/
+        <section class="card">
 
-    </div>
+.footer{
+            <h2>自己紹介</h2>
+
+    margin-top:50px;
+            <p>
+
+    background:#4fc3f7;
+                はじめまして、ランと申します。
+
+    color:white;
+                現在、Cowell-ASIA社にてQAテスターとして勤務しております。
+
+    text-align:center;
+                主にWebアプリケーションの機能テスト、セキュリティテスト、不具合検証および品質改善業務を担当しております。
+
+    padding:20px;
+                テスト設計書の作成からテスト実施、結果報告まで一連の工程に携わり、
+                ユーザー視点を重視した品質向上に努めています。
+
+}
+            </p>
+
+/*========================*/
+            <p>
+
+.hidden{
+                また、開発チームと連携しながら、
+                不具合の早期発見や再発防止策の提案・実施にも積極的に取り組んでおります。
+
+    display:none;
+                日々変化する技術やニーズに対応するため、
+                継続的に知識やスキルの向上を図っています。
+
+}
+                テストフレーズおよび確認用の文言作成についても対応可能です。
+
+</style>
+            </p>
+
+</head>
+            <p>
+
+<body>
+                2026/03/17 10:30
+
+<header class="header">
+            </p>
+
+<img
+src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg"
+alt="ベトナム国旗">
+        </section>
+
+<h1>ランのポートフォリオサイトへようこそ</h1>
+        <!-- ================= Company ================= -->
+
+<div class="subtitle">QAテスター・ランの公式ウェブサイト</div>
+        <section class="card">
+
+<div class="subtitle">翻訳サイトに新しいフレーズを追加する</div>
+            <h2>会社紹介</h2>
+
+<div class="subtitle">翻訳サイトに新しいフレーズを追加する12345</div>
+            <p>
+
+<div class="subtitle">翻訳サイト666666666666666</div>
+                株式会社Cowellは、
+                ソフトウェア開発・システム運用・品質保証（QA）を提供するIT企業です。
+
+<div class="subtitle">日本語はいいです。</div>
+            </p>
+
+<div class="subtitle">日本語はいいです1234567890。</div>
+            <p>
+
+</header>
+                日本とベトナムを拠点に、
+                Webシステムやアプリケーション開発、
+                DX支援、
+                テストサービスなど幅広い分野でサービスを展開しています。
+
+<div class="container">
+            </p>
+
+<section class="card">
+            <p>
+
+<h2>自己紹介</h2>
+                高品質なサービスとグローバルな開発体制を強みとし、
+                お客様のビジネス成長をサポートしています。
+
+<p>
+            </p>
+
+はじめまして、ランと申します。
+        </section>
+
+現在、Cowell-ASIA社にてQAテスターとして勤務しております。
+        <!-- ================= About ================= -->
+
+主にWebアプリケーションの機能テスト、セキュリティテスト、不具合検証および品質改善業務を担当しております。
+        <section class="card">
+
+テスト設計から実施、結果報告まで一連の工程に携わり、ユーザー視点を重視した品質向上に努めています。
+            <h2>このサイトについて</h2>
+
+また、開発チームと連携しながら、不具合の早期発見や再発防止策の提案・実施にも積極的に取り組んでおります。
+            <p>
+
+日々変化する技術やニーズに対応するため、継続的に知識とスキルを磨いています。
+                本サイトでは、
+                テストケース作成のノウハウ、
+                検証プロセス、
+                学習内容の記録などを共有しています。
+
+テストフレーズや確認用文言の作成にも対応可能です。
+            </p>
+
+2026/03/17 10:30
+            <p>
+
+</p>
+                シンプルで見やすい構成を目指しています。
+
+</section>
+            </p>
+
+<section class="card">
+        </section>
+
+<h2>会社紹介</h2>
+        <!-- ================= Translation Demo ================= -->
+
+<p>
+        <section class="card">
+
+株式会社Cowellは、ソフトウェア開発・システム運用・品質保証（QA）を提供するIT企業です。
+            <h2>
+
+日本とベトナムを拠点に、Webシステム開発、アプリケーション開発、DX支援、テストサービスなど幅広い事業を展開しています。
+                🌸 翻訳テスト
+
+</p>
+            </h2>
+
+</section>
+            <p>
+
+<section class="card">
+                コンテンツを入力して、
+                「送信」をクリックしてください。
+
+<h2>このサイトについて</h2>
+            </p>
+
+<p>
+            <input
+                id="textInput"
+                type="text"
+                placeholder="コンテンツを入力してください・・・">
+
+本サイトでは、
+            <button
+                id="submitBtn"
+                class="btn">
+
+テストケース作成のノウハウ、
+                送信
+
+検証プロセス、
+            </button>
+
+学習内容の記録などを共有しています。
+            <div id="result">
+
+シンプルで見やすい構成を目指しています。
+            </div>
+
+</p>
+        </section>
+
+</section>
+        <!-- ================= Message ================= -->
+
+<section class="card">
+        <section class="card">
+
+<h2>翻訳テスト</h2>
+            <h2>
+
+<p>
+                お知らせ
+
+コンテンツを入力して「送信」をクリックすると下に表示されます。
+            </h2>
+
+</p>
+            <button
+                class="btn"
+                onclick="showMessage()">
+
+<input
+type="text"
+id="textInput"
+placeholder="コンテンツを入力してください">
+                詳細を見る
+
+<button
+class="btn"
+id="submitBtn">
+            </button>
+
+送信
+            <p
+                id="message"
+                class="hidden">
+
+</button>
+                ランのポートフォリオをご覧いただき、
+                誠にありがとうございます。
+
+<div id="result"></div>
+            </p>
+
+</section>
+        </section>
+
+<section class="card">
+        <!-- ================= More Text ================= -->
+
+<h2>詳細</h2>
+        <section class="card">
+
+<button
+class="btn"
+onclick="showMessage()">
+            <h2>
+
+詳細を見る
+                テスト文章
+
+</button>
+            </h2>
+
+<p
+id="message"
+class="hidden">
+            <p>
+
+ランのポートフォリオをご覧いただきありがとうございます。
+                このページは翻訳確認用としても利用できます。
+
+</p>
+            </p>
+
+</section>
+            <p>
 
 </div>
+                Chrome Extensionの動作確認、
+                翻訳品質確認、
+                テキスト抽出など様々な用途で使用できます。
 
-<!-- ================= Modal ================= -->
+<footer class="footer">
+            </p>
 
-<div
+© 2026 Lan | QA Tester Portfolio
+            <p>
 
-    id="modal"
+</footer>
+                数字：1234567890
 
-    class="modal hidden">
+<script>
+            </p>
 
-    <div class="modal-box">
+function showMessage(){
+            <p>
 
-        <h3>
+const msg=document.getElementById("message");
+                英語：Hello World
 
-            Modal Window
+msg.classList.toggle("hidden");
+            </p>
 
-        </h3>
+}
+            <p>
 
-        <p>
+const input=document.getElementById("textInput");
+                ベトナム語：Xin chào Việt Nam
 
-            この文章はModal内のDynamic Textです。
+const button=document.getElementById("submitBtn");
+            </p>
 
-        </p>
+const result=document.getElementById("result");
+            <p>
 
-        <button
+button.addEventListener("click",()=>{
+                日本語：今日はいい天気ですね。
 
-            class="btn"
+result.textContent=input.value;
+            </p>
 
-            id="closeModal">
+});
+        </section>
 
-            OK
+input.addEventListener("keydown",(e)=>{
+    </main>
 
-        </button>
+if(e.key==="Enter"){
+    <!-- ================= Footer ================= -->
 
-    </div>
+button.click();
+    <footer>
 
-</div>
+}
+        © 2026 Lan QA Tester Portfolio
 
-<!-- ================= Toast ================= -->
+});
+    </footer>
 
-<div
+</script>
+    <script src="script.js"></script>
 
-    id="toast"
+</body>
 
-    class="toast">
-
-    保存しました。
-
-</div>
+</html>
