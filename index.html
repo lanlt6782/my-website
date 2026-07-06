@@ -1,582 +1,228 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ランのポートフォリオ</title>
-
-<script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1418"></script>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-
-    font-family:"Yu Gothic","Meiryo",sans-serif;
-
-    background:linear-gradient(180deg,#dff6ff,#eefcff,#fefcff);
-
-    color:#444;
-
-    line-height:1.8;
-
-}
-
-/*========================*/
-
-.container{
-
-    width:90%;
-    max-width:1000px;
-
-    margin:auto;
-
-    padding:30px 0 60px;
-
-}
-
-/*========================*/
-
-.header{
-
-    text-align:center;
-
-    padding:40px 20px;
-
-}
-
-.header img{
-
-    width:160px;
-
-    border-radius:12px;
-
-    box-shadow:0 6px 15px rgba(0,0,0,.15);
-
-    margin-bottom:20px;
-
-}
-
-.header h1{
-
-    color:#1976d2;
-
-    margin-bottom:15px;
-
-    font-size:34px;
-
-}
-
-.subtitle{
-
-    display:inline-block;
-
-    background:white;
-
-    padding:12px 18px;
-
-    margin:8px;
-
-    border-radius:30px;
-
-    border:2px solid #b3e5fc;
-
-    box-shadow:0 4px 10px rgba(0,0,0,.08);
-
-}
-
-/*========================*/
-
-.card{
-
-    background:white;
-
-    margin-top:30px;
-
-    border-radius:20px;
-
-    padding:28px;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-
-    border:2px solid #d7f0ff;
-
-}
-
-.card h2{
-
-    color:#2196f3;
-
-    margin-bottom:20px;
-
-    border-left:8px solid #4fc3f7;
-
-    padding-left:12px;
-
-}
-
-.card p{
-
-    background:#f8fdff;
-
-    padding:18px;
-
-    border-radius:12px;
-
-    border:1px solid #d8efff;
-
-    margin-bottom:15px;
-
-}
-
-/*========================*/
-
-input{
-
-    width:100%;
-
-    padding:14px;
-
-    border-radius:10px;
-
-    border:2px solid #b2ebf2;
-
-    font-size:16px;
-
-    margin-top:10px;
-
-    margin-bottom:18px;
-
-}
-
-input:focus{
-
-    outline:none;
-
-    border-color:#29b6f6;
-
-}
-
-/*========================*/
-
-.btn{
-
-    background:#4fc3f7;
-
-    color:white;
-
-    border:none;
 <head>
 
-    padding:14px 30px;
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    border-radius:30px;
-    <title>ランのポートフォリオ</title>
+    <title>Dynamic Content Demo</title>
 
-    font-size:16px;
-    <!-- Shutto Translation -->
-    <script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1418"></script>
-
-    cursor:pointer;
     <link rel="stylesheet" href="style.css">
 
-    transition:.3s;
 </head>
 
-}
 <body>
 
-.btn:hover{
     <!-- ================= Header ================= -->
 
-    background:#29b6f6;
-    <header class="header">
+    <header class="dc-header">
 
-    transform:translateY(-2px);
-        <img
-            class="flag"
-            src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg"
-            alt="ベトナム国旗">
+        <h1>Demo Shop</h1>
 
-}
-        <h1>
-            ランのポートフォリオサイトへようこそ
-        </h1>
+        <p>Dynamic Content テストページ</p>
 
-/*========================*/
-        <p class="subtitle">
-            QAテスター・ランの公式ウェブサイト
-        </p>
-
-#result{
-        <p class="subtitle">
-            翻訳サイトに新しいフレーズを追加する
-        </p>
-
-    margin-top:20px;
-        <p class="subtitle">
-            翻訳サイトに新しいフレーズを追加する12345
-        </p>
-
-    min-height:70px;
-        <p class="subtitle">
-            翻訳サイト666666666666666
-        </p>
-
-    background:#fffdf6;
-        <p class="subtitle">
-            日本語はいいです。
-        </p>
-
-    border:2px dashed #ffd54f;
-        <p class="subtitle">
-            日本語はいいです1234567890。
-        </p>
-
-    border-radius:12px;
     </header>
 
-    padding:18px;
     <!-- ================= Main ================= -->
 
-    white-space:pre-wrap;
-    <main class="container">
+    <main class="dc-container">
 
-}
-        <!-- ================= 自己紹介 ================= -->
+        <!-- Search -->
 
-/*========================*/
-        <section class="card">
+        <section class="dc-card">
 
-.footer{
-            <h2>自己紹介</h2>
+            <h2>商品検索</h2>
 
-    margin-top:50px;
-            <p>
-
-    background:#4fc3f7;
-                はじめまして、ランと申します。
-
-    color:white;
-                現在、Cowell-ASIA社にてQAテスターとして勤務しております。
-
-    text-align:center;
-                主にWebアプリケーションの機能テスト、セキュリティテスト、不具合検証および品質改善業務を担当しております。
-
-    padding:20px;
-                テスト設計書の作成からテスト実施、結果報告まで一連の工程に携わり、
-                ユーザー視点を重視した品質向上に努めています。
-
-}
-            </p>
-
-/*========================*/
-            <p>
-
-.hidden{
-                また、開発チームと連携しながら、
-                不具合の早期発見や再発防止策の提案・実施にも積極的に取り組んでおります。
-
-    display:none;
-                日々変化する技術やニーズに対応するため、
-                継続的に知識やスキルの向上を図っています。
-
-}
-                テストフレーズおよび確認用の文言作成についても対応可能です。
-
-</style>
-            </p>
-
-</head>
-            <p>
-
-<body>
-                2026/03/17 10:30
-
-<header class="header">
-            </p>
-
-<img
-src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg"
-alt="ベトナム国旗">
-        </section>
-
-<h1>ランのポートフォリオサイトへようこそ</h1>
-        <!-- ================= Company ================= -->
-
-<div class="subtitle">QAテスター・ランの公式ウェブサイト</div>
-        <section class="card">
-
-<div class="subtitle">翻訳サイトに新しいフレーズを追加する</div>
-            <h2>会社紹介</h2>
-
-<div class="subtitle">翻訳サイトに新しいフレーズを追加する12345</div>
-            <p>
-
-<div class="subtitle">翻訳サイト666666666666666</div>
-                株式会社Cowellは、
-                ソフトウェア開発・システム運用・品質保証（QA）を提供するIT企業です。
-
-<div class="subtitle">日本語はいいです。</div>
-            </p>
-
-<div class="subtitle">日本語はいいです1234567890。</div>
-            <p>
-
-</header>
-                日本とベトナムを拠点に、
-                Webシステムやアプリケーション開発、
-                DX支援、
-                テストサービスなど幅広い分野でサービスを展開しています。
-
-<div class="container">
-            </p>
-
-<section class="card">
-            <p>
-
-<h2>自己紹介</h2>
-                高品質なサービスとグローバルな開発体制を強みとし、
-                お客様のビジネス成長をサポートしています。
-
-<p>
-            </p>
-
-はじめまして、ランと申します。
-        </section>
-
-現在、Cowell-ASIA社にてQAテスターとして勤務しております。
-        <!-- ================= About ================= -->
-
-主にWebアプリケーションの機能テスト、セキュリティテスト、不具合検証および品質改善業務を担当しております。
-        <section class="card">
-
-テスト設計から実施、結果報告まで一連の工程に携わり、ユーザー視点を重視した品質向上に努めています。
-            <h2>このサイトについて</h2>
-
-また、開発チームと連携しながら、不具合の早期発見や再発防止策の提案・実施にも積極的に取り組んでおります。
-            <p>
-
-日々変化する技術やニーズに対応するため、継続的に知識とスキルを磨いています。
-                本サイトでは、
-                テストケース作成のノウハウ、
-                検証プロセス、
-                学習内容の記録などを共有しています。
-
-テストフレーズや確認用文言の作成にも対応可能です。
-            </p>
-
-2026/03/17 10:30
-            <p>
-
-</p>
-                シンプルで見やすい構成を目指しています。
-
-</section>
-            </p>
-
-<section class="card">
-        </section>
-
-<h2>会社紹介</h2>
-        <!-- ================= Translation Demo ================= -->
-
-<p>
-        <section class="card">
-
-株式会社Cowellは、ソフトウェア開発・システム運用・品質保証（QA）を提供するIT企業です。
-            <h2>
-
-日本とベトナムを拠点に、Webシステム開発、アプリケーション開発、DX支援、テストサービスなど幅広い事業を展開しています。
-                🌸 翻訳テスト
-
-</p>
-            </h2>
-
-</section>
-            <p>
-
-<section class="card">
-                コンテンツを入力して、
-                「送信」をクリックしてください。
-
-<h2>このサイトについて</h2>
-            </p>
-
-<p>
             <input
-                id="textInput"
+                id="searchInput"
+                class="dc-input"
                 type="text"
-                placeholder="コンテンツを入力してください・・・">
+                placeholder="商品名を入力">
 
-本サイトでは、
-            <button
-                id="submitBtn"
-                class="btn">
+            <div
+                id="searchResult"
+                class="dc-result">
 
-テストケース作成のノウハウ、
-                送信
-
-検証プロセス、
-            </button>
-
-学習内容の記録などを共有しています。
-            <div id="result">
-
-シンプルで見やすい構成を目指しています。
             </div>
 
-</p>
         </section>
 
-</section>
-        <!-- ================= Message ================= -->
+        <!-- Dropdown -->
 
-<section class="card">
-        <section class="card">
+        <section class="dc-card">
 
-<h2>翻訳テスト</h2>
-            <h2>
+            <h2>カテゴリ</h2>
 
-<p>
-                お知らせ
+            <select
+                id="categorySelect"
+                class="dc-select">
 
-コンテンツを入力して「送信」をクリックすると下に表示されます。
-            </h2>
+                <option value="">選択してください</option>
 
-</p>
+                <option value="pc">パソコン</option>
+
+                <option value="book">本</option>
+
+                <option value="food">食品</option>
+
+            </select>
+
+            <div
+                id="categoryResult"
+                class="dc-result">
+
+            </div>
+
+        </section>
+
+        <!-- Product -->
+
+        <section class="dc-card">
+
+            <h2>商品</h2>
+
+            <div class="dc-product">
+
+                <h3>MacBook Pro</h3>
+
+                <p id="priceText">
+
+                    価格：150,000円
+
+                </p>
+
+            </div>
+
             <button
-                class="btn"
-                onclick="showMessage()">
+                id="updateBtn"
+                class="dc-btn">
 
-<input
-type="text"
-id="textInput"
-placeholder="コンテンツを入力してください">
-                詳細を見る
+                データ更新
 
-<button
-class="btn"
-id="submitBtn">
             </button>
 
-送信
-            <p
-                id="message"
-                class="hidden">
-
-</button>
-                ランのポートフォリオをご覧いただき、
-                誠にありがとうございます。
-
-<div id="result"></div>
-            </p>
-
-</section>
         </section>
 
-<section class="card">
-        <!-- ================= More Text ================= -->
+        <!-- Dynamic Buttons -->
 
-<h2>詳細</h2>
-        <section class="card">
+        <section class="dc-card">
 
-<button
-class="btn"
-onclick="showMessage()">
-            <h2>
+            <h2>Dynamic Test</h2>
 
-詳細を見る
-                テスト文章
+            <div class="dc-button-group">
 
-</button>
-            </h2>
+                <button
+                    id="popupBtn"
+                    class="dc-btn">
 
-<p
-id="message"
-class="hidden">
-            <p>
+                    Popup
 
-ランのポートフォリオをご覧いただきありがとうございます。
-                このページは翻訳確認用としても利用できます。
+                </button>
 
-</p>
-            </p>
+                <button
+                    id="modalBtn"
+                    class="dc-btn">
 
-</section>
-            <p>
+                    Modal
 
-</div>
-                Chrome Extensionの動作確認、
-                翻訳品質確認、
-                テキスト抽出など様々な用途で使用できます。
+                </button>
 
-<footer class="footer">
-            </p>
+                <button
+                    id="toastBtn"
+                    class="dc-btn">
 
-© 2026 Lan | QA Tester Portfolio
-            <p>
+                    Toast
 
-</footer>
-                数字：1234567890
+                </button>
 
-<script>
-            </p>
+                <button
+                    id="addTextBtn"
+                    class="dc-btn">
 
-function showMessage(){
-            <p>
+                    Text追加
 
-const msg=document.getElementById("message");
-                英語：Hello World
+                </button>
 
-msg.classList.toggle("hidden");
-            </p>
+            </div>
 
-}
-            <p>
+            <div
+                id="dynamicArea"
+                class="dc-result">
 
-const input=document.getElementById("textInput");
-                ベトナム語：Xin chào Việt Nam
+            </div>
 
-const button=document.getElementById("submitBtn");
-            </p>
-
-const result=document.getElementById("result");
-            <p>
-
-button.addEventListener("click",()=>{
-                日本語：今日はいい天気ですね。
-
-result.textContent=input.value;
-            </p>
-
-});
         </section>
 
-input.addEventListener("keydown",(e)=>{
     </main>
 
-if(e.key==="Enter"){
-    <!-- ================= Footer ================= -->
+    <!-- ================= Popup ================= -->
 
-button.click();
-    <footer>
+    <div
+        id="popup"
+        class="dc-popup">
 
-}
-        © 2026 Lan QA Tester Portfolio
+        <div class="dc-popup-box">
 
-});
-    </footer>
+            <h3>お知らせ</h3>
 
-</script>
+            <p>
+
+                新商品が追加されました。
+
+            </p>
+
+            <button
+                id="closePopup"
+                class="dc-btn">
+
+                閉じる
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ================= Modal ================= -->
+
+    <div
+        id="modal"
+        class="dc-modal">
+
+        <div class="dc-modal-box">
+
+            <h3>確認</h3>
+
+            <p>
+
+                保存しますか？
+
+            </p>
+
+            <button
+                id="closeModal"
+                class="dc-btn">
+
+                OK
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ================= Toast ================= -->
+
+    <div
+        id="toast"
+        class="dc-toast">
+
+        保存しました。
+
+    </div>
+
     <script src="script.js"></script>
 
 </body>
