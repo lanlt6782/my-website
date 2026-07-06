@@ -1,225 +1,247 @@
-// ===============================================
-// Portfolio JavaScript
-// ===============================================
+/* ===================================================
+   Search Ajax
+=================================================== */
 
-// Khi trang tải xong
-document.addEventListener("DOMContentLoaded", () => {
+const searchInput = document.getElementById("searchInput");
+const searchResult = document.getElementById("searchResult");
 
-    // ==========================
-    // Translation Demo
-    // ==========================
+const products = [
+    "MacBook Pro",
+    "MacBook Air",
+    "Mac mini",
+    "iPhone 16",
+    "iPad Pro",
+    "Apple Watch"
+];
 
-    const input = document.getElementById("textInput");
-    const button = document.getElementById("submitBtn");
-    const result = document.getElementById("result");
+if (searchInput) {
 
-    if (button && input && result) {
+    searchInput.addEventListener("input", function () {
 
-        button.addEventListener("click", () => {
+        searchResult.innerHTML = "<p>検索中...</p>";
 
-            const value = input.value.trim();
+        setTimeout(() => {
 
-            if (value === "") {
+            const keyword = searchInput.value.trim().toLowerCase();
 
-                result.innerHTML =
-                    "<span style='color:#999'>ここに入力した内容が表示されます。</span>";
+            searchResult.innerHTML = "";
 
-                showToast("入力してください 😊");
+            if (keyword === "") {
 
                 return;
 
             }
 
-            result.textContent = value;
+            const result = products.filter(item =>
+                item.toLowerCase().includes(keyword)
+            );
 
-            showToast("表示しました 🎉");
+            if (result.length === 0) {
 
-        });
+                searchResult.innerHTML = "<p>商品がありません。</p>";
 
-        // Enter để submit
-        input.addEventListener("keydown", (event) => {
-
-            if (event.key === "Enter") {
-
-                button.click();
+                return;
 
             }
 
-        });
+            result.forEach(item => {
 
-    }
+                const p = document.createElement("p");
 
-    // ==========================
-    // Fade In Card
-    // ==========================
+                p.textContent = item;
 
-    const cards = document.querySelectorAll(".card");
+                searchResult.appendChild(p);
 
-    const observer = new IntersectionObserver((entries) => {
+            });
 
-        entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0px)";
-
-            }
-
-        });
+        }, 500);
 
     });
-
-    cards.forEach(card => {
-
-        card.style.opacity = "0";
-        card.style.transform = "translateY(40px)";
-        card.style.transition = "0.7s";
-
-        observer.observe(card);
-
-    });
-
-});
-
-// ===============================================
-// Detail Button
-// ===============================================
-
-function showMessage() {
-    const message = document.getElementById("message");
-
-    message.textContent = "ご覧いただきありがとうございます！今後もコンテンツを追加予定です。";
-    message.classList.remove("hidden");
-    const msg = document.getElementById("message");
-
-    if (msg.classList.contains("hidden")) {
-
-        msg.classList.remove("hidden");
-
-    } else {
-
-        msg.classList.add("hidden");
-
-    }
 
 }
 
-// ===============================================
-// Toast
-// ===============================================
+/* ===================================================
+   Dropdown Ajax
+=================================================== */
 
-function showToast(text) {
+const categorySelect = document.getElementById("categorySelect");
+const categoryResult = document.getElementById("categoryResult");
 
-    message.style.opacity = 0;
-    let opacity = 0;
-    const toast = document.createElement("div");
+const categoryData = {
 
-    toast.innerText = text;
+    pc: [
+        "MacBook Pro",
+        "ThinkPad",
+        "Surface Laptop"
+    ],
 
-    toast.style.position = "fixed";
-    toast.style.right = "20px";
-    toast.style.bottom = "20px";
+    book: [
+        "JavaScript",
+        "Playwright",
+        "QA Testing"
+    ],
 
-    toast.style.background = "#4fc3f7";
-    toast.style.color = "white";
+    food: [
+        "ラーメン",
+        "寿司",
+        "カレー"
+    ]
 
-    toast.style.padding = "12px 20px";
+};
 
-    toast.style.borderRadius = "30px";
+if (categorySelect) {
 
-    toast.style.boxShadow = "0 8px 20px rgba(0,0,0,.2)";
+    categorySelect.addEventListener("change", function () {
 
-    toast.style.zIndex = "9999";
-
-    toast.style.fontSize = "15px";
-
-    toast.style.opacity = "0";
-
-    toast.style.transition = ".3s";
-
-    document.body.appendChild(toast);
-
-    setTimeout(() => {
-
-        toast.style.opacity = "1";
-
-    }, 10);
-
-    setTimeout(() => {
-
-        toast.style.opacity = "0";
+        categoryResult.innerHTML = "<p>読込中...</p>";
 
         setTimeout(() => {
 
-            toast.remove();
+            categoryResult.innerHTML = "";
 
-        }, 300);
+            const list = categoryData[this.value];
 
-    }, 2000);
+            if (!list) {
 
-    const fadeIn = setInterval(() => {
-        if (opacity >= 1) {
-            clearInterval(fadeIn);
-        }
-        opacity += 0.05;
-        message.style.opacity = opacity;
-    }, 30);
+                return;
+
+            }
+
+            list.forEach(item => {
+
+                const p = document.createElement("p");
+
+                p.textContent = item;
+
+                categoryResult.appendChild(p);
+
+            });
+
+        }, 500);
+
+    });
+
 }
 
-// ===============================================
-// Back To Top Button
-// ===============================================
+/* ===================================================
+   Popup
+=================================================== */
 
-const topButton = document.createElement("button");
+const popup = document.getElementById("popup");
+const popupBtn = document.getElementById("popupBtn");
+const closePopup = document.getElementById("closePopup");
 
-topButton.innerHTML = "⬆";
+popupBtn.addEventListener("click", () => {
 
-topButton.style.position = "fixed";
-topButton.style.bottom = "25px";
-topButton.style.left = "25px";
+    popup.style.display = "flex";
 
-topButton.style.width = "50px";
-topButton.style.height = "50px";
+});
 
-topButton.style.border = "none";
-topButton.style.borderRadius = "50%";
+closePopup.addEventListener("click", () => {
 
-topButton.style.background = "#66d1ff";
-topButton.style.color = "white";
+    popup.style.display = "none";
 
-topButton.style.fontSize = "22px";
+});
 
-topButton.style.cursor = "pointer";
+/* ===================================================
+   Modal
+=================================================== */
 
-topButton.style.display = "none";
+const modal = document.getElementById("modal");
+const modalBtn = document.getElementById("modalBtn");
+const closeModal = document.getElementById("closeModal");
 
-topButton.style.boxShadow = "0 8px 20px rgba(0,0,0,.2)";
+modalBtn.addEventListener("click", () => {
 
-document.body.appendChild(topButton);
+    modal.style.display = "flex";
 
-window.addEventListener("scroll", () => {
+});
 
-    if (window.scrollY > 300) {
+closeModal.addEventListener("click", () => {
 
-        topButton.style.display = "block";
+    modal.style.display = "none";
 
-    } else {
+});
 
-        topButton.style.display = "none";
+/* ===================================================
+   Toast
+=================================================== */
+
+const toast = document.getElementById("toast");
+const toastBtn = document.getElementById("toastBtn");
+
+toastBtn.addEventListener("click", () => {
+
+    toast.style.display = "block";
+
+    setTimeout(() => {
+
+        toast.style.display = "none";
+
+    }, 3000);
+
+});
+
+/* ===================================================
+   Dynamic Text
+=================================================== */
+
+const addTextBtn = document.getElementById("addTextBtn");
+const dynamicArea = document.getElementById("dynamicArea");
+
+let textIndex = 1;
+
+addTextBtn.addEventListener("click", () => {
+
+    const p = document.createElement("p");
+
+    p.textContent = `追加テキスト ${textIndex}`;
+
+    dynamicArea.appendChild(p);
+
+    textIndex++;
+
+});
+
+/* ===================================================
+   Update Product
+=================================================== */
+
+const updateBtn = document.getElementById("updateBtn");
+const priceText = document.getElementById("priceText");
+
+let price = 150000;
+
+updateBtn.addEventListener("click", () => {
+
+    price += 10000;
+
+    priceText.textContent = `価格：${price.toLocaleString()}円`;
+
+});
+
+/* ===================================================
+   Close Popup / Modal when click background
+=================================================== */
+
+popup.addEventListener("click", e => {
+
+    if (e.target === popup) {
+
+        popup.style.display = "none";
 
     }
 
 });
 
-topButton.addEventListener("click", () => {
+modal.addEventListener("click", e => {
 
-    window.scrollTo({
+    if (e.target === modal) {
 
-        top: 0,
+        modal.style.display = "none";
 
-        behavior: "smooth"
-
-    });
+    }
 
 });
+
+console.log("Dynamic Content Demo Ready.");
