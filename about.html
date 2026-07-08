@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="ja">
 <head>
-  <script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1418"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Café de L'Amour - Dashboard</title>
+    <title>Café de L'Amour - ダッシュボード</title>
     
-    <!-- ================= nhúng CSS trực tiếp ================= -->
+    <!-- ================= CSSスタイル ================= -->
     <style>
-        /* Biến màu sắc chủ đề Café Warm */
+        /* カフェ風のカラー変数 */
         :root {
-            --primary-color: #6f4e37; /* Nâu cà phê */
-            --secondary-color: #e6ccb2; /* Màu kem sữa */
-            --accent-color: #b07d62; /* Nâu sáng */
+            --primary-color: #6f4e37; /* コーヒーブラウン */
+            --secondary-color: #e6ccb2; /* ミルククリーム */
+            --accent-color: #b07d62; /* ライトブラウン */
             --dark-color: #3d2f21;
             --bg-color: #f7f5f0;
             --white: #ffffff;
@@ -23,7 +22,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
         }
 
         body {
@@ -33,7 +32,7 @@
             line-height: 1.6;
         }
 
-        /* Header */
+        /* ヘッダー */
         .cafe-header {
             text-align: center;
             background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
@@ -49,7 +48,7 @@
             margin-bottom: 10px;
         }
 
-        /* Layout Grid */
+        /* レイアウトグリッド */
         .cafe-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -58,7 +57,7 @@
             margin: 0 auto;
         }
 
-        /* Thẻ Card */
+        /* カードデザイン */
         .cafe-card {
             background-color: var(--white);
             border-radius: 12px;
@@ -80,7 +79,7 @@
             padding-bottom: 8px;
         }
 
-        /* Form Elements */
+        /* フォーム要素 */
         .cafe-input, .cafe-select {
             width: 100%;
             padding: 12px;
@@ -95,7 +94,7 @@
             border-color: var(--primary-color);
         }
 
-        /* Buttons */
+        /* ボタン */
         .cafe-btn {
             background-color: var(--primary-color);
             color: var(--white);
@@ -118,7 +117,7 @@
             margin-bottom: 15px;
         }
 
-        /* Kết quả động */
+        /* 動的表示エリア */
         .cafe-result {
             margin-top: 15px;
             padding: 12px;
@@ -128,7 +127,7 @@
             min-height: 45px;
         }
 
-        /* Thông tin sản phẩm */
+        /* 商品情報 */
         .cafe-product-info {
             background-color: #fdfaf6;
             padding: 15px;
@@ -137,7 +136,7 @@
             border: 1px dashed var(--accent-color);
         }
 
-        /* Các lớp Overlay (Popup, Modal, Toast) */
+        /* オーバーレイ (ポップアップ、モダール) */
         .overlay {
             display: none;
             position: fixed;
@@ -162,7 +161,7 @@
             animation: fadeIn 0.3s ease;
         }
 
-        /* Toast thông báo nhanh */
+        /* トースト通知 */
         .cafe-toast {
             display: none;
             position: fixed;
@@ -191,102 +190,102 @@
 </head>
 <body>
 
-    <!-- ================= Header ================= -->
+    <!-- ================= ヘッダー ================= -->
     <header class="cafe-header">
         <h1>Café de L'Amour</h1>
-        <p>Chào mừng bạn đến với góc nhỏ yên bình. Hãy chọn cho mình một hương vị yêu thích hôm nay nhé!</p>
+        <p>穏やかなひとときへようこそ。今日のお気に入りの一杯をお選びください。</p>
     </header>
 
-    <!-- ================= Main Content ================= -->
+    <!-- ================= メインコンテンツ ================= -->
     <main class="cafe-container">
 
-        <!-- Khối 1: Tìm kiếm món -->
+        <!-- セクション 1: ドリンク検索 -->
         <section class="cafe-card">
-            <h2>Tìm Kiếm Đồ Uống</h2>
-            <input id="drinkSearch" class="cafe-input" type="text" placeholder="Nhập tên đồ uống (vd: Latte, Espresso...)">
-            <div id="searchOutput" class="cafe-result">Chưa có tìm kiếm nào...</div>
+            <h2>ドリンク検索</h2>
+            <input id="drinkSearch" class="cafe-input" type="text" placeholder="ドリンク名を入力 (例: ラテ、エスプレッソ...)">
+            <div id="searchOutput" class="cafe-result">検索キーワードを入力してください...</div>
         </section>
 
-        <!-- Khối 2: Lựa chọn hình thức nhận hàng -->
+        <!-- セクション 2: お受け取り方法 -->
         <section class="cafe-card">
-            <h2>Hình Thức Giao Nhận</h2>
+            <h2>お受け取り方法</h2>
             <select id="orderTypeSelect" class="cafe-select">
-                <option value="">-- Vui lòng chọn --</option>
-                <option value="dinein">Thưởng thức tại quán</option>
-                <option value="takeaway">Mang đi (Takeaway)</option>
-                <option value="delivery">Giao hàng tận nơi</option>
+                <option value="">-- 選択してください --</option>
+                <option value="dinein">店内飲食（イートイン）</option>
+                <option value="takeaway">テイクアウト</option>
+                <option value="delivery">デリバリー</option>
             </select>
-            <div id="orderTypeOutput" class="cafe-result">Vui lòng chọn hình thức nhận hàng.</div>
+            <div id="orderTypeOutput" class="cafe-result">お受け取り方法を選択してください Blunt。</div>
         </section>
 
-        <!-- Khối 3: Món đặc biệt trong ngày -->
+        <!-- セクション 3: 本日の特別メニュー -->
         <section class="cafe-card">
-            <h2>Món Đặc Biệt Hôm Nay</h2>
+            <h2>本日の特別メニュー</h2>
             <div class="cafe-product-info">
-                <h3 id="productName">Caramel Macchiato</h3>
-                <p id="productPrice">Giá gốc: 65.000đ</p>
+                <h3 id="productName">キャラメルマキアート</h3>
+                <p id="productPrice">通常価格：650円</p>
             </div>
-            <button id="applyDiscountBtn" class="cafe-btn">Áp Mã Giảm Giá</button>
+            <button id="applyDiscountBtn" class="cafe-btn">クーポン適用</button>
         </section>
 
-        <!-- Khối 4: Khu vực thử nghiệm tính năng động -->
+        <!-- セクション 4: テストコントロールパネル -->
         <section class="cafe-card">
-            <h2>Bảng Điều Khiển Test</h2>
+            <h2>コントロールパネル</h2>
             <div class="cafe-btn-group">
-                <button id="btnPopup" class="cafe-btn">Mở Lời Chúc</button>
-                <button id="btnModal" class="cafe-btn">Xác Nhận Đơn</button>
-                <button id="btnToast" class="cafe-btn">Báo Lưu Đơn</button>
-                <button id="btnAppend" class="cafe-btn">Thêm Ghi Chú</button>
+                <button id="btnPopup" class="cafe-btn">ポップアップ</button>
+                <button id="btnModal" class="cafe-btn">注文確認</button>
+                <button id="btnToast" class="cafe-btn">トースト通知</button>
+                <button id="btnAppend" class="cafe-btn">メモ追加</button>
             </div>
-            <div id="appendArea" class="cafe-result" style="max-height: 120px; overflow-y: auto;">Ghi chú đơn hàng sẽ hiển thị tại đây...</div>
+            <div id="appendArea" class="cafe-result" style="max-height: 120px; overflow-y: auto;">注文メモがここに表示されます...</div>
         </section>
 
     </main>
 
-    <!-- ================= Các thành phần ẩn (Popup / Modal / Toast) ================= -->
+    <!-- ================= 動的要素 (ポップアップ / モダール / トースト) ================= -->
 
-    <!-- Lời chúc ẩn (Popup) -->
+    <!-- ポップアップ -->
     <div id="customPopup" class="overlay">
         <div class="popup-box">
-            <h3>☕ Lời chúc ngày mới!</h3>
-            <p style="margin: 15px 0;">Chúc bạn một ngày tràn đầy năng lượng và làm việc thật hiệu quả cùng Café de L'Amour!</p>
-            <button id="closePopup" class="cafe-btn">Cảm ơn</button>
+            <h3>☕ 素敵な一日を！</h3>
+            <p style="margin: 15px 0;">Café de L'Amourとともに、エネルギーに満ちた素晴らしい一日をお過ごしください！</p>
+            <button id="closePopup" class="cafe-btn">閉じる</button>
         </div>
     </div>
 
-    <!-- Xác nhận đơn ẩn (Modal) -->
+    <!-- モダール (注文確認) -->
     <div id="customModal" class="overlay">
         <div class="modal-box">
-            <h3>🔔 Xác Nhận Thanh Toán</h3>
-            <p style="margin: 15px 0;">Bạn có chắc chắn muốn tiến hành chốt đơn hàng này không?</p>
+            <h3>🔔 決済確認</h3>
+            <p style="margin: 15px 0;">この内容で注文を確定してもよろしいですか？</p>
             <div style="display: flex; gap: 10px; justify-content: center;">
-                <button id="confirmModal" class="cafe-btn" style="background-color: var(--success);">Đồng ý</button>
-                <button id="closeModal" class="cafe-btn" style="background-color: #aaa;">Hủy</button>
+                <button id="confirmModal" class="cafe-btn" style="background-color: var(--success);">はい</button>
+                <button id="closeModal" class="cafe-btn" style="background-color: #aaa;">キャンセル</button>
             </div>
         </div>
     </div>
 
-    <!-- Thông báo nhanh (Toast) -->
+    <!-- トースト通知 -->
     <div id="customToast" class="cafe-toast">
-         Đã lưu thông tin đơn hàng thành công!
+        注文情報が正常に保存されました！
     </div>
 
-    <!-- ================= nhúng Javascript trực tiếp ================= -->
+    <!-- ================= JavaScript制御 ================= -->
     <script>
-        // --- 1. Tính năng tìm kiếm ---
+        // --- 1. ドリンク検索機能 ---
         const drinkSearch = document.getElementById('drinkSearch');
         const searchOutput = document.getElementById('searchOutput');
         
         drinkSearch.addEventListener('input', (e) => {
             const query = e.target.value.trim();
             if(query) {
-                searchOutput.textContent = `Đang tìm kiếm món: "${query}"...`;
+                searchOutput.textContent = `ドリンク「${query}」を検索中...`;
             } else {
-                searchOutput.textContent = 'Chưa có tìm kiếm nào...';
+                searchOutput.textContent = '検索キーワードを入力してください...';
             }
         });
 
-        // --- 2. Tính năng chọn hình thức nhận hàng ---
+        // --- 2. お受け取り方法の選択 ---
         const orderTypeSelect = document.getElementById('orderTypeSelect');
         const orderTypeOutput = document.getElementById('orderTypeOutput');
 
@@ -295,30 +294,30 @@
             const selectedText = e.target.options[e.target.selectedIndex].text;
             
             if(selectedValue) {
-                orderTypeOutput.textContent = `Bạn đã chọn: ${selectedText}`;
+                orderTypeOutput.textContent = `選択中: ${selectedText}`;
             } else {
-                orderTypeOutput.textContent = 'Vui lòng chọn hình thức nhận hàng.';
+                orderTypeOutput.textContent = 'お受け取り方法を選択してください。';
             }
         });
 
-        // --- 3. Tính năng thay đổi thông tin sản phẩm (Giảm giá) ---
+        // --- 3. クーポン適用機能 (価格変更) ---
         const applyDiscountBtn = document.getElementById('applyDiscountBtn');
         const productPrice = document.getElementById('productPrice');
         let isDiscounted = false;
 
         applyDiscountBtn.addEventListener('click', () => {
             if(!isDiscounted) {
-                productPrice.innerHTML = 'Giá ưu đãi: <strong style="color: #e63946;">45.000đ</strong> (Đã giảm 20k)';
-                applyDiscountBtn.textContent = 'Khôi Phục Giá';
+                productPrice.innerHTML = '特別価格：<strong style="color: #e63946;">450円</strong> (200円引き)';
+                applyDiscountBtn.textContent = '元に戻す';
                 isDiscounted = true;
             } else {
-                productPrice.textContent = 'Giá gốc: 65.000đ';
-                applyDiscountBtn.textContent = 'Áp Mã Giảm Giá';
+                productPrice.textContent = '通常価格：650円';
+                applyDiscountBtn.textContent = 'クーポン適用';
                 isDiscounted = false;
             }
         });
 
-        // --- 4. Tính năng Điều Khiển Hộp Thoại Động ---
+        // --- 4. ポップアップ・モダール・トースト等の制御 ---
         const btnPopup = document.getElementById('btnPopup');
         const btnModal = document.getElementById('btnModal');
         const btnToast = document.getElementById('btnToast');
@@ -329,19 +328,19 @@
         const customToast = document.getElementById('customToast');
         const appendArea = document.getElementById('appendArea');
 
-        // Bật / Tắt Lời chúc (Popup)
+        // ポップアップの開閉
         btnPopup.addEventListener('click', () => customPopup.style.display = 'flex');
         document.getElementById('closePopup').addEventListener('click', () => customPopup.style.display = 'none');
 
-        // Bật / Tắt Xác nhận đơn (Modal)
+        // モダールの開閉
         btnModal.addEventListener('click', () => customModal.style.display = 'flex');
         document.getElementById('closeModal').addEventListener('click', () => customModal.style.display = 'none');
         document.getElementById('confirmModal').addEventListener('click', () => {
             customModal.style.display = 'none';
-            alert('Cảm ơn bạn đã đặt hàng thành công!');
+            alert('ご注文ありがとうございました！');
         });
 
-        // Hiện thông báo nhanh (Toast) rồi tự ẩn sau 3 giây
+        // トースト通知の表示 (3秒後に自動非表示)
         btnToast.addEventListener('click', () => {
             customToast.style.display = 'block';
             setTimeout(() => {
@@ -349,23 +348,22 @@
             }, 3000);
         });
 
-        // Thêm ghi chú mới vào danh sách (Append Text)
+        // テキストの追加 (追加要望メモ)
         let noteCount = 0;
         btnAppend.addEventListener('click', () => {
             noteCount++;
-            if(noteCount === 1) appendArea.innerHTML = ''; // Xóa dòng chữ mặc định ở lần ấn đầu tiên
+            if(noteCount === 1) appendArea.innerHTML = ''; // 初回クリック時にデフォルトテキストを消去
             
             const newNote = document.createElement('p');
             newNote.style.color = 'var(--primary-color)';
             newNote.style.fontSize = '0.9rem';
-            newNote.textContent = `• Yêu cầu thêm #${noteCount}: Ít đường, nhiều đá.`;
+            newNote.textContent = `• 追加要望 #${noteCount}: 甘さ控えめ、氷多め。`;
             
             appendArea.appendChild(newNote);
-            // Tự động cuộn xuống dưới cùng khi thêm dòng mới
-            appendArea.scrollTop = appendArea.scrollHeight;
+            appendArea.scrollTop = appendArea.scrollHeight; // 自動スクロール
         });
 
-        // Tự đóng Popup/Modal nếu nhấn trượt ra vùng trống phía ngoài
+        // 背景クリックでポップアップ/モダールを閉じる
         window.addEventListener('click', (e) => {
             if (e.target === customPopup) customPopup.style.display = 'none';
             if (e.target === customModal) customModal.style.display = 'none';
