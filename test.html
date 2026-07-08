@@ -400,11 +400,11 @@
     <!-- メインコンテンツ (Main Interactive) -->
     <main class="cafe-container">
 
-        <!-- Ô SỐ 1 ĐÃ ĐƯỢC CẬP NHẬT: THÊM DYNAMIC TEXTBOX & SEARCH XOÁ FIX CỨNG 30 LOẠI CAFE -->
+        <!-- カード 1: テキスト確認 ＆ ドリンク検索 -->
         <section class="cafe-card">
             <h2>テキスト確認 ＆ ドリンク検索</h2>
             
-            <!-- Bộ phận 1: Ô Textbox check dynamic text mới thêm -->
+            <!-- Bộ phận 1: Ô Textbox check dynamic text -->
             <div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #ddd;">
                 <label style="font-size: 0.85rem; font-weight: bold; color: var(--accent-color); display: block; margin-bottom: 5px;">【新機能】ダイナミックテキスト確認</label>
                 <div style="display: flex; gap: 8px;">
@@ -416,7 +416,7 @@
                 </div>
             </div>
 
-            <!-- Bộ phận 2: Ô Tìm kiếm cũ (đã tích hợp logic trả về 30 loại Cafe) -->
+            <!-- Bộ phận 2: Ô Tìm kiếm -->
             <div>
                 <label style="font-size: 0.85rem; font-weight: bold; color: var(--primary-color); display: block; margin-bottom: 5px;">ドリンク名検索（「Cafe」で30種類表示）</label>
                 <input id="drinkSearch" class="cafe-input" type="text" placeholder="ドリンク名を入力 (例: ラテ、エスプレッソ、Cafe...)">
@@ -424,7 +424,7 @@
             </div>
         </section>
 
-        <!-- カード 2: お受け取り方法 -->
+        <!-- カード 2 ĐÃ ĐƯỢC CẬP NHẬT: SHOW THÔNG TIN CHI TIẾT DÀI HƠN KHI CHỌN PHƯƠNG THỨC -->
         <section class="cafe-card">
             <h2>お受け取り方法</h2>
             <select id="orderTypeSelect" class="cafe-select">
@@ -433,7 +433,10 @@
                 <option value="takeaway">テイクアウト</option>
                 <option value="delivery">デリバリー</option>
             </select>
-            <div id="orderTypeOutput" class="cafe-result">お受け取り方法を選択してください。</div>
+            <!-- Phần kết quả mô tả chi tiết được định dạng rõ ràng, bỏ italic để dễ đọc -->
+            <div id="orderTypeOutput" class="cafe-result" style="font-style: normal; font-size: 0.95rem; line-height: 1.5; color: #444;">
+                お受け取り方法を選択してください。
+            </div>
         </section>
 
         <!-- カード 3: 本日の特別メニュー -->
@@ -559,7 +562,7 @@
                 <span class="menu-item-name">キャラメルモカ</span>
                 <span class="menu-item-price">580円</span>
             </div>
-            <p class="menu-item-desc">ほろ苦いチョコレートとキャラメルシロップが溶け合う、デザート感覚の贅沢な一杯。</p>
+            <p class="menu-item-desc">ほろ苦いチョコレートとキャラメルシロップが溶け合う、デザert感覚の贅沢な一杯。</p>
             <button class="cafe-btn select-menu-btn" data-name="キャラメルモカ">選択する</button>
         </div>
         <!-- Món 12 -->
@@ -841,14 +844,13 @@
         submitTextBtn.addEventListener('click', () => {
             const currentText = dynamicTextInput.value.trim();
             if(currentText) {
-                dynamicTextOutput.textContent = currentText; // Hiện văn bản xuống phía dưới ô submit
-                dynamicTextInput.value = ''; // Xoá trắng ô nhập sau khi submit
+                dynamicTextOutput.textContent = currentText;
+                dynamicTextInput.value = '';
             } else {
                 dynamicTextOutput.textContent = '⚠ テキストを入力してから送信してください。';
             }
         });
 
-        // Hỗ trợ nhấn phím Enter để submit nhanh văn bản
         dynamicTextInput.addEventListener('keypress', (e) => {
             if(e.key === 'Enter') submitTextBtn.click();
         });
@@ -867,7 +869,6 @@
                 return;
             }
 
-            // Nếu từ khoá tìm kiếm có chứa từ "cafe" hoặc "カフェ" (tiếng Nhật)
             if(lowerValue.includes('cafe') || lowerValue.includes('カフェ')) {
                 let htmlResult = `<div style="font-weight:bold; color:var(--primary-color); margin-bottom:8px;">☕ 「Cafe」の検索結果（30種類を固定表示中）:</div>`;
                 fixedCafeList.forEach(item => {
@@ -875,7 +876,6 @@
                 });
                 searchOutput.innerHTML = htmlResult;
             } else {
-                // Các trường hợp search từ khoá bình thường khác
                 searchOutput.textContent = `ドリンク「${value}」を検索中...`;
             }
         }
@@ -884,7 +884,6 @@
             updateSearchOutput(e.target.value.trim());
         });
 
-        // Hàm helper kích hoạt Toast thông báo
         function triggerToast(message) {
             customToast.textContent = message;
             customToast.style.display = 'block';
@@ -893,7 +892,6 @@
             }, 3000);
         }
 
-        // Chọn đồ uống từ Menu -> Hiện toast thành công & Điền ô tìm kiếm
         const selectMenuBtns = document.querySelectorAll('.select-menu-btn');
         selectMenuBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -908,20 +906,29 @@
             });
         });
 
-        // --- 3. お受け取り方法の選択 ---
+
+        // --- 3. CHỨC NĂNG 3: ĐÃ CẬP NHẬT SHOW THÔNG TIN CHI TIẾT DÀI HƠN (~20-30 TỪ) ---
         const orderTypeSelect = document.getElementById('orderTypeSelect');
         const orderTypeOutput = document.getElementById('orderTypeOutput');
 
+        // Định nghĩa nội dung mô tả chi tiết dài hơn cho từng phương thức
+        const orderDescriptions = {
+            dinein: "【店内飲食】落ち着いたアンティーク調の店内で、淹れたての一杯を最高の香りとともにお楽しみいただけます。ゆったりとした快適な時間をお過ごしください。",
+            takeaway: "【テイクアウト】お忙しい時間でも、特製タンブラーや専用カップで手軽にお持ち帰りいただけます。オフィスやお出かけ先でもお店の味をお楽しみください。",
+            delivery: "【デリバリー】専門スタッフがスマートに安全運転でお届けします。ご自宅やオフィスに居ながらにして、カフェ特製の本格ドリンクをそのままお届けいたします。"
+        };
+
         orderTypeSelect.addEventListener('change', (e) => {
             const selectedValue = e.target.value;
-            const selectedText = e.target.options[e.target.selectedIndex].text;
             
-            if(selectedValue) {
-                orderTypeOutput.textContent = `選択中: ${selectedText}`;
+            if(selectedValue && orderDescriptions[selectedValue]) {
+                // Đổ văn bản chi tiết dài vào thẻ hiển thị
+                orderTypeOutput.innerHTML = `<strong style="color:var(--primary-color); display:block; margin-bottom:4px;">✓ 受取設定完了</strong>${orderDescriptions[selectedValue]}`;
             } else {
                 orderTypeOutput.textContent = 'お受け取り方法を選択してください。';
             }
         });
+
 
         // --- 4. クーポン適用機能 ---
         const applyDiscountBtn = document.getElementById('applyDiscountBtn');
