@@ -139,9 +139,7 @@
             border: 1px dashed var(--accent-color);
         }
 
-        /* ===================================================
-           CSS CHO CÁC PHẦN MỚI THÊM (FEEDBACK & SHOP INFO)
-           =================================================== */
+        /* Tiêu đề các phần lớn */
         .section-title {
             text-align: center;
             color: var(--primary-color);
@@ -157,6 +155,84 @@
             height: 3px;
             background-color: var(--accent-color);
             margin: 10px auto 0 auto;
+        }
+
+        /* ===================================================
+           CSS CHO PHẦN MENU MỚI (Hàng 3 món)
+           =================================================== */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Chia đều 3 cột trên 1 hàng */
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Responsive cho Menu khi màn hình nhỏ */
+        @media (max-width: 992px) {
+            .menu-grid { grid-template-columns: repeat(2, 1fr); } /* Màn hình vừa: 2 món/hàng */
+        }
+        @media (max-width: 650px) {
+            .menu-grid { grid-template-columns: 1fr; } /* Màn hình điện thoại: 1 món/hàng */
+        }
+
+        .menu-item {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #e2dddf;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            box-shadow: 0 8px 15px rgba(111, 78, 55, 0.15);
+            border-color: var(--accent-color);
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 8px;
+        }
+
+        .menu-item-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--dark-color);
+        }
+
+        .menu-item-price {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .menu-item-desc {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .menu-item .cafe-btn {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.9rem;
+            background-color: #fbf9f6;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .menu-item .cafe-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
         }
 
         /* フィードバック (Feedback) */
@@ -204,9 +280,7 @@
         }
 
         @media (max-width: 768px) {
-            .info-container {
-                grid-template-columns: 1fr;
-            }
+            .info-container { grid-template-columns: 1fr; }
         }
 
         .info-table {
@@ -359,7 +433,102 @@
 
     </main>
 
-    <!-- === PHẦN MỚI 1: PHẢN HỒI KHÁCH HÀNG (お客様の声) === -->
+    <!-- === PHẦN MỚI 1: MENU ĐỒ UỐNG (メニュー) - 10 LOẠI - HÀNG 3 MÓN === -->
+    <h2 class="section-title">ドリンクメニュー</h2>
+    <section class="menu-grid">
+        <!-- Món 1 -->
+        <div class="menu-item">
+            <div class="menu-item-header">
+                <span class="menu-item-name">ハウスブレンド</span>
+                <span class="menu-item-price">450円</span>
+            </div>
+            <p class="menu-item-desc">創業当時から変わらない伝統の味。深いコクと豊かな香りが特徴の定番コーヒーです。</p>
+            <button class="cafe-btn select-menu-btn" data-name="ハウスブレンド">選択する</button>
+        </div>
+        <!-- Món 2 -->
+        <div class="menu-item">
+            <div class="menu-item-header">
+                <span class="menu-item-name">カフェラテ</span>
+                <span class="menu-item-price">500円</span>
+            </div>
+            <p class="menu-item-desc">濃厚なエスプレッソに、スチームしたてできめ細やかなミルクを注いだまろやかな一杯。</p>
+            <button class="cafe-btn select-menu-btn" data-name="カフェラテ">選択する</button>
+        </div>
+        <!-- Món 3 -->
+        <div class="menu-item">
+            <div class="menu-item-header">
+                <span class="menu-item-name">カプチーノ</span>
+                <span class="menu-item-price">520円</span>
+            </div>
+            <p class="menu-item-desc">ふわふわの泡立ちミルクの食感と、ほのかなシナモンの香りが絶妙なコンビネーション。</p>
+            <button class="cafe-btn select-menu-btn" data-name="カプチーノ">選択する</button>
+        </div>
+        <!-- Món 4 -->
+        <div class="menu-item">
+            <div class="menu-item-header">
+                <span class="menu-item-name">エスプレッソ</span>
+                <span class="menu-item-price">400円</span>
+            </div>
+            <p class="menu-item-desc">厳選された豆を高圧で短時間抽出。コーヒー本来の旨味を凝縮した贅沢なコク。</p>
+            <button class="cafe-btn select-menu-btn" data-name="エスプレッソ">選択する</button>
+        </div>
+        <!-- Món 5 -->
+        <div class="menu-item">
+            <div class="menu-item-header">
+                <span class="menu-item-name">宇治抹茶ラテ</span>
+                <span class="menu-item-price">550円</span>
+            </div>
+            <p class="menu-item-desc">京都の高級宇治抹茶を贅沢に使用。上品なほろ苦さとミルクの甘みがマッチします。</p>
+            <button class="cafe-btn select-menu-btn" data-name="宇治抹茶ラテ">選択する</button>
+        </div>
+        <!-- Món 6 -->
+        <div class="menu-item">
+            <div class="menu-item-header">
+                <span class="menu-item-name">ほうじ茶ラテ</span>
+                <span class="menu-item-price">550円</span>
+            </div>
+            <p class="menu-item-desc">香ばしく焙煎した和のほうじ茶とミルクの融合。心安らぐホッとする味わいです。</p>
+            <button class="cafe-btn select-menu-btn" data-name="ほうじ茶ラテ">選択する</button>
+        </div>
+        <!-- Món 7 -->
+        <div class="menu-item">
+            <div class="menu-item-header">
+                <span class="menu-item-name">水出しコーヒー</span>
+                <span class="menu-item-price">500円</span>
+            </div>
+            <p class="menu-item-desc">時間をかけてじっくり水で抽出。雑味や苦味が少なく、すっきりとした透明感のある味。</p>
+            <button class="cafe-btn select-menu-btn" data-name="水出しコーヒー">選択する</button>
+        </div>
+        <!-- Món 8 -->
+        <div class="menu-item">
+            <div class="menu-item-header">
+                <span class="menu-item-name">アールグレイ</span>
+                <span class="menu-item-price">480円</span>
+            </div>
+            <p class="menu-item-desc">ベルガモットの華やかで爽やかな柑橘系の香りが際立つ、上質なストレート紅茶。</p>
+            <button class="cafe-btn select-menu-btn" data-name="アールグレイ">選択する</button>
+        </div>
+        <!-- Món 9 -->
+        <div class="menu-item">
+            <div class="menu-item-header">
+                <span class="menu-item-name">自家製レモネード</span>
+                <span class="menu-item-price">520円</span>
+            </div>
+            <p class="menu-item-desc">新鮮なレモンをじっくりと特製蜂蜜に漬け込みました。ビタミンたっぷりの甘酸っぱさ。</p>
+            <button class="cafe-btn select-menu-btn" data-name="自家製レモネード">選択する</button>
+        </div>
+        <!-- Món 10 -->
+        <div class="menu-item">
+            <div class="menu-item-header">
+                <span class="menu-item-name">ココア</span>
+                <span class="menu-item-price">530円</span>
+            </div>
+            <p class="menu-item-desc">高級カカオパウダーを使用。濃厚でリッチな甘さが、心も体も芯から温めてくれます。</p>
+            <button class="cafe-btn select-menu-btn" data-name="ココア">選択する</button>
+        </div>
+    </section>
+
+    <!-- === PHẦN MỚI 2: PHẢN HỒI KHÁCH HÀNG (お客様の声) === -->
     <h2 class="section-title">お客様の声</h2>
     <section class="feedback-grid">
         <div class="feedback-item">
@@ -379,7 +548,7 @@
         </div>
     </section>
 
-    <!-- === PHẦN MỚI 2: THÔNG TIN CỬA HÀNG (店舗情報) === -->
+    <!-- === PHẦN MỚI 3: THÔNG TIN CỬA HÀNG KÈM LỊCH SỬ (店舗情報) === -->
     <h2 class="section-title">店舗情報</h2>
     <section class="info-container">
         <!-- Bảng thông tin -->
@@ -388,6 +557,10 @@
                 <tr>
                     <th>店名</th>
                     <td>Café de L'Amour（カフェ・ド・ラムール）</td>
+                </tr>
+                <tr>
+                    <th>創業・歴史</th>
+                    <td><strong>1976年（おかげさまで創業50年を迎えます）</strong></td>
                 </tr>
                 <tr>
                     <th>住所</th>
@@ -407,7 +580,7 @@
                 </tr>
             </table>
         </div>
-        <!-- Bản đồ giả lập (Có thể thay thế bằng iframe Google Map thật) -->
+        <!-- Bản đồ giả lập -->
         <div class="map-placeholder">
             <span style="font-size: 2.5rem; margin-bottom: 10px;">📍</span>
             <strong>Google Map エリア</strong>
@@ -458,13 +631,33 @@
         const drinkSearch = document.getElementById('drinkSearch');
         const searchOutput = document.getElementById('searchOutput');
         
-        drinkSearch.addEventListener('input', (e) => {
-            const query = e.target.value.trim();
-            if(query) {
-                searchOutput.textContent = `ドリンク「${query}」を検索中...`;
+        function updateSearchOutput(value) {
+            if(value) {
+                searchOutput.textContent = `ドリンク「${value}」を検索中...`;
             } else {
                 searchOutput.textContent = '検索キーワードを入力してください...';
             }
+        }
+
+        drinkSearch.addEventListener('input', (e) => {
+            updateSearchOutput(e.target.value.trim());
+        });
+
+        // TÍNH NĂNG MỚI: Chọn đồ uống từ Menu dưới sẽ điền lên ô tìm kiếm trên
+        const selectMenuBtns = document.querySelectorAll('.select-menu-btn');
+        selectMenuBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const drinkName = btn.getAttribute('data-name');
+                drinkSearch.value = drinkName;
+                updateSearchOutput(drinkName);
+                
+                // Cuộn mượt mà lên phần tìm kiếm để người dùng thấy kết quả
+                drinkSearch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Hiệu ứng nháy nhẹ ô input để báo hiệu
+                drinkSearch.style.borderColor = 'var(--success)';
+                setTimeout(() => { drinkSearch.style.borderColor = 'var(--primary-color)'; }, 1000);
+            });
         });
 
         // --- 2. お受け取り方法の選択 ---
