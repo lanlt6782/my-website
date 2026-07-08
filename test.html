@@ -130,6 +130,16 @@
             min-height: 45px;
         }
 
+        /* Vùng hiển thị danh sách 30 loại cafe (cuộn được nếu quá dài) */
+        .cafe-scroll-result {
+            max-height: 250px;
+            overflow-y: auto;
+            font-style: normal;
+            font-size: 0.9rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
         /* 商品情報 */
         .cafe-product-info {
             background-color: #fdfaf6;
@@ -390,11 +400,28 @@
     <!-- メインコンテンツ (Main Interactive) -->
     <main class="cafe-container">
 
-        <!-- カード 1: ドリンク検索 -->
+        <!-- Ô SỐ 1 ĐÃ ĐƯỢC CẬP NHẬT: THÊM DYNAMIC TEXTBOX & SEARCH XOÁ FIX CỨNG 30 LOẠI CAFE -->
         <section class="cafe-card">
-            <h2>ドリンク検索</h2>
-            <input id="drinkSearch" class="cafe-input" type="text" placeholder="ドリンク名を入力 (例: ラテ、エスプレッソ...)">
-            <div id="searchOutput" class="cafe-result">検索キーワードを入力してください...</div>
+            <h2>テキスト確認 ＆ ドリンク検索</h2>
+            
+            <!-- Bộ phận 1: Ô Textbox check dynamic text mới thêm -->
+            <div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #ddd;">
+                <label style="font-size: 0.85rem; font-weight: bold; color: var(--accent-color); display: block; margin-bottom: 5px;">【新機能】ダイナミックテキスト確認</label>
+                <div style="display: flex; gap: 8px;">
+                    <input id="dynamicTextInput" class="cafe-input" type="text" placeholder="ここに文字を入力してください..." style="margin-bottom: 0;">
+                    <button id="submitTextBtn" class="cafe-btn" style="white-space: nowrap;">送信</button>
+                </div>
+                <div id="dynamicTextOutput" class="cafe-result" style="margin-top: 10px; background-color: #fdfcf7; border: 1px solid #eadecc; color: #5d4037;">
+                    入力したテキストがここに動的に表示されます...
+                </div>
+            </div>
+
+            <!-- Bộ phận 2: Ô Tìm kiếm cũ (đã tích hợp logic trả về 30 loại Cafe) -->
+            <div>
+                <label style="font-size: 0.85rem; font-weight: bold; color: var(--primary-color); display: block; margin-bottom: 5px;">ドリンク名検索（「Cafe」で30種類表示）</label>
+                <input id="drinkSearch" class="cafe-input" type="text" placeholder="ドリンク名を入力 (例: ラテ、エスプレッソ、Cafe...)">
+                <div id="searchOutput" class="cafe-result cafe-scroll-result">検索キーワードを入力してください...</div>
+            </div>
         </section>
 
         <!-- カード 2: お受け取り方法 -->
@@ -433,7 +460,7 @@
 
     </main>
 
-    <!-- === PHẦN MENU ĐỒ UỐNG (メニュー) - TỔNG CỘNG 20 MÓN - HÀNG 3 MÓN === -->
+    <!-- === PHẦN MENU ĐỒ UỐNG (メニュー) - TỔNG CỘNG 20 MÓN === -->
     <h2 class="section-title">ドリンクメニュー</h2>
     <section class="menu-grid">
         <!-- Món 1 -->
@@ -618,7 +645,7 @@
         </div>
     </section>
 
-    <!-- === PHẢN HỒI KHÁCH HÀNG (お客様の声) === -->
+    <!-- === お客様の声 (Ý kiến khách hàng) === -->
     <h2 class="section-title" id="feedbackSection">お客様の声</h2>
     <section class="feedback-grid" id="feedbackGrid">
         <div class="feedback-item">
@@ -638,10 +665,9 @@
         </div>
     </section>
 
-    <!-- === THÔNG TIN CỬA HÀNG KÈM LỊCH SỬ (店舗情報) === -->
+    <!-- === 店舗情報 (Thông tin cửa hàng) === -->
     <h2 class="section-title">店舗情報</h2>
     <section class="info-container">
-        <!-- Bảng thông tin -->
         <div>
             <table class="info-table">
                 <tr>
@@ -670,7 +696,6 @@
                 </tr>
             </table>
         </div>
-        <!-- Bản đồ giả lập -->
         <div class="map-placeholder">
             <span style="font-size: 2.5rem; margin-bottom: 10px;">📍</span>
             <strong>Google Map エリア</strong>
@@ -678,25 +703,22 @@
         </div>
     </section>
 
-    <!-- === PHẦN MỚI: ĐĂNG KÝ Ý KIẾN PHẢN HỒI (フィードバック送信フォーム) === -->
+    <!-- === フィードバック送信フォーム (Form phản hồi) === -->
     <h2 class="section-title">フィードバックの送信</h2>
     <section style="max-width: 700px; margin: 0 auto 60px auto; background-color: var(--white); padding: 35px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 5px solid var(--primary-color);">
         <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px; text-align: center;">お店やドリンクに関するご意見・ご感想をお聞かせください。今後の参考にさせていただきます。</p>
         
         <form id="cafeFeedbackForm">
-            <!-- 1. Tên -->
             <div style="margin-bottom: 15px;">
                 <label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">お名前（必須）</label>
                 <input type="text" id="fbName" class="cafe-input" placeholder="例：山田 太郎" required style="margin-bottom: 0;">
             </div>
             
-            <!-- 2. Email -->
             <div style="margin-bottom: 15px;">
                 <label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">メールアドレス（必須）</label>
                 <input type="email" id="fbEmail" class="cafe-input" placeholder="例：yamada@example.com" required style="margin-bottom: 0;">
             </div>
             
-            <!-- 3. Chọn Đồ uống -->
             <div style="margin-bottom: 15px;">
                 <label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">対象のドリンク</label>
                 <select id="fbDrink" class="cafe-select" style="margin-bottom: 0;">
@@ -724,7 +746,6 @@
                 </select>
             </div>
             
-            <!-- 4. Đánh giá sao -->
             <div style="margin-bottom: 15px;">
                 <label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">満足度評価</label>
                 <select id="fbRating" class="cafe-select" style="margin-bottom: 0;">
@@ -736,14 +757,12 @@
                 </select>
             </div>
             
-            <!-- 5. Nội dung Feedback -->
             <div style="margin-bottom: 25px;">
                 <label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">ご意見・ご感想（必須）</label>
                 <textarea id="fbComment" class="cafe-input" rows="4" placeholder="ドリンクの味や店舗へのメッセージを自由にご記入ください..." style="resize: vertical; height: auto; margin-bottom: 0;" required></textarea>
             </div>
             
-            <!-- Nút gửi -->
-            <button type="submit" class="cafe-btn" style="width: 100%; padding: 14px; font-size: 1.1rem; background-color: var(--primary-color);">フィードバックを送信する</button>
+            <button type="submit" class="cafe-btn" style="width: 100%; padding: 14px; font-size: 1.1rem;">フィードバックを送信する</button>
         </form>
     </section>
 
@@ -752,11 +771,7 @@
         <p>&copy; 2026 Café de L'Amour. All Rights Reserved.</p>
     </footer>
 
-    <!-- ===================================================
-         3. PHẦN ĐỘNG (POPUP / MODAL / TOAST ẨN)
-         =================================================== -->
-
-    <!-- ポップアップ -->
+    <!-- POPUP / MODAL / TOAST ẨN -->
     <div id="customPopup" class="overlay">
         <div class="popup-box">
             <h3>☕ 素敵な一日を！</h3>
@@ -765,7 +780,6 @@
         </div>
     </div>
 
-    <!-- モダール (注文確認) -->
     <div id="customModal" class="overlay">
         <div class="modal-box">
             <h3>🔔 決済確認</h3>
@@ -777,7 +791,6 @@
         </div>
     </div>
 
-    <!-- トースト通知 -->
     <div id="customToast" class="cafe-toast">
         注文情報が正常に保存されました！
     </div>
@@ -786,16 +799,84 @@
          4. PHẦN JAVASCRIPT: Xử lý chức năng tương tác
          =================================================== -->
     <script>
-        // --- 1. ドリンク検索機能 ---
+        // --- MẢNG FIX CỨNG DANH SÁCH 30 LOẠI CAFE ---
+        const fixedCafeList = [
+            "1. エスプレッソ (Espresso) - 全てのコーヒーの基本となる濃厚な一杯",
+            "2. カフェラテ (Café Latte) - エスプレッソとたっぷりのミルクの調和",
+            "3. カプチーノ (Cappuccino) - 泡立ちミルクがふんわり乗った定番",
+            "4. アメリカーノ (Americano) - エスプレッソをお湯で割ったすっきり味",
+            "5. カフェモカ (Caffè Mocha) - チョコレートシロップを加えた甘い一杯",
+            "6. キャラメルマキアート (Caramel Macchiato) - キャラメル高香るリッチ味",
+            "7. フラットホワイト (Flat White) - エスプレッソ強めの濃厚ラテ",
+            "8. エスプレッソ・コンパナ (Con Panna) - 生クリームを添えた贅沢エスプレッソ",
+            "9. カフェマキアート (Caffè Macchiato) - 少量ミルクを落としたエスプレッソ",
+            "10. カフェ・オ・レ (Café au Lait) - ドリップコーヒーとミルクを1:1で",
+            "11. リストレット (Ristretto) - 旨味を凝縮させた濃厚ショート抽出",
+            "12. ルンゴ (Lungo) - 通常より長めに抽出したほろ苦い一杯",
+            "13. アフォガート (Affogato) - バニラアイスに熱々エスプレッソを注ぐ",
+            "14. ウィンナーコーヒー (Viennese) - ホイップクリームを浮かべた上品な味",
+            "15. コールドブリュー (Cold Brew) - 低温でじっくり抽出した水出し",
+            "16. ニトロコールドブリュー (Nitro) - 窒素を含ませたクリーミーな生ビール風",
+            "17. アイリッシュコーヒー (Irish Coffee) - ウイスキーが入った大人のカクテル",
+            "18. ベトナムコーヒー (Vietnamese) - 練乳（コンデンスミルク）を使った濃厚な甘さ",
+            "19. トルココーヒー (Turkish Coffee) - 粉を煮立てて上澄みを飲む伝統スタイル",
+            "20. フラッペ (Frappé) - インスタントと水を泡立てたギリシャ風アイス",
+            "21. ロマーノ (Romano) - レモンを添えた爽やかなエスプレッソ",
+            "22. ギルブラルタル (Gibraltar) - ガラス器に注ぐ濃密なミニラテ",
+            "23. コルタード (Cortado) - 酸味を抑えるため同量の温かいミルクで割る",
+            "24. ドリップコーヒー (Drip Coffee) - 丁寧にハンドドリップした王道の一杯",
+            "25. フレンチプレス (French Press) - 豆の油分まで余すことなく抽出する製法",
+            "26. サイフォンコーヒー (Siphon) - 蒸気圧を利用した芳醇でクリアな味わい",
+            "27. デカフェ・ラテ (Decaf Latte) - カフェインレスの体に優しいカフェラテ",
+            "28. カフェ・ボンボン (Café Bombón) - コンデンスミルクとエスプレッソが2層に",
+            "29. マサグラン (Mazagran) - レモンジュースと氷を合わせたアイスコーヒー",
+            "30. キューバ・エスプレッソ (Cuban) - 抽出時にブラウンシュガーを混ぜる甘濃厚味"
+        ];
+
+        // --- 1. CHỨC NĂNG 1: KIỂM TRA DYNAMIC TEXTBOX ---
+        const dynamicTextInput = document.getElementById('dynamicTextInput');
+        const submitTextBtn = document.getElementById('submitTextBtn');
+        const dynamicTextOutput = document.getElementById('dynamicTextOutput');
+
+        submitTextBtn.addEventListener('click', () => {
+            const currentText = dynamicTextInput.value.trim();
+            if(currentText) {
+                dynamicTextOutput.textContent = currentText; // Hiện văn bản xuống phía dưới ô submit
+                dynamicTextInput.value = ''; // Xoá trắng ô nhập sau khi submit
+            } else {
+                dynamicTextOutput.textContent = '⚠ テキストを入力してから送信してください。';
+            }
+        });
+
+        // Hỗ trợ nhấn phím Enter để submit nhanh văn bản
+        dynamicTextInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') submitTextBtn.click();
+        });
+
+
+        // --- 2. CHỨC NĂNG 2: ĐỒ UỐNG VÀ XỬ LÝ SEARCH CAFE TRA 30 LOẠI ---
         const drinkSearch = document.getElementById('drinkSearch');
         const searchOutput = document.getElementById('searchOutput');
         const customToast = document.getElementById('customToast');
         
         function updateSearchOutput(value) {
-            if(value) {
-                searchOutput.textContent = `ドリンク「${value}」を検索中...`;
+            const lowerValue = value.toLowerCase();
+            
+            if(!value) {
+                searchOutput.innerHTML = '検索キーワードを入力してください...';
+                return;
+            }
+
+            // Nếu từ khoá tìm kiếm có chứa từ "cafe" hoặc "カフェ" (tiếng Nhật)
+            if(lowerValue.includes('cafe') || lowerValue.includes('カフェ')) {
+                let htmlResult = `<div style="font-weight:bold; color:var(--primary-color); margin-bottom:8px;">☕ 「Cafe」の検索結果（30種類を固定表示中）:</div>`;
+                fixedCafeList.forEach(item => {
+                    htmlResult += `<div style="padding: 4px 0; border-bottom: 1px dashed #eee;">${item}</div>`;
+                });
+                searchOutput.innerHTML = htmlResult;
             } else {
-                searchOutput.textContent = '検索キーワードを入力してください...';
+                // Các trường hợp search từ khoá bình thường khác
+                searchOutput.textContent = `ドリンク「${value}」を検索中...`;
             }
         }
 
@@ -827,7 +908,7 @@
             });
         });
 
-        // --- 2. お受け取り方法の選択 ---
+        // --- 3. お受け取り方法の選択 ---
         const orderTypeSelect = document.getElementById('orderTypeSelect');
         const orderTypeOutput = document.getElementById('orderTypeOutput');
 
@@ -842,7 +923,7 @@
             }
         });
 
-        // --- 3. クーポン適用機能 ---
+        // --- 4. クーポン適用機能 ---
         const applyDiscountBtn = document.getElementById('applyDiscountBtn');
         const productPrice = document.getElementById('productPrice');
         let isDiscounted = false;
@@ -859,7 +940,7 @@
             }
         });
 
-        // --- 4. ポップアップ・モダール・コントロールパネル ---
+        // --- 5. ポップアップ・モダール・コントロールパネル ---
         const btnPopup = document.getElementById('btnPopup');
         const btnModal = document.getElementById('btnModal');
         const btnToast = document.getElementById('btnToast');
@@ -897,32 +978,27 @@
             appendArea.scrollTop = appendArea.scrollHeight;
         });
 
-        // --- 5. TÍNH NĂNG MỚI: Xử lý Form gửi Feedback ---
+        // --- 6. Xử lý Form gửi Feedback ---
         const cafeFeedbackForm = document.getElementById('cafeFeedbackForm');
         const feedbackGrid = document.getElementById('feedbackGrid');
 
         cafeFeedbackForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Chặn hành vi tải lại trang của form mặc định
+            e.preventDefault();
             
-            // Lấy dữ liệu từ form
             const name = document.getElementById('fbName').value.trim();
             const drink = document.getElementById('fbDrink').value;
             const rating = parseInt(document.getElementById('fbRating').value);
             const comment = document.getElementById('fbComment').value.trim();
             
-            // Tạo chuỗi ký tự Sao (★) dựa trên điểm số đánh giá
             let starString = '';
             for(let i = 0; i < 5; i++) {
                 starString += (i < rating) ? '★' : '☆';
             }
             
-            // Chuỗi hiển thị tên đồ uống nếu có chọn
             const drinkInfo = drink ? `（${drink}）` : '';
-            
-            // Tạo phần tử div mới cho danh sách "お客様の声" (Ý kiến khách hàng)
             const newFeedbackCard = document.createElement('div');
             newFeedbackCard.className = 'feedback-item';
-            newFeedbackCard.style.animation = 'fadeIn 0.6s ease'; // Hiệu ứng xuất hiện mượt
+            newFeedbackCard.style.animation = 'fadeIn 0.6s ease';
             
             newFeedbackCard.innerHTML = `
                 <div class="feedback-stars">${starString}</div>
@@ -930,20 +1006,12 @@
                 <div class="feedback-user">ー ${name} 様 (新着)</div>
             `;
             
-            // Chèn nhận xét mới lên đầu danh sách Ý kiến khách hàng để thấy luôn
             feedbackGrid.insertBefore(newFeedbackCard, feedbackGrid.firstChild);
-            
-            // Hiển thị Toast thông báo thành công
             triggerToast('フィードバックを送信しました。ありがとうございます！');
-            
-            // Làm sạch Form sau khi gửi xong
             cafeFeedbackForm.reset();
-            
-            // Cuộn màn hình mượt mà lên phần "お客様の声" để xem bài đăng mới của mình
             document.getElementById('feedbackSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
 
-        // Đóng popup/modal khi click nền đen
         window.addEventListener('click', (e) => {
             if (e.target === customPopup) customPopup.style.display = 'none';
             if (e.target === customModal) customModal.style.display = 'none';
