@@ -1,116 +1,555 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-   <script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1418"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café de L'Amour - ダッシュボード</title>
+    
+    <!-- ===================================================
+         1. PHẦN CSS: Định dạng giao diện toàn bộ trang web
+         =================================================== -->
+    <style>
+        /* カフェ風のカラー変数 */
+        :root {
+            --primary-color: #6f4e37; /* コーヒーブラウン */
+            --secondary-color: #e6ccb2; /* ミルククリーム */
+            --accent-color: #b07d62; /* ライトブラウン */
+            --dark-color: #3d2f21;
+            --bg-color: #f7f5f0;
+            --white: #ffffff;
+            --success: #52b788;
+            --star-color: #f1c40f;
+        }
 
-  <meta charset="UTF-8">
-  <title>私のウェブサイト</title>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        }
 
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  margin: 0;
-  padding: 40px;
-}
+        body {
+            background-color: var(--bg-color);
+            color: var(--dark-color);
+            padding: 20px;
+            line-height: 1.6;
+        }
 
-.container {
-  max-width: 700px;
-  margin: auto;
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
+        /* ヘッダー */
+        .cafe-header {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: var(--white);
+            padding: 50px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
 
-h1 {
-  margin-top: 0;
-}
+        .cafe-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
 
-.box {
-  margin: 20px 0;
-  padding: 20px;
-  background: #fafafa;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
+        /* レイアウトグリッド (コントロールパネル用) */
+        .cafe-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+        }
 
-.sample {
-  font-size: 22px;
-  margin: 12px 0;
-}
+        /* カードデザイン */
+        .cafe-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.2s;
+        }
 
-button {
-  padding: 12px 24px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  background: #0078ff;
-  color: white;
-  cursor: pointer;
-}
+        .cafe-card:hover {
+            transform: translateY(-3px);
+        }
 
-button:hover {
-  background: #005fcc;
-}
-</style>
+        .cafe-card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 8px;
+        }
+
+        /* フォーム要素 */
+        .cafe-input, .cafe-select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .cafe-input:focus, .cafe-select:focus {
+            border-color: var(--primary-color);
+        }
+
+        /* ボタン */
+        .cafe-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .cafe-btn:hover {
+            background-color: var(--dark-color);
+        }
+
+        .cafe-btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* 動的表示エリア */
+        .cafe-result {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: var(--bg-color);
+            border-radius: 6px;
+            font-style: italic;
+            min-height: 45px;
+        }
+
+        /* 商品情報 */
+        .cafe-product-info {
+            background-color: #fdfaf6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px dashed var(--accent-color);
+        }
+
+        /* ===================================================
+           CSS CHO CÁC PHẦN MỚI THÊM (FEEDBACK & SHOP INFO)
+           =================================================== */
+        .section-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin: 50px 0 25px 0;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0 auto;
+        }
+
+        /* フィードバック (Feedback) */
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feedback-item {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .feedback-stars {
+            color: var(--star-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .feedback-user {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #777;
+            text-align: right;
+        }
+
+        /* 店舗情報 (Shop Info) */
+        .info-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 60px auto;
+            background-color: var(--white);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .info-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-table th, .info-table td {
+            padding: 15px 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-table th {
+            color: var(--primary-color);
+            width: 30%;
+            font-weight: 600;
+        }
+
+        /* Giả lập bản đồ Google Map */
+        .map-placeholder {
+            background-color: #e5e5e5;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #555;
+            min-height: 250px;
+            border: 1px solid #ddd;
+        }
+
+        /* フッター */
+        .cafe-footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* オーバーレイ (ポップアップ、モダール) */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-box, .modal-box {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* トースト通知 */
+        .cafe-toast {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-left: 5px solid var(--success);
+            z-index: 2000;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
+    <!-- ===================================================
+         2. PHẦN HTML: Nội dung hiển thị trên trang web
+         =================================================== -->
 
-<h1>私のウェブサイト</h1>
+    <!-- ヘッダー (Header) -->
+    <header class="cafe-header">
+        <h1>Café de L'Amour</h1>
+        <p>穏やかなひとときへようこそ。今日のお気に入りの一杯をお選びください。</p>
+    </header>
 
-<p>
-約5.1g。この設定では、数字と記号のみで構成されたテキストを
-自動翻訳に含めるかどうかを選択できます。<br>
-たとえば、元サイトにサービス名やスケジュールなどの英語のみの単語、
-または数字のみのテキストが含まれている場合、<br>
-除外設定時には元のテキストがそのまま表示されます。
-</p>
+    <!-- メインコンテンツ (Main Interactive) -->
+    <main class="cafe-container">
 
-<label>
-  <input type="checkbox" id="toggle">
-  数字・記号のみのテキストを翻訳対象に含める
-</label>
+        <!-- カード 1: ドリンク検索 -->
+        <section class="cafe-card">
+            <h2>ドリンク検索</h2>
+            <input id="drinkSearch" class="cafe-input" type="text" placeholder="ドリンク名を入力 (例: ラテ、エスプレッソ...)">
+            <div id="searchOutput" class="cafe-result">検索キーワードを入力してください...</div>
+        </section>
 
-<div class="box">
-  <div class="sample" data-type="number">1234567890</div>
-  <div class="sample" data-type="symbol">12/13/2026 10:30</div>
-  <div class="sample" data-type="text">サービスカレンダー</div>
-  <div class="sample" data-type="jp">予約受付中</div>
-   <div class="sample" data-type="number">9/24 100%</div>
-     <div class="sample" data-type="text">Version 1.0!</div>
-  <div class="sample" data-type="text">約5.1g</div>
-</div>
+        <!-- カード 2: お受け取り方法 -->
+        <section class="cafe-card">
+            <h2>お受け取り方法</h2>
+            <select id="orderTypeSelect" class="cafe-select">
+                <option value="">-- 選択してください --</option>
+                <option value="dinein">店内飲食（イートイン）</option>
+                <option value="takeaway">テイクアウト</option>
+                <option value="delivery">デリバリー</option>
+            </select>
+            <div id="orderTypeOutput" class="cafe-result">お受け取り方法を選択してください。</div>
+        </section>
 
-<button onclick="translate()">翻訳実行</button>
+        <!-- カード 3: 本日の特別メニュー -->
+        <section class="cafe-card">
+            <h2>本日の特別メニュー</h2>
+            <div class="cafe-product-info">
+                <h3 id="productName">キャラメルマキアート</h3>
+                <p id="productPrice">通常価格：650円</p>
+            </div>
+            <button id="applyDiscountBtn" class="cafe-btn">クーポン適用</button>
+        </section>
 
-</div>
+        <!-- カード 4: コントロールパネル -->
+        <section class="cafe-card">
+            <h2>コントロールパネル</h2>
+            <div class="cafe-btn-group">
+                <button id="btnPopup" class="cafe-btn">ポップアップ</button>
+                <button id="btnModal" class="cafe-btn">注文確認</button>
+                <button id="btnToast" class="cafe-btn">トースト通知</button>
+                <button id="btnAppend" class="cafe-btn">メモ追加</button>
+            </div>
+            <div id="appendArea" class="cafe-result" style="max-height: 120px; overflow-y: auto;">注文メモがここに表示されます...</div>
+        </section>
 
-<script>
-function isNumericOrSymbol(text) {
-  return /^[0-9\s\/:.\-]+$/.test(text);
-}
+    </main>
 
-function translate() {
-  const includeNumeric = document.getElementById("toggle").checked;
-  const items = document.querySelectorAll(".sample");
+    <!-- === PHẦN MỚI 1: PHẢN HỒI KHÁCH HÀNG (お客様の声) === -->
+    <h2 class="section-title">お客様の声</h2>
+    <section class="feedback-grid">
+        <div class="feedback-item">
+            <div class="feedback-stars">★★★★★</div>
+            <p>「ここのラテは本当にクリーミーで美味しいです！お店の雰囲気も落ち着いていて、毎週末の読書タイムに利用しています。」</p>
+            <div class="feedback-user">ー 佐藤 様 (会社員)</div>
+        </div>
+        <div class="feedback-item">
+            <div class="feedback-stars">★★★★★</div>
+            <p>「リモートワークでよく利用しますが、Wi-Fiも早くて居心地が最高です。キャラメルマキアートが特にお気に入り！」</p>
+            <div class="feedback-user">ー 鈴木 様 (デザイナー)</div>
+        </div>
+        <div class="feedback-item">
+            <div class="feedback-stars">★★★★☆</div>
+            <p>「テイクアウトの対応がとても迅速で助かります。店員さんの笑顔が素敵で、朝からとても良い気分になれるお店です。」</p>
+            <div class="feedback-user">ー 田中 様 (主婦)</div>
+        </div>
+    </section>
 
-  items.forEach(el => {
-    const original = el.textContent;
+    <!-- === PHẦN MỚI 2: THÔNG TIN CỬA HÀNG (店舗情報) === -->
+    <h2 class="section-title">店舗情報</h2>
+    <section class="info-container">
+        <!-- Bảng thông tin -->
+        <div>
+            <table class="info-table">
+                <tr>
+                    <th>店名</th>
+                    <td>Café de L'Amour（カフェ・ド・ラムール）</td>
+                </tr>
+                <tr>
+                    <th>住所</th>
+                    <td>〒100-0005 東京都千代田区丸の内 1-2-3</td>
+                </tr>
+                <tr>
+                    <th>営業時間</th>
+                    <td>09:00 ～ 21:00 (ラストオーダー 20:30)</td>
+                </tr>
+                <tr>
+                    <th>定休日</th>
+                    <td>毎週水曜日、年末年始</td>
+                </tr>
+                <tr>
+                    <th>電話番号</th>
+                    <td>03-1234-5678</td>
+                </tr>
+            </table>
+        </div>
+        <!-- Bản đồ giả lập (Có thể thay thế bằng iframe Google Map thật) -->
+        <div class="map-placeholder">
+            <span style="font-size: 2.5rem; margin-bottom: 10px;">📍</span>
+            <strong>Google Map エリア</strong>
+            <p style="font-size: 0.8rem; color: #777; margin-top: 5px;">（ここに実際の地図が埋め込まれます）</p>
+        </div>
+    </section>
 
-    if (!includeNumeric && isNumericOrSymbol(original)) {
-      // 元のまま表示
-      el.textContent = original;
-    } else {
-      // 翻訳シミュレーション
-      el.textContent = "[翻訳済み] " + original;
-    }
-  });
-}
-</script>
+    <!-- フッター (Footer) -->
+    <footer class="cafe-footer">
+        <p>&copy; 2026 Café de L'Amour. All Rights Reserved.</p>
+    </footer>
 
+    <!-- ===================================================
+         3. PHẦN ĐỘNG (POPUP / MODAL / TOAST ẨN)
+         =================================================== -->
+
+    <!-- ポップアップ -->
+    <div id="customPopup" class="overlay">
+        <div class="popup-box">
+            <h3>☕ 素敵な一日を！</h3>
+            <p style="margin: 15px 0;">Café de L'Amourとともに、エネルギーに満ちた素晴らしい一日をお過ごしください！</p>
+            <button id="closePopup" class="cafe-btn">閉じる</button>
+        </div>
+    </div>
+
+    <!-- モダール (注文確認) -->
+    <div id="customModal" class="overlay">
+        <div class="modal-box">
+            <h3>🔔 決済確認</h3>
+            <p style="margin: 15px 0;">この内容で注文を確定してもよろしいですか？</p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button id="confirmModal" class="cafe-btn" style="background-color: var(--success);">はい</button>
+                <button id="closeModal" class="cafe-btn" style="background-color: #aaa;">キャンセル</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div id="customToast" class="cafe-toast">
+        注文情報が正常に保存されました！
+    </div>
+
+    <!-- ===================================================
+         4. PHẦN JAVASCRIPT: Xử lý chức năng tương tác
+         =================================================== -->
+    <script>
+        // --- 1. ドリンク検索機能 ---
+        const drinkSearch = document.getElementById('drinkSearch');
+        const searchOutput = document.getElementById('searchOutput');
+        
+        drinkSearch.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            if(query) {
+                searchOutput.textContent = `ドリンク「${query}」を検索中...`;
+            } else {
+                searchOutput.textContent = '検索キーワードを入力してください...';
+            }
+        });
+
+        // --- 2. お受け取り方法の選択 ---
+        const orderTypeSelect = document.getElementById('orderTypeSelect');
+        const orderTypeOutput = document.getElementById('orderTypeOutput');
+
+        orderTypeSelect.addEventListener('change', (e) => {
+            const selectedValue = e.target.value;
+            const selectedText = e.target.options[e.target.selectedIndex].text;
+            
+            if(selectedValue) {
+                orderTypeOutput.textContent = `選択中: ${selectedText}`;
+            } else {
+                orderTypeOutput.textContent = 'お受け取り方法を選択してください。';
+            }
+        });
+
+        // --- 3. クーポン適用機能 (価格変更) ---
+        const applyDiscountBtn = document.getElementById('applyDiscountBtn');
+        const productPrice = document.getElementById('productPrice');
+        let isDiscounted = false;
+
+        applyDiscountBtn.addEventListener('click', () => {
+            if(!isDiscounted) {
+                productPrice.innerHTML = '特別価格：<strong style="color: #e63946;">450円</strong> (200円引き)';
+                applyDiscountBtn.textContent = '元に戻す';
+                isDiscounted = true;
+            } else {
+                productPrice.textContent = '通常価格：650円';
+                applyDiscountBtn.textContent = 'クーポン適用';
+                isDiscounted = false;
+            }
+        });
+
+        // --- 4. ポップアップ・モダール・トースト等の制御 ---
+        const btnPopup = document.getElementById('btnPopup');
+        const btnModal = document.getElementById('btnModal');
+        const btnToast = document.getElementById('btnToast');
+        const btnAppend = document.getElementById('btnAppend');
+
+        const customPopup = document.getElementById('customPopup');
+        const customModal = document.getElementById('customModal');
+        const customToast = document.getElementById('customToast');
+        const appendArea = document.getElementById('appendArea');
+
+        // ポップアップの開閉
+        btnPopup.addEventListener('click', () => customPopup.style.display = 'flex');
+        document.getElementById('closePopup').addEventListener('click', () => customPopup.style.display = 'none');
+
+        // モダールの開閉
+        btnModal.addEventListener('click', () => customModal.style.display = 'flex');
+        document.getElementById('closeModal').addEventListener('click', () => customModal.style.display = 'none');
+        document.getElementById('confirmModal').addEventListener('click', () => {
+            customModal.style.display = 'none';
+            alert('ご注文ありがとうございました！');
+        });
+
+        // トースト通知の表示 (3秒後に自動非表示)
+        btnToast.addEventListener('click', () => {
+            customToast.style.display = 'block';
+            setTimeout(() => {
+                customToast.style.display = 'none';
+            }, 3000);
+        });
+
+        // テキストの追加 (追加要望メモ)
+        let noteCount = 0;
+        btnAppend.addEventListener('click', () => {
+            noteCount++;
+            if(noteCount === 1) appendArea.innerHTML = ''; // 初回クリック時にデフォルトテキストを消去
+            
+            const newNote = document.createElement('p');
+            newNote.style.color = 'var(--primary-color)';
+            newNote.style.fontSize = '0.9rem';
+            newNote.textContent = `• 追加要望 #${noteCount}: 甘さ控えめ、氷多め。`;
+            
+            appendArea.appendChild(newNote);
+            appendArea.scrollTop = appendArea.scrollHeight; // 自動スクロール
+        });
+
+        // 背景クリックでポップアップ/モダールを閉じる
+        window.addEventListener('click', (e) => {
+            if (e.target === customPopup) customPopup.style.display = 'none';
+            if (e.target === customModal) customModal.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
