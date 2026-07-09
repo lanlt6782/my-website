@@ -841,22 +841,31 @@
         });
 
 
-        // --- 4. クーポン適用機能 ---
-        const applyDiscountBtn = document.getElementById('applyDiscountBtn');
-        const productPrice = document.getElementById('productPrice');
-        let isDiscounted = false;
+       // --- 4. クーポン適用機能 ---
+const applyDiscountBtn = document.getElementById('applyDiscountBtn');
+const productPrice = document.getElementById('productPrice');
 
-        applyDiscountBtn.addEventListener('click', () => {
-            if(!isDiscounted) {
-                productPrice.innerHTML = '特別価格：<strong style="color: #e63946;">450円</strong> (200円引き)';
-                applyDiscountBtn.textContent = '元に戻す';
-                isDiscounted = true;
-            } else {
-                productPrice.textContent = '通常価格：650円';
-                applyDiscountBtn.textContent = 'クーポン適用';
-                isDiscounted = false;
-            }
-        });
+// Danh sách giá sẽ lần lượt hiển thị
+const specialPrices = [
+    100, 200, 300, 400,
+    500, 600, 700, 800
+];
+
+let currentPriceIndex = 0;
+
+applyDiscountBtn.addEventListener('click', () => {
+
+    const price = specialPrices[currentPriceIndex];
+
+    productPrice.innerHTML =
+        `特別価格：<strong style="color:#e63946;">${price}円</strong>`;
+
+    currentPriceIndex++;
+
+    if (currentPriceIndex >= specialPrices.length) {
+        currentPriceIndex = 0;
+    }
+});
 
         // --- 5. ポップアップ・モダール・コントロールパネル ---
         const btnPopup = document.getElementById('btnPopup');
