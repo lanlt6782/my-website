@@ -754,7 +754,7 @@
         const dynamicTextOutput = document.getElementById('dynamicTextOutput');
 
         submitTextBtn.addEventListener('click', () => {
-            const currentText = dynamicTextInput.value.trim();
+            const currentText = dynamicTextInput.value;
             if(currentText) {
                 dynamicTextOutput.textContent = currentText;
                 dynamicTextInput.value = '';
