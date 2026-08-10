@@ -468,14 +468,25 @@
     <h2 class="section-title">ドリンクメニュー</h2>
     <section class="menu-grid">
         <!-- Món 1 -->
-        <div class="menu-item">
-            <div class="menu-item-header">
-                <span class="menu-item-name">ハウスブレンド</span>
-                <span class="menu-item-price">450円</span>
-            </div>
-            <p class="menu-item-desc">創業当時から変わらない伝統の味。深いコクと豊かな香りが特徴の定番コーヒーです。</p>
-            <button class="cafe-btn select-menu-btn" data-name="ハウスブレンド">選択する</button>
+       <!-- === PHẦN MENU ĐỒ UỐNG (メニュー) === -->
+<h2 class="section-title">ドリンクメニュー</h2>
+<section class="menu-grid">
+    <!-- Món 1 -->
+    <div class="menu-item">
+        <div class="menu-item-header">
+            <span class="menu-item-name">ハウスブレンド</span>
+            <span class="menu-item-price">450円</span>
         </div>
+        <p class="menu-item-desc">創業当時から変わらない伝統の味。深いコクと豊かな香りが特徴の定番コーヒーです。</p>
+        
+        <!-- Cập nhật thêm onclick để mở URL mới sang tab khác -->
+        <button class="cafe-btn select-menu-btn" 
+                data-name="ハウスブレンド" 
+                onclick="window.open('https://lanlt6782.github.io/my-website/test?drink1', '_blank')">
+            選択する
+        </button>
+    </div>
+</section>
         <!-- Món 2 -->
         <div class="menu-item">
             <div class="menu-item-header">
