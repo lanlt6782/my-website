@@ -1,953 +1,950 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1418"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Café de L'Amour - ダッシュボード</title>
-    
-    <!-- ===================================================
-         1. PHẦN CSS: Định dạng giao diện toàn bộ trang web
-         =================================================== -->
-    <style>
-        /* カフェ風のカラー変数 */
-        :root {
-            --primary-color: #6f4e37; /* コーヒーブラウン */
-            --secondary-color: #e6ccb2; /* ミルククリーム */
-            --accent-color: #b07d62; /* ライトブラウン */
-            --dark-color: #3d2f21;
-            --bg-color: #f7f5f0;
-            --white: #ffffff;
-            --success: #52b788;
-            --star-color: #f1c40f;
-        }
+<script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1418"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café de L'Amour - ダッシュボード</title>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-        }
+<!-- ===================================================
+        1. PHẦN CSS: Định dạng giao diện toàn bộ trang web
+        =================================================== -->
+<style>
+/* カフェ風のカラー変数 */
+:root {
+--primary-color: #6f4e37; /* コーヒーブラウン */
+--secondary-color: #e6ccb2; /* ミルククリーム */
+--accent-color: #b07d62; /* ライトブラウン */
+--dark-color: #3d2f21;
+--bg-color: #f7f5f0;
+--white: #ffffff;
+--success: #52b788;
+--star-color: #f1c40f;
+}
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--dark-color);
-            padding: 20px;
-            line-height: 1.6;
-        }
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+}
 
-        /* ヘッダー */
-        .cafe-header {
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
-            color: var(--white);
-            padding: 50px 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
+body {
+background-color: var(--bg-color);
+color: var(--dark-color);
+padding: 20px;
+line-height: 1.6;
+}
 
-        .cafe-header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 12px;
-        }
+/* ヘッダー */
+.cafe-header {
+text-align: center;
+background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+color: var(--white);
+padding: 50px 20px;
+border-radius: 15px;
+margin-bottom: 30px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
 
-        /* レイアウトグリッド (コントロールパネル用) */
-        .cafe-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto 40px auto;
-        }
+.cafe-header h1 {
+font-size: 2.8rem;
+margin-bottom: 12px;
+}
 
-        /* カードデザイン */
-        .cafe-card {
-            background-color: var(--white);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--primary-color);
-            transition: transform 0.2s;
-        }
+/* レイアウトグリッド (コントロールパネル用) */
+.cafe-container {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 20px;
+max-width: 1200px;
+margin: 0 auto 40px auto;
+}
 
-        .cafe-card:hover {
-            transform: translateY(-3px);
-        }
+/* カードデザイン */
+.cafe-card {
+background-color: var(--white);
+border-radius: 12px;
+padding: 25px;
+box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+border-left: 5px solid var(--primary-color);
+transition: transform 0.2s;
+}
 
-        .cafe-card h2 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--bg-color);
-            padding-bottom: 8px;
-        }
+.cafe-card:hover {
+transform: translateY(-3px);
+}
 
-        /* フォーム要素 */
-        .cafe-input, .cafe-select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1rem;
-            outline: none;
-        }
+.cafe-card h2 {
+font-size: 1.3rem;
+margin-bottom: 15px;
+color: var(--primary-color);
+border-bottom: 2px solid var(--bg-color);
+padding-bottom: 8px;
+}
 
-        .cafe-input:focus, .cafe-select:focus {
-            border-color: var(--primary-color);
-        }
+/* フォーム要素 */
+.cafe-input, .cafe-select {
+width: 100%;
+padding: 12px;
+margin-bottom: 15px;
+border: 1px solid #ccc;
+border-radius: 8px;
+font-size: 1rem;
+outline: none;
+}
 
-        /* ボタン */
-        .cafe-btn {
-            background-color: var(--primary-color);
-            color: var(--white);
-            border: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
+.cafe-input:focus, .cafe-select:focus {
+border-color: var(--primary-color);
+}
 
-        .cafe-btn:hover {
-            background-color: var(--dark-color);
-        }
+/* ボタン */
+.cafe-btn {
+background-color: var(--primary-color);
+color: var(--white);
+border: none;
+padding: 10px 18px;
+border-radius: 8px;
+cursor: pointer;
+font-weight: 600;
+transition: background 0.2s;
+}
 
-        .cafe-btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
+.cafe-btn:hover {
+background-color: var(--dark-color);
+}
 
-        /* 動的表示エリア */
-        .cafe-result {
-            margin-top: 15px;
-            padding: 12px;
-            background-color: var(--bg-color);
-            border-radius: 6px;
-            font-style: italic;
-            min-height: 45px;
-        }
+.cafe-btn-group {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+margin-bottom: 15px;
+}
 
-        /* Vùng hiển thị danh sách 30 loại cafe (cuộn được nếu quá dài) */
-        .cafe-scroll-result {
-            max-height: 250px;
-            overflow-y: auto;
-            font-style: normal;
-            font-size: 0.9rem;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
+/* 動的表示エリア */
+.cafe-result {
+margin-top: 15px;
+padding: 12px;
+background-color: var(--bg-color);
+border-radius: 6px;
+font-style: italic;
+min-height: 45px;
+}
 
-        /* 商品情報 */
-        .cafe-product-info {
-            background-color: #fdfaf6;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border: 1px dashed var(--accent-color);
-        }
+/* Vùng hiển thị danh sách 30 loại cafe (cuộn được nếu quá dài) */
+.cafe-scroll-result {
+max-height: 250px;
+overflow-y: auto;
+font-style: normal;
+font-size: 0.9rem;
+text-align: left;
+border: 1px solid #ddd;
+}
 
-        /* Tiêu đề các phần lớn */
-        .section-title {
-            text-align: center;
-            color: var(--primary-color);
-            margin: 50px 0 25px 0;
-            font-size: 2rem;
-            position: relative;
-        }
+/* 商品情報 */
+.cafe-product-info {
+background-color: #fdfaf6;
+padding: 15px;
+border-radius: 8px;
+margin-bottom: 15px;
+border: 1px dashed var(--accent-color);
+}
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: var(--accent-color);
-            margin: 10px auto 0 auto;
-        }
+/* Tiêu đề các phần lớn */
+.section-title {
+text-align: center;
+color: var(--primary-color);
+margin: 50px 0 25px 0;
+font-size: 2rem;
+position: relative;
+}
 
-        /* ===================================================
-           CSS CHO PHẦN MENU (Hàng 3 món)
-           =================================================== */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Chia đều 3 cột trên 1 hàng */
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+.section-title::after {
+content: '';
+display: block;
+width: 60px;
+height: 3px;
+background-color: var(--accent-color);
+margin: 10px auto 0 auto;
+}
 
-        /* Responsive cho Menu khi màn hình nhỏ */
-        @media (max-width: 992px) {
-            .menu-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 650px) {
-            .menu-grid { grid-template-columns: 1fr; }
-        }
+/* ===================================================
+          CSS CHO PHẦN MENU (Hàng 3 món)
+          =================================================== */
+.menu-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr); /* Chia đều 3 cột trên 1 hàng */
+gap: 25px;
+max-width: 1200px;
+margin: 0 auto;
+}
 
-        .menu-item {
-            background-color: var(--white);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 1px solid #e2dddf;
-            transition: all 0.3s ease;
-        }
+/* Responsive cho Menu khi màn hình nhỏ */
+@media (max-width: 992px) {
+.menu-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 650px) {
+.menu-grid { grid-template-columns: 1fr; }
+}
 
-        .menu-item:hover {
-            box-shadow: 0 8px 15px rgba(111, 78, 55, 0.15);
-            border-color: var(--accent-color);
-        }
+.menu-item {
+background-color: var(--white);
+border-radius: 12px;
+padding: 20px;
+box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+border: 1px solid #e2dddf;
+transition: all 0.3s ease;
+}
 
-        .menu-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            border-bottom: 1px dashed #ddd;
-            padding-bottom: 8px;
-        }
+.menu-item:hover {
+box-shadow: 0 8px 15px rgba(111, 78, 55, 0.15);
+border-color: var(--accent-color);
+}
 
-        .menu-item-name {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: var(--dark-color);
-        }
+.menu-item-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 10px;
+border-bottom: 1px dashed #ddd;
+padding-bottom: 8px;
+}
 
-        .menu-item-price {
-            font-weight: bold;
-            color: var(--primary-color);
-            font-size: 1.1rem;
-        }
+.menu-item-name {
+font-weight: bold;
+font-size: 1.1rem;
+color: var(--dark-color);
+}
 
-        .menu-item-desc {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
+.menu-item-price {
+font-weight: bold;
+color: var(--primary-color);
+font-size: 1.1rem;
+}
 
-        .menu-item .cafe-btn {
-            width: 100%;
-            padding: 8px;
-            font-size: 0.9rem;
-            background-color: #fbf9f6;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-        }
+.menu-item-desc {
+font-size: 0.85rem;
+color: #666;
+margin-bottom: 15px;
+flex-grow: 1;
+}
 
-        .menu-item .cafe-btn:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
+.menu-item .cafe-btn {
+width: 100%;
+padding: 8px;
+font-size: 0.9rem;
+background-color: #fbf9f6;
+color: var(--primary-color);
+border: 1px solid var(--primary-color);
+}
 
-        /* フィードバック (Feedback) */
-        .feedback-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+.menu-item .cafe-btn:hover {
+background-color: var(--primary-color);
+color: var(--white);
+}
 
-        .feedback-item {
-            background-color: var(--white);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--accent-color);
-        }
+/* フィードバック (Feedback) */
+.feedback-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 25px;
+max-width: 1200px;
+margin: 0 auto;
+}
 
-        .feedback-stars {
-            color: var(--star-color);
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
+.feedback-item {
+background-color: var(--white);
+padding: 25px;
+border-radius: 12px;
+box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+border-top: 4px solid var(--accent-color);
+}
 
-        .feedback-user {
-            margin-top: 15px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            color: #777;
-            text-align: right;
-        }
+.feedback-stars {
+color: var(--star-color);
+margin-bottom: 10px;
+font-size: 1.2rem;
+}
 
-        /* 店舗情報 (Shop Info) */
-        .info-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto 40px auto;
-            background-color: var(--white);
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
+.feedback-user {
+margin-top: 15px;
+font-weight: bold;
+font-size: 0.9rem;
+color: #777;
+text-align: right;
+}
 
-        @media (max-width: 768px) {
-            .info-container { grid-template-columns: 1fr; }
-        }
+/* 店舗情報 (Shop Info) */
+.info-container {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 30px;
+max-width: 1200px;
+margin: 0 auto 40px auto;
+background-color: var(--white);
+padding: 35px;
+border-radius: 12px;
+box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
 
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+@media (max-width: 768px) {
+.info-container { grid-template-columns: 1fr; }
+}
 
-        .info-table th, .info-table td {
-            padding: 15px 10px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
+.info-table {
+width: 100%;
+border-collapse: collapse;
+}
 
-        .info-table th {
-            color: var(--primary-color);
-            width: 30%;
-            font-weight: 600;
-        }
+.info-table th, .info-table td {
+padding: 15px 10px;
+text-align: left;
+border-bottom: 1px solid #eee;
+}
 
-        /* Giả lập bản đồ Google Map */
-        .map-placeholder {
-            background-color: #e5e5e5;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #555;
-            min-height: 250px;
-            border: 1px solid #ddd;
-        }
+.info-table th {
+color: var(--primary-color);
+width: 30%;
+font-weight: 600;
+}
 
-        /* フッター */
-        .cafe-footer {
-            text-align: center;
-            padding: 25px;
-            margin-top: 40px;
-            border-top: 1px solid #ddd;
-            color: #777;
-            font-size: 0.9rem;
-        }
+/* Giả lập bản đồ Google Map */
+.map-placeholder {
+background-color: #e5e5e5;
+border-radius: 8px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+color: #555;
+min-height: 250px;
+border: 1px solid #ddd;
+}
 
-        /* オーバーレイ (ポップアップ、モダール) */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
+/* フッター */
+.cafe-footer {
+text-align: center;
+padding: 25px;
+margin-top: 40px;
+border-top: 1px solid #ddd;
+color: #777;
+font-size: 0.9rem;
+}
 
-        .popup-box, .modal-box {
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            animation: fadeIn 0.3s ease;
-        }
+/* オーバーレイ (ポップアップ、モダール) */
+.overlay {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0,0,0,0.5);
+z-index: 1000;
+justify-content: center;
+align-items: center;
+}
 
-        /* トースト通知 */
-        .cafe-toast {
-            display: none;
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: var(--dark-color);
-            color: var(--white);
-            padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            border-left: 5px solid var(--success);
-            z-index: 2000;
-            animation: slideUp 0.3s ease;
-        }
+.popup-box, .modal-box {
+background-color: var(--white);
+padding: 30px;
+border-radius: 12px;
+max-width: 400px;
+width: 90%;
+text-align: center;
+box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+animation: fadeIn 0.3s ease;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
+/* トースト通知 */
+.cafe-toast {
+display: none;
+position: fixed;
+bottom: 30px;
+right: 30px;
+background-color: var(--dark-color);
+color: var(--white);
+padding: 15px 25px;
+border-radius: 8px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+border-left: 5px solid var(--success);
+z-index: 2000;
+animation: slideUp 0.3s ease;
+}
 
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-    </style>
+@keyframes fadeIn {
+from { opacity: 0; transform: scale(0.9); }
+to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+from { transform: translateY(50px); opacity: 0; }
+to { transform: translateY(0); opacity: 1; }
+}
+</style>
 </head>
 <body>
 
-    <!-- ===================================================
-         2. PHẦN HTML: Nội dung hiển thị trên trang web
-         =================================================== -->
+<!-- ===================================================
+        2. PHẦN HTML: Nội dung hiển thị trên trang web
+        =================================================== -->
 
-    <!-- ヘッダー (Header) -->
-    <header class="cafe-header">
-        <h1>Café de L'Amour</h1>
-        <p>穏やかなひとときへようこそ。今日のお気に入りの一杯をお選びください。</p>
-    </header>
+<!-- ヘッダー (Header) -->
+<header class="cafe-header">
+<h1>Café de L'Amour</h1>
+<p>穏やかなひとときへようこそ。今日のお気に入りの一杯をお選びください。</p>
+</header>
 
-    <!-- メインコンテンツ (Main Interactive) -->
-    <main class="cafe-container">
+<!-- メインコンテンツ (Main Interactive) -->
+<main class="cafe-container">
 
-        <!-- カード 1: テキスト確認 ＆ ドリンク検索 -->
-        <section class="cafe-card">
-            <h2>テキスト確認 ＆ ドリンク検索</h2>
-            
-            <!-- Bộ phận 1: Ô Textbox check dynamic text -->
-            <div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #ddd;">
-                <label style="font-size: 0.85rem; font-weight: bold; color: var(--accent-color); display: block; margin-bottom: 5px;">【新機能】ダイナミックテキスト確認</label>
-                <div style="display: flex; gap: 8px;">
-                    <input id="dynamicTextInput" class="cafe-input" type="text" placeholder="ここに文字を入力してください..." style="margin-bottom: 0;">
-                    <button id="submitTextBtn" class="cafe-btn" style="white-space: nowrap;">送信</button>
-                </div>
-                <div id="dynamicTextOutput" class="cafe-result" style="margin-top: 10px; background-color: #fdfcf7; border: 1px solid #eadecc; color: #5d4037;">
-                    入力したテキストがここに動的に表示されます...
-                </div>
-            </div>
+<!-- カード 1: テキスト確認 ＆ ドリンク検索 -->
+<section class="cafe-card">
+<h2>テキスト確認 ＆ ドリンク検索</h2>
 
-            <!-- Bộ phận 2: Ô Tìm kiếm -->
-            <div>
-                <label style="font-size: 0.85rem; font-weight: bold; color: var(--primary-color); display: block; margin-bottom: 5px;">ドリンク名検索（「Cafe」で30種類表示）</label>
-                <input id="drinkSearch" class="cafe-input" type="text" placeholder="ドリンク名を入力 (例: ラテ、エスプレッソ、Cafe...)">
-                <div id="searchOutput" class="cafe-result cafe-scroll-result">検索キーワードを入力してください...</div>
-            </div>
-        </section>
+<!-- Bộ phận 1: Ô Textbox check dynamic text -->
+<div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #ddd;">
+<label style="font-size: 0.85rem; font-weight: bold; color: var(--accent-color); display: block; margin-bottom: 5px;">【新機能】ダイナミックテキスト確認</label>
+<div style="display: flex; gap: 8px;">
+<input id="dynamicTextInput" class="cafe-input" type="text" placeholder="ここに文字を入力してください..." style="margin-bottom: 0;">
+<button id="submitTextBtn" class="cafe-btn" style="white-space: nowrap;">送信</button>
+</div>
+<div id="dynamicTextOutput" class="cafe-result" style="margin-top: 10px; background-color: #fdfcf7; border: 1px solid #eadecc; color: #5d4037;">
+入力したテキストがここに動的に表示されます...
+</div>
+</div>
 
-        <!-- カード 2 ĐÃ ĐƯỢC CẬP NHẬT: SHOW THÔNG TIN CHI TIẾT DÀI HƠN KHI CHỌN PHƯƠNG THỨC -->
-        <section class="cafe-card">
-            <h2>お受け取り方法</h2>
-            <select id="orderTypeSelect" class="cafe-select">
-                <option value="">-- 選択してください --</option>
-                <option value="dinein">店内飲食（イートイン）</option>
-                <option value="takeaway">テイクアウト</option>
-                <option value="delivery">デリバリー</option>
-            </select>
-            <!-- Phần kết quả mô tả chi tiết được định dạng rõ ràng, bỏ italic để dễ đọc -->
-            <div id="orderTypeOutput" class="cafe-result" style="font-style: normal; font-size: 0.95rem; line-height: 1.5; color: #444;">
-                お受け取り方法を選択してください。
-            </div>
-        </section>
+<!-- Bộ phận 2: Ô Tìm kiếm -->
+<div>
+<label style="font-size: 0.85rem; font-weight: bold; color: var(--primary-color); display: block; margin-bottom: 5px;">ドリンク名検索（「Cafe」で30種類表示）</label>
+<input id="drinkSearch" class="cafe-input" type="text" placeholder="ドリンク名を入力 (例: ラテ、エスプレッソ、Cafe...)">
+<div id="searchOutput" class="cafe-result cafe-scroll-result">検索キーワードを入力してください...</div>
+</div>
+</section>
 
-        <!-- カード 3: 本日の特別メニュー -->
-        <section class="cafe-card">
-            <h2>本日の特別メニュー</h2>
-            <div class="cafe-product-info">
-                <h3 id="productName">キャラメルマキアート</h3>
-                <p id="productPrice">通常価格：650円</p>
-            </div>
-            <button id="applyDiscountBtn" class="cafe-btn">クーポン適用</button>
-        </section>
+<!-- カード 2 ĐÃ ĐƯỢC CẬP NHẬT: SHOW THÔNG TIN CHI TIẾT DÀI HƠN KHI CHỌN PHƯƠNG THỨC -->
+<section class="cafe-card">
+<h2>お受け取り方法</h2>
+<select id="orderTypeSelect" class="cafe-select">
+<option value="">-- 選択してください --</option>
+<option value="dinein">店内飲食（イートイン）</option>
+<option value="takeaway">テイクアウト</option>
+<option value="delivery">デリバリー</option>
+</select>
+<!-- Phần kết quả mô tả chi tiết được định dạng rõ ràng, bỏ italic để dễ đọc -->
+<div id="orderTypeOutput" class="cafe-result" style="font-style: normal; font-size: 0.95rem; line-height: 1.5; color: #444;">
+お受け取り方法を選択してください。
+</div>
+</section>
 
-        <!-- カード 4: コントロールパネル -->
-        <section class="cafe-card">
-            <h2>コントロールパネル</h2>
-            <div class="cafe-btn-group">
-                <button id="btnPopup" class="cafe-btn">ポップアップ</button>
-                <button id="btnModal" class="cafe-btn">注文確認</button>
-                <button id="btnToast" class="cafe-btn">トースト通知</button>
-                <button id="btnAppend" class="cafe-btn">メモ追加</button>
-            </div>
-            <div id="appendArea" class="cafe-result" style="max-height: 120px; overflow-y: auto;">注文メモがここに表示されます...</div>
-        </section>
+<!-- カード 3: 本日の特別メニュー -->
+<section class="cafe-card">
+<h2>本日の特別メニュー</h2>
+<div class="cafe-product-info">
+<h3 id="productName">キャラメルマキアート</h3>
+<p id="productPrice">通常価格：650円</p>
+</div>
+<button id="applyDiscountBtn" class="cafe-btn">クーポン適用</button>
+</section>
 
-    </main>
+<!-- カード 4: コントロールパネル -->
+<section class="cafe-card">
+<h2>コントロールパネル</h2>
+<div class="cafe-btn-group">
+<button id="btnPopup" class="cafe-btn">ポップアップ</button>
+<button id="btnModal" class="cafe-btn">注文確認</button>
+<button id="btnToast" class="cafe-btn">トースト通知</button>
+<button id="btnAppend" class="cafe-btn">メモ追加</button>
+</div>
+<div id="appendArea" class="cafe-result" style="max-height: 120px; overflow-y: auto;">注文メモがここに表示されます...</div>
+</section>
 
-    <!-- === PHẦN MENU ĐỒ UỐNG (メニュー) - TỔNG CỘNG 20 MÓN === -->
-    <h2 class="section-title">ドリンクメニュー</h2>
-    <section class="menu-grid">
-        <!-- Món 1 -->
-       <!-- === PHẦN MENU ĐỒ UỐNG (メニュー) === -->
+</main>
+
+<!-- === PHẦN MENU ĐỒ UỐNG (メニュー) - TỔNG CỘNG 20 MÓN === -->
 <h2 class="section-title">ドリンクメニュー</h2>
 <section class="menu-grid">
-    <!-- Món 1 -->
-     <div class="menu-item">
-            <div class="menu-item-header">
-                <span class="menu-item-name">カフェラテ</span>
-                <span class="menu-item-price">500円</span>
-            </div>
-            <p class="menu-item-desc">濃厚なエスプレッソに、スチームしたてできめ細やかなミルクを注いだまろやかな一杯。</p>
-            <button class="cafe-btn select-menu-btn" data-name="カフェラテ">選択する</button>
-        </div>
-        <!-- Món 2 -->
-        <div class="menu-item">
-            <div class="menu-item-header">
-                <span class="menu-item-name">カフェラテ</span>
-                <span class="menu-item-price">500円</span>
-            </div>
-            <p class="menu-item-desc">濃厚なエスプレッソに、スチームしたてできめ細やかなミルクを注いだまろやかな一杯。</p>
-            <button class="cafe-btn select-menu-btn" data-name="カフェラテ">選択する</button>
-        </div>
-        <!-- Món 3 -->
-        <div class="menu-item">
-            <div class="menu-item-header">
-                <span class="menu-item-name">カプチーノ</span>
-                <span class="menu-item-price">520円</span>
-            </div>
-            <p class="menu-item-desc">ふわふわの泡立ちミルクの食感と、ほのかなシナモンの香りが絶妙なコンビネーション。</p>
-            <button class="cafe-btn select-menu-btn" data-name="カプチーノ">選択する</button>
-        </div>
-        <!-- Món 4 -->
-        <div class="menu-item">
-            <div class="menu-item-header">
-                <span class="menu-item-name">エスプレッソ</span>
-                <span class="menu-item-price">400円</span>
-            </div>
-            <p class="menu-item-desc">厳選された豆を高圧で短時間抽出。コーヒー本来の旨味を凝縮した贅沢なコク。</p>
-            <button class="cafe-btn select-menu-btn" data-name="エスプレッソ">選択する</button>
-        </div>
-        <!-- Món 5 -->
-        <div class="menu-item">
-            <div class="menu-item-header">
-                <span class="menu-item-name">宇治抹茶ラテ</span>
-                <span class="menu-item-price">550円</span>
-            </div>
-            <p class="menu-item-desc">京都の高級宇治抹茶を贅沢に使用。上品なほろ苦さとミルクの甘みがマッチします。</p>
-            <button class="cafe-btn select-menu-btn" data-name="宇治抹茶ラテ">選択する</button>
-        </div>
-        <!-- Món 6 -->
-        <div class="menu-item">
-            <div class="menu-item-header">
-                <span class="menu-item-name">ほうじ茶ラテ</span>
-                <span class="menu-item-price">550円</span>
-            </div>
-            <p class="menu-item-desc">香ばしく焙煎した和のほうじ茶とミルクの融合。心安らぐホッとする味わいです。</p>
-            <button class="cafe-btn select-menu-btn" data-name="ほうじ茶ラテ">選択する</button>
-        </div>
-        <!-- Món 7 -->
-        <div class="menu-item">
-            <div class="menu-item-header">
-                <span class="menu-item-name">水出しコーヒー</span>
-                <span class="menu-item-price">500円</span>
-            </div>
-            <p class="menu-item-desc">時間をかけてじっくり水で抽出。雑味や苦味が少なく、すっきりとした透明感のある味。</p>
-            <button class="cafe-btn select-menu-btn" data-name="水出しコーヒー">選択する</button>
-        </div>
-        <!-- Món 8 -->
-        <div class="menu-item">
-            <div class="menu-item-header">
-                <span class="menu-item-name">アールグレイ</span>
-                <span class="menu-item-price">480円</span>
-            </div>
-            <p class="menu-item-desc">ベルガモットの華やかで爽やかな柑橘系の香りが際立つ、上質なストレート紅茶。</p>
-            <button class="cafe-btn select-menu-btn" data-name="アールグレイ">選択する</button>
-        </div>
-        <!-- Món 9 -->
-        <div class="menu-item">
-            <div class="menu-item-header">
-                <span class="menu-item-name">自家製レモネード</span>
-                <span class="menu-item-price">520円</span>
-            </div>
-            <p class="menu-item-desc">新鮮なレモンをじっくりと特製蜂蜜に漬け込みました。ビタミンたっぷりの甘酸っぱさ。</p>
-            <button class="cafe-btn select-menu-btn" data-name="自家製レモネード">選択する</button>
-        </div>
-        <!-- Món 10 -->
-        <div class="menu-item">
-            <div class="menu-item-header">
-                <span class="menu-item-name">ココア</span>
-                <span class="menu-item-price">530円</span>
-            </div>
-            <p class="menu-item-desc">高級カカオパウダーを使用。濃厚でリッチな甘さが、心も体も芯から温めてくれます。</p>
-            <button class="cafe-btn select-menu-btn" data-name="ココア">選択する</button>
-        </div>
-       
-    </section>
+<!-- Món 1 -->
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">ハウスブレンド</span>
+<span class="menu-item-price">450円</span>
+</div>
+<p class="menu-item-desc">創業当時から変わらない伝統の味。深いコクと豊かな香りが特徴の定番コーヒーです。</p>
+<button class="cafe-btn select-menu-btn" data-name="ハウスブレンド">選択する</button>
+</div>
+<!-- Món 2 -->
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">カフェラテ</span>
+<span class="menu-item-price">500円</span>
+</div>
+<p class="menu-item-desc">濃厚なエスプレッソに、スチームしたてできめ細やかなミルクを注いだまろやかな一杯。</p>
+<button class="cafe-btn select-menu-btn" data-name="カフェラテ">選択する</button>
+</div>
+<!-- Món 3 -->
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">カプチーノ</span>
+<span class="menu-item-price">520円</span>
+</div>
+<p class="menu-item-desc">ふわふわの泡立ちミルクの食感と、ほのかなシナモンの香りが絶妙なコンビネーション。</p>
+<button class="cafe-btn select-menu-btn" data-name="カプチーノ">選択する</button>
+</div>
+<!-- Món 4 -->
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">エスプレッソ</span>
+<span class="menu-item-price">400円</span>
+</div>
+<p class="menu-item-desc">厳選された豆を高圧で短時間抽出。コーヒー本来の旨味を凝縮した贅沢なコク。</p>
+<button class="cafe-btn select-menu-btn" data-name="エスプレッソ">選択する</button>
+</div>
+<!-- Món 5 -->
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">宇治抹茶ラテ</span>
+<span class="menu-item-price">550円</span>
+</div>
+<p class="menu-item-desc">京都の高級宇治抹茶を贅沢に使用。上品なほろ苦さとミルクの甘みがマッチします。</p>
+<button class="cafe-btn select-menu-btn" data-name="宇治抹茶ラテ">選択する</button>
+</div>
+<!-- Món 6 -->
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">ほうじ茶ラテ</span>
+<span class="menu-item-price">550円</span>
+</div>
+<p class="menu-item-desc">香ばしく焙煎した和のほうじ茶とミルクの融合。心安らぐホッとする味わいです。</p>
+<button class="cafe-btn select-menu-btn" data-name="ほうじ茶ラテ">選択する</button>
+</div>
+<!-- Món 7 -->
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">水出しコーヒー</span>
+<span class="menu-item-price">500円</span>
+</div>
+<p class="menu-item-desc">時間をかけてじっくり水で抽出。雑味や苦味が少なく、すっきりとした透明感のある味。</p>
+<button class="cafe-btn select-menu-btn" data-name="水出しコーヒー">選択する</button>
+</div>
+<!-- Món 8 -->
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">アールグレイ</span>
+<span class="menu-item-price">480円</span>
+</div>
+<p class="menu-item-desc">ベルガモットの華やかで爽やかな柑橘系の香りが際立つ、上質なストレート紅茶。</p>
+<button class="cafe-btn select-menu-btn" data-name="アールグレイ">選択する</button>
+</div>
+<!-- Món 9 -->
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">自家製レモネード</span>
+<span class="menu-item-price">520円</span>
+</div>
+<p class="menu-item-desc">新鮮なレモンをじっくりと特製蜂蜜に漬け込みました。ビタミンたっぷりの甘酸っぱさ。</p>
+<button class="cafe-btn select-menu-btn" data-name="自家製レモネード">選択する</button>
+</div>
+<!-- Món 10 -->
+<div class="menu-item">
+<div class="menu-item-header">
+<span class="menu-item-name">ココア</span>
+<span class="menu-item-price">530円</span>
+</div>
+<p class="menu-item-desc">高級カカオパウダーを使用。濃厚でリッチな甘さが、心も体も芯から温めてくれます。</p>
+<button class="cafe-btn select-menu-btn" data-name="ココア">選択する</button>
+</div>
 
-    <!-- === お客様の声 (Ý kiến khách hàng) === -->
-    <h2 class="section-title" id="feedbackSection">お客様の声</h2>
-    <section class="feedback-grid" id="feedbackGrid">
-        <div class="feedback-item">
-            <div class="feedback-stars">★★★★★</div>
-            <p>「ここのラテは本当にクリーミーで美味しいです！お店の雰囲気も落ち着いていて、毎週末の読書タイムに利用しています。」</p>
-            <div class="feedback-user">ー 佐藤 様 (会社員)</div>
-        </div>
-        <div class="feedback-item">
-            <div class="feedback-stars">★★★★★</div>
-            <p>「リモートワークでよく利用しますが、Wi-Fiも早くて居心地が最高です。キャラメルマキアートが特にお気に入り！」</p>
-            <div class="feedback-user">ー 鈴木 様 (デザイナー)</div>
-        </div>
-        <div class="feedback-item">
-            <div class="feedback-stars">★★★★☆</div>
-            <p>「テイクアウトの対応がとても迅速で助かります。店員さんの笑顔が素敵で、朝からとても良い気分になれるお店です。」</p>
-            <div class="feedback-user">ー 田中 様 (主婦)</div>
-        </div>
-    </section>
+</section>
 
-    <!-- === 店舗情報 (Thông tin cửa hàng) === -->
-    <h2 class="section-title">店舗情報</h2>
-    <section class="info-container">
-        <div>
-            <table class="info-table">
-                <tr>
-                    <th>店名</th>
-                    <td>Café de L'Amour（カフェ・ド・ラムール）</td>
-                </tr>
-                <tr>
-                    <th>創業・歴史</th>
-                    <td><strong>1976年（おかげさまで創業50年を迎えます）</strong></td>
-                </tr>
-                <tr>
-                    <th>住所</th>
-                    <td>〒100-0005 東京都千代田区丸の内 1-2-3</td>
-                </tr>
-                <tr>
-                    <th>営業時間</th>
-                    <td>09:00 ～ 21:00 (ラストオーダー 20:30)</td>
-                </tr>
-                <tr>
-                    <th>定休日</th>
-                    <td>毎週水曜日、年末年始</td>
-                </tr>
-                <tr>
-                    <th>電話番号</th>
-                    <td>03-1234-5678</td>
-                </tr>
-            </table>
-        </div>
-        <div class="map-placeholder">
-            <span style="font-size: 2.5rem; margin-bottom: 10px;">📍</span>
-            <strong>Google Map エリア</strong>
-            <p style="font-size: 0.8rem; color: #777; margin-top: 5px;">（ここに実際の地図が埋め込まれます）</p>
-        </div>
-    </section>
+<!-- === お客様の声 (Ý kiến khách hàng) === -->
+<h2 class="section-title" id="feedbackSection">お客様の声</h2>
+<section class="feedback-grid" id="feedbackGrid">
+<div class="feedback-item">
+<div class="feedback-stars">★★★★★</div>
+<p>「ここのラテは本当にクリーミーで美味しいです！お店の雰囲気も落ち着いていて、毎週末の読書タイムに利用しています。」</p>
+<div class="feedback-user">ー 佐藤 様 (会社員)</div>
+</div>
+<div class="feedback-item">
+<div class="feedback-stars">★★★★★</div>
+<p>「リモートワークでよく利用しますが、Wi-Fiも早くて居心地が最高です。キャラメルマキアートが特にお気に入り！」</p>
+<div class="feedback-user">ー 鈴木 様 (デザイナー)</div>
+</div>
+<div class="feedback-item">
+<div class="feedback-stars">★★★★☆</div>
+<p>「テイクアウトの対応がとても迅速で助かります。店員さんの笑顔が素敵で、朝からとても良い気分になれるお店です。」</p>
+<div class="feedback-user">ー 田中 様 (主婦)</div>
+</div>
+</section>
 
-    <!-- === フィードバック送信フォーム (Form phản hồi) === -->
-    <h2 class="section-title">フィードバックの送信</h2>
-    <section style="max-width: 700px; margin: 0 auto 60px auto; background-color: var(--white); padding: 35px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 5px solid var(--primary-color);">
-        <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px; text-align: center;">お店やドリンクに関するご意見・ご感想をお聞かせください。今後の参考にさせていただきます。</p>
-        
-        <form id="cafeFeedbackForm">
-            <div style="margin-bottom: 15px;">
-                <label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">お名前（必須）</label>
-                <input type="text" id="fbName" class="cafe-input" placeholder="例：山田 太郎" required style="margin-bottom: 0;">
-            </div>
-            
-            <div style="margin-bottom: 15px;">
-                <label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">メールアドレス（必須）</label>
-                <input type="email" id="fbEmail" class="cafe-input" placeholder="例：yamada@example.com" required style="margin-bottom: 0;">
-            </div>
-            
-            <div style="margin-bottom: 15px;">
-                <label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">対象のドリンク</label>
-                <select id="fbDrink" class="cafe-select" style="margin-bottom: 0;">
-                    <option value="">-- ドリンクを選択 (任意) --</option>
-                    <option value="ハウスブレンド">ハウスブレンド</option>
-                    <option value="カフェラテ">カフェラテ</option>
-                    <option value="カプチーノ">カプチーノ</option>
-                    <option value="エスプレッソ">エスプレッソ</option>
-                    <option value="宇治抹茶ラテ">宇治抹茶ラテ</option>
-                    <option value="ほうじ茶ラテ">ほうじ茶ラテ</option>
-                    <option value="水出しコーヒー">水出しコーヒー</option>
-                    <option value="アールグレイ">アールグレイ</option>
-                    <option value="自家製レモネード">自家製レモネード</option>
-                    <option value="ココア">ココア</option>
-                    <option value="キャラメルモカ">キャラメルモカ</option>
-                    <option value="アメリカーノ">アメリカーノ</option>
-                    <option value="フラットホワイト">フラットホワイト</option>
-                    <option value="ダージリン">ダージリン</option>
-                    <option value="カモミールハニー">カモミールハニー</option>
-                    <option value="マンゴースムージー">マンゴースムージー</option>
-                    <option value="濃厚イチゴミルク">濃厚イチゴミルク</option>
-                    <option value="クラフトジンジャー">クラフトジンジャー</option>
-                    <option value="100%アップル">100%アップル</option>
-                    <option value="アフォガート">アフォガート</option>
-                </select>
-            </div>
-            
-            <div style="margin-bottom: 15px;">
-                <label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">満足度評価</label>
-                <select id="fbRating" class="cafe-select" style="margin-bottom: 0;">
-                    <option value="5">★★★★★ (非常に満足)</option>
-                    <option value="4">★★★★☆ (満足)</option>
-                    <option value="3">★★★☆☆ (普通)</option>
-                    <option value="2">★★☆☆☆ (やや不満)</option>
-                    <option value="1">★☆☆☆☆ (不満)</option>
-                </select>
-            </div>
-            
-            <div style="margin-bottom: 25px;">
-                <label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">ご意見・ご感想（必須）</label>
-                <textarea id="fbComment" class="cafe-input" rows="4" placeholder="ドリンクの味や店舗へのメッセージを自由にご記入ください..." style="resize: vertical; height: auto; margin-bottom: 0;" required></textarea>
-            </div>
-            
-            <button type="submit" class="cafe-btn" style="width: 100%; padding: 14px; font-size: 1.1rem;">フィードバックを送信する</button>
-        </form>
-    </section>
+<!-- === 店舗情報 (Thông tin cửa hàng) === -->
+<h2 class="section-title">店舗情報</h2>
+<section class="info-container">
+<div>
+<table class="info-table">
+<tr>
+<th>店名</th>
+<td>Café de L'Amour（カフェ・ド・ラムール）</td>
+</tr>
+<tr>
+<th>創業・歴史</th>
+<td><strong>1976年（おかげさまで創業50年を迎えます）</strong></td>
+</tr>
+<tr>
+<th>住所</th>
+<td>〒100-0005 東京都千代田区丸の内 1-2-3</td>
+</tr>
+<tr>
+<th>営業時間</th>
+<td>09:00 ～ 21:00 (ラストオーダー 20:30)</td>
+</tr>
+<tr>
+<th>定休日</th>
+<td>毎週水曜日、年末年始</td>
+</tr>
+<tr>
+<th>電話番号</th>
+<td>03-1234-5678</td>
+</tr>
+</table>
+</div>
+<div class="map-placeholder">
+<span style="font-size: 2.5rem; margin-bottom: 10px;">📍</span>
+<strong>Google Map エリア</strong>
+<p style="font-size: 0.8rem; color: #777; margin-top: 5px;">（ここに実際の地図が埋め込まれます）</p>
+</div>
+</section>
 
-    <!-- フッター (Footer) -->
-    <footer class="cafe-footer">
-        <p>&copy; 2026 Café de L'Amour. All Rights Reserved.</p>
-    </footer>
+<!-- === フィードバック送信フォーム (Form phản hồi) === -->
+<h2 class="section-title">フィードバックの送信</h2>
+<section style="max-width: 700px; margin: 0 auto 60px auto; background-color: var(--white); padding: 35px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 5px solid var(--primary-color);">
+<p style="font-size: 0.9rem; color: #666; margin-bottom: 20px; text-align: center;">お店やドリンクに関するご意見・ご感想をお聞かせください。今後の参考にさせていただきます。</p>
 
-    <!-- POPUP / MODAL / TOAST ẨN -->
-    <div id="customPopup" class="overlay">
-        <div class="popup-box">
-            <h3>☕ 素敵な一日を！</h3>
-            <p style="margin: 15px 0;">Café de L'Amourとともに、エネルギーに満ちた素晴らしい一日をお過ごしください！</p>
-            <button id="closePopup" class="cafe-btn">閉じる</button>
-        </div>
-    </div>
+<form id="cafeFeedbackForm">
+<div style="margin-bottom: 15px;">
+<label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">お名前（必須）</label>
+<input type="text" id="fbName" class="cafe-input" placeholder="例：山田 太郎" required style="margin-bottom: 0;">
+</div>
 
-    <div id="customModal" class="overlay">
-        <div class="modal-box">
-            <h3>🔔 決済確認</h3>
-            <p style="margin: 15px 0;">この内容で注文を確定してもよろしいですか？</p>
-            <div style="display: flex; gap: 10px; justify-content: center;">
-                <button id="confirmModal" class="cafe-btn" style="background-color: var(--success);">はい</button>
-                <button id="closeModal" class="cafe-btn" style="background-color: #aaa;">キャンセル</button>
-            </div>
-        </div>
-    </div>
+<div style="margin-bottom: 15px;">
+<label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">メールアドレス（必須）</label>
+<input type="email" id="fbEmail" class="cafe-input" placeholder="例：yamada@example.com" required style="margin-bottom: 0;">
+</div>
 
-    <div id="customToast" class="cafe-toast">
-        注文情報が正常に保存されました！
-    </div>
+<div style="margin-bottom: 15px;">
+<label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">対象のドリンク</label>
+<select id="fbDrink" class="cafe-select" style="margin-bottom: 0;">
+<option value="">-- ドリンクを選択 (任意) --</option>
+<option value="ハウスブレンド">ハウスブレンド</option>
+<option value="カフェラテ">カフェラテ</option>
+<option value="カプチーノ">カプチーノ</option>
+<option value="エスプレッソ">エスプレッソ</option>
+<option value="宇治抹茶ラテ">宇治抹茶ラテ</option>
+<option value="ほうじ茶ラテ">ほうじ茶ラテ</option>
+<option value="水出しコーヒー">水出しコーヒー</option>
+<option value="アールグレイ">アールグレイ</option>
+<option value="自家製レモネード">自家製レモネード</option>
+<option value="ココア">ココア</option>
+<option value="キャラメルモカ">キャラメルモカ</option>
+<option value="アメリカーノ">アメリカーノ</option>
+<option value="フラットホワイト">フラットホワイト</option>
+<option value="ダージリン">ダージリン</option>
+<option value="カモミールハニー">カモミールハニー</option>
+<option value="マンゴースムージー">マンゴースムージー</option>
+<option value="濃厚イチゴミルク">濃厚イチゴミルク</option>
+<option value="クラフトジンジャー">クラフトジンジャー</option>
+<option value="100%アップル">100%アップル</option>
+<option value="アフォガート">アフォガート</option>
+</select>
+</div>
 
-    <!-- ===================================================
-         4. PHẦN JAVASCRIPT: Xử lý chức năng tương tác
-         =================================================== -->
-    <script>
-        // --- MẢNG FIX CỨNG DANH SÁCH 30 LOẠI CAFE ---
-        const fixedCafeList = [
-            "1. エスプレッソ (Espresso) - 全てのコーヒーの基本となる濃厚な一杯",
-            "2. カフェラテ (Café Latte) - エスプレッソとたっぷりのミルクの調和",
-            "3. カプチーノ (Cappuccino) - 泡立ちミルクがふんわり乗った定番",
-            "4. アメリカーノ (Americano) - エスプレッソをお湯で割ったすっきり味",
-            "5. カフェモカ (Caffè Mocha) - チョコレートシロップを加えた甘い一杯",
-            "6. キャラメルマキアート (Caramel Macchiato) - キャラメル高香るリッチ味",
-            "7. フラットホワイト (Flat White) - エスプレッソ強めの濃厚ラテ",
-            "8. エスプレッソ・コンパナ (Con Panna) - 生クリームを添えた贅沢エスプレッソ",
-            "9. カフェマキアート (Caffè Macchiato) - 少量ミルクを落としたエスプレッソ",
-            "10. カフェ・オ・レ (Café au Lait) - ドリップコーヒーとミルクを1:1で",
-            "11. リストレット (Ristretto) - 旨味を凝縮させた濃厚ショート抽出",
-            "12. ルンゴ (Lungo) - 通常より長めに抽出したほろ苦い一杯",
-            "13. アフォガート (Affogato) - バニラアイスに熱々エスプレッソを注ぐ",
-            "14. ウィンナーコーヒー (Viennese) - ホイップクリームを浮かべた上品な味",
-            "15. コールドブリュー (Cold Brew) - 低温でじっくり抽出した水出し",
-            "16. ニトロコールドブリュー (Nitro) - 窒素を含ませたクリーミーな生ビール風",
-            "17. アイリッシュコーヒー (Irish Coffee) - ウイスキーが入った大人のカクテル",
-            "18. ベトナムコーヒー (Vietnamese) - 練乳（コンデンスミルク）を使った濃厚な甘さ",
-            "19. トルココーヒー (Turkish Coffee) - 粉を煮立てて上澄みを飲む伝統スタイル",
-            "20. フラッペ (Frappé) - インスタントと水を泡立てたギリシャ風アイス",
-            "21. ロマーノ (Romano) - レモンを添えた爽やかなエスプレッソ",
-            "22. ギルブラルタル (Gibraltar) - ガラス器に注ぐ濃密なミニラテ",
-            "23. コルタード (Cortado) - 酸味を抑えるため同量の温かいミルクで割る",
-            "24. ドリップコーヒー (Drip Coffee) - 丁寧にハンドドリップした王道の一杯",
-            "25. フレンチプレス (French Press) - 豆の油分まで余すことなく抽出する製法",
-            "26. サイフォンコーヒー (Siphon) - 蒸気圧を利用した芳醇でクリアな味わい",
-            "27. デカフェ・ラテ (Decaf Latte) - カフェインレスの体に優しいカフェラテ",
-            "28. カフェ・ボンボン (Café Bombón) - コンデンスミルクとエスプレッソが2層に",
-            "29. マサグラン (Mazagran) - レモンジュースと氷を合わせたアイスコーヒー",
-            "30. キューバ・エスプレッソ (Cuban) - 抽出時にブラウンシュガーを混ぜる甘濃厚味"
-        ];
+<div style="margin-bottom: 15px;">
+<label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">満足度評価</label>
+<select id="fbRating" class="cafe-select" style="margin-bottom: 0;">
+<option value="5">★★★★★ (非常に満足)</option>
+<option value="4">★★★★☆ (満足)</option>
+<option value="3">★★★☆☆ (普通)</option>
+<option value="2">★★☆☆☆ (やや不満)</option>
+<option value="1">★☆☆☆☆ (不満)</option>
+</select>
+</div>
 
-        // --- 1. CHỨC NĂNG 1: KIỂM TRA DYNAMIC TEXTBOX ---
-        const dynamicTextInput = document.getElementById('dynamicTextInput');
-        const submitTextBtn = document.getElementById('submitTextBtn');
-        const dynamicTextOutput = document.getElementById('dynamicTextOutput');
+<div style="margin-bottom: 25px;">
+<label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.95rem;">ご意見・ご感想（必須）</label>
+<textarea id="fbComment" class="cafe-input" rows="4" placeholder="ドリンクの味や店舗へのメッセージを自由にご記入ください..." style="resize: vertical; height: auto; margin-bottom: 0;" required></textarea>
+</div>
 
-        submitTextBtn.addEventListener('click', () => {
+<button type="submit" class="cafe-btn" style="width: 100%; padding: 14px; font-size: 1.1rem;">フィードバックを送信する</button>
+</form>
+</section>
+
+<!-- フッター (Footer) -->
+<footer class="cafe-footer">
+<p>&copy; 2026 Café de L'Amour. All Rights Reserved.</p>
+</footer>
+
+<!-- POPUP / MODAL / TOAST ẨN -->
+<div id="customPopup" class="overlay">
+<div class="popup-box">
+<h3>☕ 素敵な一日を！</h3>
+<p style="margin: 15px 0;">Café de L'Amourとともに、エネルギーに満ちた素晴らしい一日をお過ごしください！</p>
+<button id="closePopup" class="cafe-btn">閉じる</button>
+</div>
+</div>
+
+<div id="customModal" class="overlay">
+<div class="modal-box">
+<h3>🔔 決済確認</h3>
+<p style="margin: 15px 0;">この内容で注文を確定してもよろしいですか？</p>
+<div style="display: flex; gap: 10px; justify-content: center;">
+<button id="confirmModal" class="cafe-btn" style="background-color: var(--success);">はい</button>
+<button id="closeModal" class="cafe-btn" style="background-color: #aaa;">キャンセル</button>
+</div>
+</div>
+</div>
+
+<div id="customToast" class="cafe-toast">
+注文情報が正常に保存されました！
+</div>
+
+<!-- ===================================================
+        4. PHẦN JAVASCRIPT: Xử lý chức năng tương tác
+        =================================================== -->
+<script>
+// --- MẢNG FIX CỨNG DANH SÁCH 30 LOẠI CAFE ---
+const fixedCafeList = [
+"1. エスプレッソ (Espresso) - 全てのコーヒーの基本となる濃厚な一杯",
+"2. カフェラテ (Café Latte) - エスプレッソとたっぷりのミルクの調和",
+"3. カプチーノ (Cappuccino) - 泡立ちミルクがふんわり乗った定番",
+"4. アメリカーノ (Americano) - エスプレッソをお湯で割ったすっきり味",
+"5. カフェモカ (Caffè Mocha) - チョコレートシロップを加えた甘い一杯",
+"6. キャラメルマキアート (Caramel Macchiato) - キャラメル高香るリッチ味",
+"7. フラットホワイト (Flat White) - エスプレッソ強めの濃厚ラテ",
+"8. エスプレッソ・コンパナ (Con Panna) - 生クリームを添えた贅沢エスプレッソ",
+"9. カフェマキアート (Caffè Macchiato) - 少量ミルクを落としたエスプレッソ",
+"10. カフェ・オ・レ (Café au Lait) - ドリップコーヒーとミルクを1:1で",
+"11. リストレット (Ristretto) - 旨味を凝縮させた濃厚ショート抽出",
+"12. ルンゴ (Lungo) - 通常より長めに抽出したほろ苦い一杯",
+"13. アフォガート (Affogato) - バニラアイスに熱々エスプレッソを注ぐ",
+"14. ウィンナーコーヒー (Viennese) - ホイップクリームを浮かべた上品な味",
+"15. コールドブリュー (Cold Brew) - 低温でじっくり抽出した水出し",
+"16. ニトロコールドブリュー (Nitro) - 窒素を含ませたクリーミーな生ビール風",
+"17. アイリッシュコーヒー (Irish Coffee) - ウイスキーが入った大人のカクテル",
+"18. ベトナムコーヒー (Vietnamese) - 練乳（コンデンスミルク）を使った濃厚な甘さ",
+"19. トルココーヒー (Turkish Coffee) - 粉を煮立てて上澄みを飲む伝統スタイル",
+"20. フラッペ (Frappé) - インスタントと水を泡立てたギリシャ風アイス",
+"21. ロマーノ (Romano) - レモンを添えた爽やかなエスプレッソ",
+"22. ギルブラルタル (Gibraltar) - ガラス器に注ぐ濃密なミニラテ",
+"23. コルタード (Cortado) - 酸味を抑えるため同量の温かいミルクで割る",
+"24. ドリップコーヒー (Drip Coffee) - 丁寧にハンドドリップした王道の一杯",
+"25. フレンチプレス (French Press) - 豆の油分まで余すことなく抽出する製法",
+"26. サイフォンコーヒー (Siphon) - 蒸気圧を利用した芳醇でクリアな味わい",
+"27. デカフェ・ラテ (Decaf Latte) - カフェインレスの体に優しいカフェラテ",
+"28. カフェ・ボンボン (Café Bombón) - コンデンスミルクとエスプレッソが2層に",
+"29. マサグラン (Mazagran) - レモンジュースと氷を合わせたアイスコーヒー",
+"30. キューバ・エスプレッソ (Cuban) - 抽出時にブラウンシュガーを混ぜる甘濃厚味"
+];
+
+// --- 1. CHỨC NĂNG 1: KIỂM TRA DYNAMIC TEXTBOX ---
+const dynamicTextInput = document.getElementById('dynamicTextInput');
+const submitTextBtn = document.getElementById('submitTextBtn');
+const dynamicTextOutput = document.getElementById('dynamicTextOutput');
+
+submitTextBtn.addEventListener('click', () => {
+            const currentText = dynamicTextInput.value.trim();
             const currentText = dynamicTextInput.value;
-            if(currentText) {
-                dynamicTextOutput.textContent = currentText;
-                dynamicTextInput.value = '';
-            } else {
-                dynamicTextOutput.textContent = '⚠ テキストを入力してから送信してください。';
-            }
-        });
+if(currentText) {
+dynamicTextOutput.textContent = currentText;
+dynamicTextInput.value = '';
+} else {
+dynamicTextOutput.textContent = '⚠ テキストを入力してから送信してください。';
+}
+});
 
-        dynamicTextInput.addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') submitTextBtn.click();
-        });
-
-
-        // --- 2. CHỨC NĂNG 2: ĐỒ UỐNG VÀ XỬ LÝ SEARCH CAFE TRA 30 LOẠI ---
-        const drinkSearch = document.getElementById('drinkSearch');
-        const searchOutput = document.getElementById('searchOutput');
-        const customToast = document.getElementById('customToast');
-        
-        function updateSearchOutput(value) {
-            const lowerValue = value.toLowerCase();
-            
-            if(!value) {
-                searchOutput.innerHTML = '検索キーワードを入力してください...';
-                return;
-            }
-
-            if(lowerValue.includes('cafe') || lowerValue.includes('カフェ')) {
-                let htmlResult = `<div style="font-weight:bold; color:var(--primary-color); margin-bottom:8px;">☕ 「Cafe」の検索結果（30種類を固定表示中）:</div>`;
-                fixedCafeList.forEach(item => {
-                    htmlResult += `<div style="padding: 4px 0; border-bottom: 1px dashed #eee;">${item}</div>`;
-                });
-                searchOutput.innerHTML = htmlResult;
-            } else {
-                searchOutput.textContent = `ドリンク「${value}」を検索中...`;
-            }
-        }
-
-        drinkSearch.addEventListener('input', (e) => {
-            updateSearchOutput(e.target.value.trim());
-        });
-
-        function triggerToast(message) {
-            customToast.textContent = message;
-            customToast.style.display = 'block';
-            setTimeout(() => {
-                customToast.style.display = 'none';
-            }, 3000);
-        }
-
-        const selectMenuBtns = document.querySelectorAll('.select-menu-btn');
-        selectMenuBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const drinkName = btn.getAttribute('data-name');
-                drinkSearch.value = drinkName;
-                updateSearchOutput(drinkName);
-                triggerToast(`「${drinkName}」を選択しました！`);
-                
-                drinkSearch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                drinkSearch.style.borderColor = 'var(--success)';
-                setTimeout(() => { drinkSearch.style.borderColor = 'var(--primary-color)'; }, 1000);
-            });
-        });
+dynamicTextInput.addEventListener('keypress', (e) => {
+if(e.key === 'Enter') submitTextBtn.click();
+});
 
 
-        // --- 3. CHỨC NĂNG 3: ĐÃ CẬP NHẬT SHOW THÔNG TIN CHI TIẾT DÀI HƠN (~20-30 TỪ) ---
-        const orderTypeSelect = document.getElementById('orderTypeSelect');
-        const orderTypeOutput = document.getElementById('orderTypeOutput');
+// --- 2. CHỨC NĂNG 2: ĐỒ UỐNG VÀ XỬ LÝ SEARCH CAFE TRA 30 LOẠI ---
+const drinkSearch = document.getElementById('drinkSearch');
+const searchOutput = document.getElementById('searchOutput');
+const customToast = document.getElementById('customToast');
 
-        // Định nghĩa nội dung mô tả chi tiết dài hơn cho từng phương thức
-        const orderDescriptions = {
-            dinein: "【店内飲食】落ち着いたアンティーク調の店内で、淹れたての一杯を最高の香りとともにお楽しみいただけます。ゆったりとした快適な時間をお過ごしください。",
-            takeaway: "【テイクアウト】お忙しい時間でも、特製タンブラーや専用カップで手軽にお持ち帰りいただけます。オフィスやお出かけ先でもお店の味をお楽しみください。",
-            delivery: "【デリバリー】専門スタッフがスマートに安全運転でお届けします。ご自宅やオフィスに居ながらにして、カフェ特製の本格ドリンクをそのままお届けいたします。"
-        };
+function updateSearchOutput(value) {
+const lowerValue = value.toLowerCase();
 
-        orderTypeSelect.addEventListener('change', (e) => {
-            const selectedValue = e.target.value;
-            
-            if(selectedValue && orderDescriptions[selectedValue]) {
-                // Đổ văn bản chi tiết dài vào thẻ hiển thị
-                orderTypeOutput.innerHTML = `<strong style="color:var(--primary-color); display:block; margin-bottom:4px;">✓ 受取設定完了</strong>${orderDescriptions[selectedValue]}`;
-            } else {
-                orderTypeOutput.textContent = 'お受け取り方法を選択してください。';
-            }
-        });
+if(!value) {
+searchOutput.innerHTML = '検索キーワードを入力してください...';
+return;
+}
+
+if(lowerValue.includes('cafe') || lowerValue.includes('カフェ')) {
+let htmlResult = `<div style="font-weight:bold; color:var(--primary-color); margin-bottom:8px;">☕ 「Cafe」の検索結果（30種類を固定表示中）:</div>`;
+fixedCafeList.forEach(item => {
+htmlResult += `<div style="padding: 4px 0; border-bottom: 1px dashed #eee;">${item}</div>`;
+});
+searchOutput.innerHTML = htmlResult;
+} else {
+searchOutput.textContent = `ドリンク「${value}」を検索中...`;
+}
+}
+
+drinkSearch.addEventListener('input', (e) => {
+updateSearchOutput(e.target.value.trim());
+});
+
+function triggerToast(message) {
+customToast.textContent = message;
+customToast.style.display = 'block';
+setTimeout(() => {
+customToast.style.display = 'none';
+}, 3000);
+}
+
+const selectMenuBtns = document.querySelectorAll('.select-menu-btn');
+selectMenuBtns.forEach(btn => {
+btn.addEventListener('click', () => {
+const drinkName = btn.getAttribute('data-name');
+drinkSearch.value = drinkName;
+updateSearchOutput(drinkName);
+triggerToast(`「${drinkName}」を選択しました！`);
+
+drinkSearch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+drinkSearch.style.borderColor = 'var(--success)';
+setTimeout(() => { drinkSearch.style.borderColor = 'var(--primary-color)'; }, 1000);
+});
+});
 
 
-       // --- 4. クーポン適用機能 ---
+// --- 3. CHỨC NĂNG 3: ĐÃ CẬP NHẬT SHOW THÔNG TIN CHI TIẾT DÀI HƠN (~20-30 TỪ) ---
+const orderTypeSelect = document.getElementById('orderTypeSelect');
+const orderTypeOutput = document.getElementById('orderTypeOutput');
+
+// Định nghĩa nội dung mô tả chi tiết dài hơn cho từng phương thức
+const orderDescriptions = {
+dinein: "【店内飲食】落ち着いたアンティーク調の店内で、淹れたての一杯を最高の香りとともにお楽しみいただけます。ゆったりとした快適な時間をお過ごしください。",
+takeaway: "【テイクアウト】お忙しい時間でも、特製タンブラーや専用カップで手軽にお持ち帰りいただけます。オフィスやお出かけ先でもお店の味をお楽しみください。",
+delivery: "【デリバリー】専門スタッフがスマートに安全運転でお届けします。ご自宅やオフィスに居ながらにして、カフェ特製の本格ドリンクをそのままお届けいたします。"
+};
+
+orderTypeSelect.addEventListener('change', (e) => {
+const selectedValue = e.target.value;
+
+if(selectedValue && orderDescriptions[selectedValue]) {
+// Đổ văn bản chi tiết dài vào thẻ hiển thị
+orderTypeOutput.innerHTML = `<strong style="color:var(--primary-color); display:block; margin-bottom:4px;">✓ 受取設定完了</strong>${orderDescriptions[selectedValue]}`;
+} else {
+orderTypeOutput.textContent = 'お受け取り方法を選択してください。';
+}
+});
+
+
+// --- 4. クーポン適用機能 ---
 const applyDiscountBtn = document.getElementById('applyDiscountBtn');
 const productPrice = document.getElementById('productPrice');
 
 // Danh sách giá sẽ lần lượt hiển thị
 const specialPrices = [
-    100, 200, 300, 400,
-    500, 600, 700, 800
+100, 200, 300, 400,
+500, 600, 700, 800
 ];
 
 let currentPriceIndex = 0;
 
 applyDiscountBtn.addEventListener('click', () => {
 
-    const price = specialPrices[currentPriceIndex];
+const price = specialPrices[currentPriceIndex];
 
-    productPrice.innerHTML =
-        `特別価格：<strong style="color:#e63946;">${price}円</strong>`;
+productPrice.innerHTML =
+`特別価格：<strong style="color:#e63946;">${price}円</strong>`;
 
-    currentPriceIndex++;
+currentPriceIndex++;
 
-    if (currentPriceIndex >= specialPrices.length) {
-        currentPriceIndex = 0;
-    }
+if (currentPriceIndex >= specialPrices.length) {
+currentPriceIndex = 0;
+}
 });
 
-        // --- 5. ポップアップ・モダール・コントロールパネル ---
-        const btnPopup = document.getElementById('btnPopup');
-        const btnModal = document.getElementById('btnModal');
-        const btnToast = document.getElementById('btnToast');
-        const btnAppend = document.getElementById('btnAppend');
+// --- 5. ポップアップ・モダール・コントロールパネル ---
+const btnPopup = document.getElementById('btnPopup');
+const btnModal = document.getElementById('btnModal');
+const btnToast = document.getElementById('btnToast');
+const btnAppend = document.getElementById('btnAppend');
 
-        const customPopup = document.getElementById('customPopup');
-        const customModal = document.getElementById('customModal');
-        const appendArea = document.getElementById('appendArea');
+const customPopup = document.getElementById('customPopup');
+const customModal = document.getElementById('customModal');
+const appendArea = document.getElementById('appendArea');
 
-        btnPopup.addEventListener('click', () => customPopup.style.display = 'flex');
-        document.getElementById('closePopup').addEventListener('click', () => customPopup.style.display = 'none');
+btnPopup.addEventListener('click', () => customPopup.style.display = 'flex');
+document.getElementById('closePopup').addEventListener('click', () => customPopup.style.display = 'none');
 
-        btnModal.addEventListener('click', () => customModal.style.display = 'flex');
-        document.getElementById('closeModal').addEventListener('click', () => customModal.style.display = 'none');
-        document.getElementById('confirmModal').addEventListener('click', () => {
-            customModal.style.display = 'none';
-            alert('ご注文ありがとうございました！');
-        });
+btnModal.addEventListener('click', () => customModal.style.display = 'flex');
+document.getElementById('closeModal').addEventListener('click', () => customModal.style.display = 'none');
+document.getElementById('confirmModal').addEventListener('click', () => {
+customModal.style.display = 'none';
+alert('ご注文ありがとうございました！');
+});
 
-        btnToast.addEventListener('click', () => {
-            triggerToast("注文情報が正常に保存されました！");
-        });
+btnToast.addEventListener('click', () => {
+triggerToast("注文情報が正常に保存されました！");
+});
 
-        let noteCount = 0;
-        btnAppend.addEventListener('click', () => {
-            noteCount++;
-            if(noteCount === 1) appendArea.innerHTML = ''; 
-            
-            const newNote = document.createElement('p');
-            newNote.style.color = 'var(--primary-color)';
-            newNote.style.fontSize = '0.9rem';
-            newNote.textContent = `• 追加要望 #${noteCount}: 甘さ控えめ、氷多め。`;
-            
-            appendArea.appendChild(newNote);
-            appendArea.scrollTop = appendArea.scrollHeight;
-        });
+let noteCount = 0;
+btnAppend.addEventListener('click', () => {
+noteCount++;
+if(noteCount === 1) appendArea.innerHTML = ''; 
 
-        // --- 6. Xử lý Form gửi Feedback ---
-        const cafeFeedbackForm = document.getElementById('cafeFeedbackForm');
-        const feedbackGrid = document.getElementById('feedbackGrid');
+const newNote = document.createElement('p');
+newNote.style.color = 'var(--primary-color)';
+newNote.style.fontSize = '0.9rem';
+newNote.textContent = `• 追加要望 #${noteCount}: 甘さ控えめ、氷多め。`;
 
-        cafeFeedbackForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('fbName').value.trim();
-            const drink = document.getElementById('fbDrink').value;
-            const rating = parseInt(document.getElementById('fbRating').value);
-            const comment = document.getElementById('fbComment').value.trim();
-            
-            let starString = '';
-            for(let i = 0; i < 5; i++) {
-                starString += (i < rating) ? '★' : '☆';
-            }
-            
-            const drinkInfo = drink ? `（${drink}）` : '';
-            const newFeedbackCard = document.createElement('div');
-            newFeedbackCard.className = 'feedback-item';
-            newFeedbackCard.style.animation = 'fadeIn 0.6s ease';
-            
-            newFeedbackCard.innerHTML = `
-                <div class="feedback-stars">${starString}</div>
-                <p>「${comment}」${drinkInfo}</p>
-                <div class="feedback-user">ー ${name} 様 (新着)</div>
-            `;
-            
-            feedbackGrid.insertBefore(newFeedbackCard, feedbackGrid.firstChild);
-            triggerToast('フィードバックを送信しました。ありがとうございます！');
-            cafeFeedbackForm.reset();
-            document.getElementById('feedbackSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
+appendArea.appendChild(newNote);
+appendArea.scrollTop = appendArea.scrollHeight;
+});
 
-        window.addEventListener('click', (e) => {
-            if (e.target === customPopup) customPopup.style.display = 'none';
-            if (e.target === customModal) customModal.style.display = 'none';
-        });
-    </script>
+// --- 6. Xử lý Form gửi Feedback ---
+const cafeFeedbackForm = document.getElementById('cafeFeedbackForm');
+const feedbackGrid = document.getElementById('feedbackGrid');
+
+cafeFeedbackForm.addEventListener('submit', (e) => {
+e.preventDefault();
+
+const name = document.getElementById('fbName').value.trim();
+const drink = document.getElementById('fbDrink').value;
+const rating = parseInt(document.getElementById('fbRating').value);
+const comment = document.getElementById('fbComment').value.trim();
+
+let starString = '';
+for(let i = 0; i < 5; i++) {
+starString += (i < rating) ? '★' : '☆';
+}
+
+const drinkInfo = drink ? `（${drink}）` : '';
+const newFeedbackCard = document.createElement('div');
+newFeedbackCard.className = 'feedback-item';
+newFeedbackCard.style.animation = 'fadeIn 0.6s ease';
+
+newFeedbackCard.innerHTML = `
+               <div class="feedback-stars">${starString}</div>
+               <p>「${comment}」${drinkInfo}</p>
+               <div class="feedback-user">ー ${name} 様 (新着)</div>
+           `;
+
+feedbackGrid.insertBefore(newFeedbackCard, feedbackGrid.firstChild);
+triggerToast('フィードバックを送信しました。ありがとうございます！');
+cafeFeedbackForm.reset();
+document.getElementById('feedbackSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+
+window.addEventListener('click', (e) => {
+if (e.target === customPopup) customPopup.style.display = 'none';
+if (e.target === customModal) customModal.style.display = 'none';
+});
+</script>
 </body>
 </html>
