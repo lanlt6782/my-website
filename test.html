@@ -474,7 +474,7 @@ to { transform: translateY(0); opacity: 1; }
 <span class="menu-item-price">450円</span>
 </div>
 <p class="menu-item-desc">創業当時から変わらない伝統の味。深いコクと豊かな香りが特徴の定番コーヒーです。</p>
-<button class="cafe-btn select-menu-btn" data-name="ハウスブレンド">選択する</button>
+<button class="cafe-btn select-menu-btn" data-name="ハウスブレンド" onclick="window.location.href='houseblend.html'">選択する</button>
 </div>
 <!-- Món 2 -->
 <div class="menu-item">
@@ -755,7 +755,6 @@ const dynamicTextOutput = document.getElementById('dynamicTextOutput');
 
 submitTextBtn.addEventListener('click', () => {
             const currentText = dynamicTextInput.value.trim();
-            const currentText = dynamicTextInput.value;
 if(currentText) {
 dynamicTextOutput.textContent = currentText;
 dynamicTextInput.value = '';
