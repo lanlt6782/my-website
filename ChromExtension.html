@@ -101,16 +101,25 @@
         </div>
       </div>
 
-      <!-- CARD 5: [TC_PHR_06] Bộ lọc mã JS/JSON -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
-        <div class="flex items-center space-x-2 mb-3">
-          <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">TC_PHR_06: Lọc mã JS/JSON</h2>
-        </div>
-        <!-- Target Code: Trigger hàm isJsText() -->
-        <div id="js-text-block" class="p-3.5 bg-slate-900 text-slate-300 text-xs font-mono rounded-xl overflow-x-auto leading-relaxed border border-slate-800">
-          function() { var data = {"key":"value"}; $(document).ready(function() { return true; }); }
-        </div>
+<!-- CARD 5: [TC_PHR_06] JS Code Filter (Multi-line JS) -->
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+  <div class="flex items-center space-x-2 mb-3">
+    <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">TC_PHR_06: JS Code Filter</h2>
+  </div>
+  
+  <!-- Target Code: Khối JS chuẩn nhiều dòng -->
+  <pre id="js-text-block" class="p-3.5 bg-slate-900 text-slate-300 text-xs font-mono rounded-xl overflow-x-auto leading-relaxed border border-slate-800">
+function processData(config) {
+  var token = config.token || "";
+  if (!token) return false;
+  console.log("Processing...");
+  return true;
+}
+  </pre>
+  
+  <span class="text-[11px] text-slate-400 mt-2 block">Completely detected and filtered out by the isJsText() function</span>
+</div>
      
 
     </div>
