@@ -86,24 +86,34 @@
         </form>
       </div>
 
-      <!-- CARD 4: [TC_PHR_04] Thẻ và Vùng bị bỏ qua (Ignored) -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
-        <div class="flex items-center space-x-2 mb-3">
-          <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">TC_PHR_04: Phần tử bị bỏ qua (Ignored)</h2>
-        </div>
-        <!-- Target Ignored: data-stt-ignore & script -->
-        <div class="text-sm text-slate-600 space-y-2">
-          <p>Nội dung này sẽ hiển thị và được thu thập.</p>
-          <span data-stt-ignore class="inline-block px-2.5 py-1 bg-rose-50 text-rose-600 text-xs rounded-lg border border-rose-200 font-medium">
-            Đoạn văn bản này sẽ bị bỏ qua.
-          </span>
-          <script>
-            console.log("Mã JavaScript này sẽ không bị dịch");
-          </script>
-          <p>Nội dung tiếp theo vẫn được hiển thị bình thường.</p>
-        </div>
-      </div>
+    <!-- CARD 4: [TC_PHR_04] Ignored Elements -->
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+  <div class="flex items-center space-x-2 mb-3">
+    <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">TC_PHR_04: Phần tử bị bỏ qua (Ignored)</h2>
+  </div>
+  
+  <div class="text-sm text-slate-600 space-y-2">
+    <p>Nội dung này sẽ hiển thị và được thu thập.</p>
+
+    <!-- Thẻ có data-stt-ignore hoặc stt-ignore -->
+    <span data-stt-ignore class="inline-block px-2.5 py-1 bg-rose-50 text-rose-600 text-xs rounded-lg border border-rose-200 font-medium">
+      Đoạn văn bản này sẽ bị bỏ qua.
+    </span>
+
+    <!-- Thẻ <script> mặc định bị bỏ qua -->
+    <script>
+      console.log("Mã JavaScript này sẽ không bị dịch");
+    </script>
+
+    <!-- Thẻ <noscript> mặc định bị bỏ qua -->
+    <noscript>
+      Trình duyệt của bạn không hỗ trợ JavaScript.
+    </noscript>
+
+    <p>Nội dung tiếp theo vẫn được hiển thị bình thường.</p>
+  </div>
+</div>
 
       <!-- CARD 5: [TC_PHR_06] Bộ lọc mã JS/JSON -->
       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
