@@ -1,82 +1,69 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ウェブサイトへようこそ</title>
-    <style>
-        body {
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", MeiRyo, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        header {
-            background-color: #2c3e50;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
-        main {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-        h1 {
-            margin-top: 0;
-        }
-        .btn {
-            display: inline-block;
-            background: #e74c3c;
-            color: #fff;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 15px;
-        }
-        .btn:hover {
-            background: #c0392b;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9em;
-            color: #666;
-        }
-    </style>
+  <!-- [TC_PHR_01] Head Processing: Title & Meta dịch được -->
+  <title>システムログイン - 公式ページ</title>
+  <meta name="description" content="アカウントにログインしてサービスをご利用ください。">
+  <meta name="robots" content="index,follow"> <!-- Meta bị loại bỏ -->
+
+  <!-- [TC_PHR_04] Ignored Tag (style) -->
+  <style>
+    .hidden-box { display: none; }
+    body { font-family: sans-serif; }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>公式ウェブサイト</h1>
-        <p>ご訪問ありがとうございます</p>
-    </header>
+  <!-- [TC_PHR_02] Inline Tag Bundling: Gom nhóm Text Node + Inline Tags (span, b, i) -->
+  <section id="tc-02-inline">
+    <h2>TC_PHR_02: インラインタグのテスト</h2>
+    <p id="inline-bundle">
+      こんにちは、<span>お客様 <b>とても</b> <i>大切</i></span> な方です！
+    </p>
+  </section>
 
-    <main>
-        <h2>はじめに</h2>
-        <p>これは日本語で書かれたシンプルなHTMLテンプレートです。フォント設定や文字コード（UTF-8）が最適化されているため、日本語が綺麗に表示されます。</p>
+  <!-- [TC_PHR_03] Block Boundary: Ngắt Phrase khi gặp thẻ Block (div) -->
+  <section id="tc-03-block">
+    <h2>TC_PHR_03: ブロック要素のテスト</h2>
+    <div id="block-1">最初のセクションのテキストです。</div>
+    <div id="block-2">次のセクションのテキストです。</div>
+  </section>
 
-        <h2>サービス内容</h2>
-        <ul>
-            <li>ウェブサイト制作・ an 開発</li>
-            <li>日本語コンテンツの翻訳・作成</li>
-            <li>デザインおよびコンサルティング</li>
-        </ul>
+  <!-- [TC_PHR_04] Ignored Elements: Thẻ script, style và attribute stt-ignore -->
+  <section id="tc-04-ignored">
+    <h2>TC_PHR_04: 無視される要素のテスト</h2>
+    <div>
+      画面に表示されるテキストです。
+      <span data-stt-ignore>このテキストは無視されます。</span>
+      <script>
+        console.log("JavaScriptコードは翻訳されません");
+      </script>
+      引き続き表示されるテキストです。
+    </div>
+  </section>
 
-        <h2>お問い合わせ</h2>
-        <p>ご質問やご相談がございましたら、お気軽にご連絡ください。</p>
-        
-        <a href="#" class="btn">お問い合わせはこちら</a>
-    </main>
+  <!-- [TC_PHR_05] Attribute Extraction: Thuộc tính dịch được (placeholder, title, value, alt) -->
+  <section id="tc-05-attributes">
+    <h2>TC_PHR_05: 属性翻訳のテスト</h2>
+    <form>
+      <!-- input text: lấy placeholder & title -->
+      <input type="text" placeholder="ユーザー名を入力してください" title="必須項目です">
+      
+      <!-- input submit: lấy value -->
+      <input type="submit" value="ログインする">
+      
+      <!-- img: lấy alt -->
+      <img src="avatar.png" alt="ユーザーのプロフィール画像">
+    </form>
+  </section>
 
-    <footer>
-        <p>&copy; 2026 私たちの会社. All Rights Reserved.</p>
-    </footer>
+  <!-- [TC_PHR_06] JS Code Filtering: Chuỗi văn bản chứa mã JS/JSON bị hàm isJsText() lọc bỏ -->
+  <section id="tc-06-js-filter">
+    <h2>TC_PHR_06: JSコードフィルタリングのテスト</h2>
+    <div id="js-text-block">
+      function() { var data = {"key":"value"}; $(document).ready(function() { return true; }); }
+    </div>
+  </section>
 
 </body>
 </html>
