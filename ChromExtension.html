@@ -115,32 +115,88 @@
   </div>
 </div>
 
-<!-- CARD 5: [TC_PHR_06] JS/JSON Code Filter -->
+<!-- CARD 5: [TC_PHR_06] JS/JSON Code Filter (> 2000 Characters) -->
 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
   <div class="flex items-center space-x-2 mb-3">
     <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">TC_PHR_06: JS/JSON Code Filter</h2>
+    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">TC_PHR_06: JS Code Filter (>2000 chars)</h2>
   </div>
   
-  <!-- Target Code: Dùng thẻ <div> + whitespace-pre + Đoạn JS dài chuẩn chỉ -->
+  <!-- Target Code: Thẻ <div> chứa mã JS dài hơn 2400 ký tự -->
   <div id="js-text-block" class="p-3.5 bg-slate-900 text-slate-300 text-xs font-mono rounded-xl overflow-x-auto leading-relaxed border border-slate-800 whitespace-pre">
-async function handleUserAuth(req, res) {
-  const { username, password, options } = req.body || {};
-  if (!username || !password) {
-    return res.status(400).json({ error: "Missing required credentials" });
+/**
+ * Authentication & Data Processing Module v2.4.0
+ * Handles user sessions, token validation, and API payload formatting.
+ */
+class UserAuthenticationService {
+  constructor(config = {}) {
+    this.apiEndpoint = config.apiEndpoint || "https://api.example.com/v1";
+    this.timeout = config.timeout || 5000;
+    this.retryCount = config.retryCount || 3;
+    this.tokenKey = "STT_AUTH_TOKEN_KEY_2026";
+    this.isInitialized = false;
+    this.sessionData = null;
   }
-  try {
-    let userConfig = { role: "guest", permissions: ["read"] };
-    if (options && typeof options === "object") {
-      Object.assign(userConfig, options);
+
+  async initialize() {
+    console.log("Initializing UserAuthenticationService...");
+    try {
+      const storedToken = localStorage.getItem(this.tokenKey);
+      if (storedToken && this.validateTokenStructure(storedToken)) {
+        this.sessionData = await this.verifySessionOnServer(storedToken);
+        this.isInitialized = true;
+        return { status: "SUCCESS", message: "Session restored successfully" };
+      }
+      return { status: "UNAUTHENTICATED", message: "No valid token found" };
+    } catch (error) {
+      console.error("Initialization error:", error);
+      return { status: "ERROR", message: error.message };
     }
-    console.log("Authenticating user:", username);
-    return res.status(200).json({ status: "success", data: userConfig });
-  } catch (err) {
-    return res.status(500).json({ error: err.message });
+  }
+
+  validateTokenStructure(token) {
+    if (!token || typeof token !== "string") return false;
+    const parts = token.split(".");
+    if (parts.length !== 3) return false;
+    try {
+      const payload = JSON.parse(atob(parts[1]));
+      const now = Math.floor(Date.now() / 1000);
+      return payload.exp && payload.exp > now;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async verifySessionOnServer(token) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), this.timeout);
+    const response = await fetch(`${this.apiEndpoint}/auth/verify`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({ clientTime: new Date().toISOString() }),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    if (!response.ok) {
+      throw new Error(`Server returned HTTP status ${response.status}`);
+    }
+    return await response.json();
+  }
+
+  clearSession() {
+    localStorage.removeItem(this.tokenKey);
+    this.sessionData = null;
+    this.isInitialized = false;
+    console.log("User session terminated successfully.");
   }
 }
   </div>
+  
+  <span class="text-[11px] text-slate-400 mt-2 block">Completely detected and filtered out by the isJsText() function</span>
+</div>
   
   <span class="text-[11px] text-slate-400 mt-2 block">Completely detected and filtered out by the isJsText() function</span>
 </div>>
