@@ -81,25 +81,39 @@
                  class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-xl transition cursor-pointer shadow-sm">
         </form>
       </div>
+<!-- CARD 4: [TC_PHR_04] Ignored Elements -->
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+  <div class="flex items-center space-x-2 mb-3">
+    <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">TC_PHR_04: Ignored Elements</h2>
+  </div>
+  
+  <div class="text-sm text-slate-600 space-y-2">
+    <p>This content will be displayed and collected.</p>
 
-      <!-- CARD 4: [TC_PHR_04] Thẻ và Vùng bị bỏ qua (Ignored) -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
-        <div class="flex items-center space-x-2 mb-3">
-          <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">TC_PHR_04: Phần tử bị bỏ qua (Ignored)</h2>
-        </div>
-        <!-- Target Ignored: data-stt-ignore & script -->
-        <div class="text-sm text-slate-600 space-y-2">
-          <p>This content will be displayed and collected..</p>
-          <span data-stt-ignore class="inline-block px-2.5 py-1 bg-rose-50 text-rose-600 text-xs rounded-lg border border-rose-200 font-medium">
-            Do not collect this text
-          </span>
-          <script>
-            console.log("Mã JavaScript này sẽ không bị dịch");
-          </script>
-          <p>content will still be displayed normally..</p>
-        </div>
-      </div>
+    <!-- 1. Bỏ qua do có thuộc tính data-stt-ignore -->
+    <span data-stt-ignore class="inline-block px-2.5 py-1 bg-rose-50 text-rose-600 text-xs rounded-lg border border-rose-200 font-medium">
+      This text snippet will be ignored.
+    </span>
+
+    <!-- 2. Bỏ qua do tên thẻ là <code> (MỚI BỔ SUNG) -->
+    <code class="block p-2 bg-slate-100 text-rose-600 text-xs rounded font-mono">
+      const testCode = "This code tag is ignored by default";
+    </code>
+
+    <!-- 3. Bỏ qua do tên thẻ là <script> -->
+    <script>
+      console.log("This JavaScript code will not be translated");
+    </script>
+
+    <!-- 4. Bỏ qua do tên thẻ là <noscript> -->
+    <noscript>
+      Your browser does not support JavaScript.
+    </noscript>
+
+    <p>Subsequent content will still be displayed normally.</p>
+  </div>
+</div>
 
 <!-- CARD 5: [TC_PHR_06] JS Code Filter (Multi-line JS) -->
 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
