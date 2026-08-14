@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Step 1 & 4: Meta & Title trong Head -->
+  <title>Trang Chủ System</title>
+  <meta name="description" content="Mô tả hệ thống">
+  <meta name="robots" content="index,follow"> <!-- Loại Meta này KHÔNG được thu thập -->
+  <style>body { color: red; }</style> <!-- Ignored Tag -->
+</head>
+<body>
+  <!-- Step 2 & 3: Inline Tags (Giữ cùng 1 Phrase) -->
+  <p id="case-inline">
+    Xin chào <span>bạn <b>rất</b> <i>nhiều</i></span>!
+  </p>
+
+  <!-- Step 3: Block Tags (Ngắt Phrase) -->
+  <div id="case-block-1">Đoạn văn A.</div>
+  <div id="case-block-2">Đoạn văn B.</div>
+
+  <!-- Step 3: Ignored Attributes & Tags -->
+  <div>
+    Nội dung hiển thị.
+    <span data-stt-ignore>Nội dung bị bỏ qua.</span>
+    <script>var x = 10;</script>
+    Tiếp tục hiển thị.
+  </div>
+
+  <!-- Step 4: Attribute Phrases & Special Inputs -->
+  <form id="case-attrs">
+    <input type="text" placeholder="Nhập họ tên" title="Thông tin bắt buộc">
+    <input type="submit" value="Gửi dữ liệu">
+    <img src="logo.png" alt="Logo công ty">
+  </form>
+</body>
+</html>
