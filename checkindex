@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Tiếng Nhật</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        ul {
+            font-size: 18px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Danh sách test tiếng Nhật</h1>
+    <ul>
+        <li>こんにちは (Xin chào)</li>
+        <li>ありがとう (Cảm ơn)</li>
+        <li>さようなら (Tạm biệt)</li>
+        <li>はい (Vâng / Đúng)</li>
+        <li>いいえ (Không / Khôn phải)</li>
+    </ul>
+</body>
+</html>
