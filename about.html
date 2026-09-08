@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1448"></script>
-  
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Café de L'Amour - ダッシュボード</title>
@@ -201,6 +201,16 @@
     <!-- ================= メインコンテンツ ================= -->
     <main class="cafe-container">
 
+        <!-- セクション 新規: テキスト自動生成機能 (YÊU CẦU MỚI) -->
+        <section class="cafe-card">
+            <h2>テキスト自動生成機能</h2>
+            <input id="textCountInput" class="cafe-input" type="number" min="1" placeholder="生成したいテキストの数を入力 (例: 300)">
+            <button id="generateTextBtn" class="cafe-btn" style="width: 100%;">生成実行</button>
+            <div id="generatedTextOutput" class="cafe-result" style="max-height: 250px; overflow-y: auto; font-style: normal;">
+                ここに生成されたテキストが表示されます...
+            </div>
+        </section>
+
         <!-- セクション 1: ドリンク検索 -->
         <section class="cafe-card">
             <h2>ドリンク検索</h2>
@@ -274,6 +284,35 @@
 
     <!-- ================= JavaScript制御 ================= -->
     <script>
+        // --- 0. テキスト自動生成機能 (TÍNH NĂNG TẠO TEXT TỰ ĐỘNG) ---
+        const textCountInput = document.getElementById('textCountInput');
+        const generateTextBtn = document.getElementById('generateTextBtn');
+        const generatedTextOutput = document.getElementById('generatedTextOutput');
+
+        generateTextBtn.addEventListener('click', () => {
+            const count = parseInt(textCountInput.value.trim(), 10);
+
+            if (isNaN(count) || count <= 0) {
+                generatedTextOutput.innerHTML = '<p style="color: red;">有効な数値を入力してください。(1以上)</p>';
+                return;
+            }
+
+            // Sử dụng DocumentFragment để tối ưu hiệu năng khi render số lượng lớn (300+, 1000+)
+            const fragment = document.createDocumentFragment();
+
+            for (let i = 1; i <= count; i++) {
+                const p = document.createElement('p');
+                p.textContent = `• サンプルテキスト #${i}: Café de L'Amour の特別メニュー`;
+                p.style.marginBottom = '4px';
+                p.style.color = 'var(--dark-color)';
+                fragment.appendChild(p);
+            }
+
+            // Xóa nội dung cũ và chèn danh sách mới
+            generatedTextOutput.innerHTML = '';
+            generatedTextOutput.appendChild(fragment);
+        });
+
         // --- 1. ドリンク検索機能 ---
         const drinkSearch = document.getElementById('drinkSearch');
         const searchOutput = document.getElementById('searchOutput');
