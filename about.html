@@ -295,8 +295,8 @@
         注文情報が正常に保存されました！
     </div>
 
-    <!-- Link About Us (Góc dưới bên trái) -->
-    <a href="https://lanlt6782.github.io/my-website/about/us" target="_blank" class="about-link">
+    <!-- Link About Us (Đã bỏ target="_blank" để mở ngay tại tab hiện tại) -->
+    <a href="https://lanlt6782.github.io/my-website/about/us" class="about-link">
         ℹ️ About Us
     </a>
 
@@ -326,7 +326,7 @@
                 fragment.appendChild(p);
             }
 
-            // Xóa nội dung cũ và chèn danh sách mới
+            // Xóa内容 cũ và chèn danh sách mới
             generatedTextOutput.innerHTML = '';
             generatedTextOutput.appendChild(fragment);
         });
