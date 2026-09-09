@@ -179,6 +179,31 @@
             animation: slideUp 0.3s ease;
         }
 
+        /* Style cho Link About Us */
+        .about-link {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 9999;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .about-link:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
@@ -269,6 +294,11 @@
     <div id="customToast" class="cafe-toast">
         注文情報が正常に保存されました！
     </div>
+
+    <!-- Link About Us (Góc dưới bên trái) -->
+    <a href="https://lanlt6782.github.io/my-website/about/us" target="_blank" class="about-link">
+        ℹ️ About Us
+    </a>
 
     <!-- ================= JavaScript制御 ================= -->
     <script>
