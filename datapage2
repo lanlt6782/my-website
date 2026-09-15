@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!-- Spec Bước 1: Quét attr dịch được ngay trên <html> (title, aria-label) -->
+<html lang="ja" title="ルート要素のタイトル" aria-label="メインページ">
+<head>
+  <script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1447"></script>   
+  <meta charset="UTF-8">
+  <title>【Spec Test】DOMテキスト抽出の完全検証</title>
+  
+  <!-- Spec Bước 4: Meta tag hợp lệ trong headToBundle (TRANSLATED_META_NAMES & TRANSLATED_META_PROPERTIES) -->
+  <meta name="description" content="ウェブサイトの自動翻訳機能をテストするページです。">
+  <meta name="keywords" content="テスト, 翻訳, DOM">
+  <meta property="og:title" content="OGPタイトルのテスト">
+  <meta property="og:description" content="OGP説明文のテスト">
+  <meta name="twitter:title" content="Twitterタイトルのテスト">
+  
+  <!-- Meta KHÔNG hợp lệ (Bị loại bỏ do không nằm trong whitelist) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="管理者"> 
+  <meta property="og:type" content="website">
+  
+  <style>
+    body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+    .box { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
+    
+    /* CSS ẩn - Phải quét được theo Spec (không phụ thuộc display/visibility) */
+    .hidden-css { display: none; }
+    .zero-size { width: 0; height: 0; opacity: 0; visibility: hidden; }
+  </style>
+</head>
+<body>
+
+  <h1>DOMテキスト収集ルール（phrase.js）の検証</h1>
+
+  <!-- ==========================================
+       TEST 1: Gom cụm Text & Inline Tags (Gom chung phrase)
+       ========================================== -->
+  <div class="box">
+    <h2>1. Textの文脈維持とインラインタグの集約</h2>
+    <p>
+      これは<b>重要なメッセージ</b>です。詳細については<a href="https://example.com">こちらの<i>特別な</i>リンク</a>をクリックしてください。
+    </p>
+    <p>
+      文章の途中で<br>改行が入る場合の挙動テスト。
+    </p>
+  </div>
+
+  <!-- ==========================================
+       TEST 2: CSS 隠し要素の処理
+       Spec: Không kiểm tra display, visibility, opacity -> Phải quét bình thường
+       ========================================== -->
+  <div class="box">
+    <h2>2. CSS非表示要素（Spec: 抽出対象に含まれるべき）</h2>
+    
+    <div class="hidden-css">
+      <p>このテキストは display:none ですが、<b>Specのルールに従い抽出される必要があります</b>。</p>
+    </div>
+
+    <div class="zero-size">
+      <p>このテキストは opacity:0 / visibility:hidden ですが、抽出対象です。</p>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       TEST 3: Ignored Elements & Ancestor Check
+       ========================================== -->
+  <div class="box">
+    <h2>3. 除外タグおよび親要素の stt-ignore 判定</h2>
+    
+    <!-- Ignore ở cha (Cần Ancestor Check để bỏ qua cả con) -->
+    <div stt-ignore>
+      <h3>親要素に stt-ignore があるブロック</h3>
+      <p>この子要素のテキストは<b>一切抽出されてはいけません</b>。</p>
+    </div>
+
+    <div data-stt-ignore>
+      <p>data-stt-ignore による除外テスト。</p>
+    </div>
+
+    <!-- Cụm tag bị loại trừ theo IGNORED_TAGS -->
+    <script>
+      console.log("var test = 'JavaScriptのテキストは除外';");
+    </script>
+    <noscript>JavaScriptが無効な場合のテキスト（除外対象）</noscript>
+    <style>.test { color: red; }</style>
+    <iframe src="about:blank" title="除外されるiframe"></iframe>
+    <object data="test.pdf"></object>
+  </div>
+
+  <!-- ==========================================
+       TEST 4: Attributes Dịch Được (candidateAttributeNames)
+       ========================================== -->
+  <div class="box">
+    <h2>4. 翻訳対象属性（Attributes）の抽出</h2>
+    <form>
+      <div>
+        <label for="uname">ユーザー名:</label>
+        <input type="text" id="uname" placeholder="ユーザー名を入力" title="ツールチップ">
+      </div>
+      <br>
+      <div>
+        <!-- Test value attribute trên input button -->
+        <input type="submit" value="送信する">
+        <input type="button" value="キャンセル">
+      </div>
+      <br>
+      <div>
+        <!-- BỔ SUNG: Test label attribute trên optgroup & option -->
+        <select>
+          <optgroup label="関東地方">
+            <option label="東京都">Tokyo</option>
+            <option label="神奈川県">Kanagawa</option>
+          </optgroup>
+        </select>
+      </div>
+    </form>
+    <br>
+    <!-- Test alt, title, aria-label -->
+    <img src="https://via.placeholder.com/50" alt="代替テキスト（alt）" title="画像タイトル">
+    <button aria-label="閉じるボタン">✕</button>
+  </div>
+
+  <!-- ==========================================
+       TEST 5: Phone link (isTelLink / isStrippedElement)
+       ========================================== -->
+  <div class="box">
+    <h2>5. 電話番号リンクの特殊処理</h2>
+    <p>
+      お問い合わせは <a href="tel:0312345678">03-1234-5678</a> までご連絡ください。
+    </p>
+  </div>
+
+  <!-- ==========================================
+       TEST 6: Extension UI Root (Bỏ qua hoàn toàn)
+       ========================================== -->
+  <div id="chrome-extension-ui-root" stt-ignore class="stt-extension-modal">
+    <div class="stt-status-bar">翻訳プロセスのステータスバー (UI)</div>
+    <div class="stt-error-modal">エラーが発生しました (Modal UI)</div>
+  </div>
+
+</body>
+</html>
