@@ -165,7 +165,6 @@
 
         /* トースト通知 */
         .cafe-toast {
-            display: none;
             position: fixed;
             bottom: 30px;
             right: 30px;
@@ -226,7 +225,7 @@
     <!-- ================= メインコンテンツ ================= -->
     <main class="cafe-container">
 
-        <!-- セクション 新規: テキスト自動生成機能 (YÊU CẦU MỚI) -->
+        <!-- セクション 新規: テキスト自動生成機能 -->
         <section class="cafe-card">
             <h2>テキスト自動生成機能</h2>
             <input id="textCountInput" class="cafe-input" type="number" min="1" placeholder="生成したいテキストの数を入力 (例: 300)">
@@ -279,7 +278,7 @@
 
     </main>
 
-    <!-- ================= 動的要素 (ポップアップ / モダール / トースト) ================= -->
+    <!-- ================= 動的要素 (ポップアップ) ================= -->
 
     <!-- ポップアップ -->
     <div id="customPopup" class="overlay">
@@ -290,19 +289,14 @@
         </div>
     </div>
 
-    <!-- トースト通知 -->
-    <div id="customToast" class="cafe-toast">
-        注文情報が正常に保存されました！
-    </div>
-
-    <!-- Link About Us (Đã bỏ target="_blank" để mở ngay tại tab hiện tại) -->
+    <!-- Link About Us -->
     <a href="https://lanlt6782.github.io/my-website/about/us" class="about-link">
         ℹ️ About Us
     </a>
 
     <!-- ================= JavaScript制御 ================= -->
     <script>
-        // --- 0. テキスト自動生成機能 (TÍNH NĂNG TẠO TEXT TỰ ĐỘNG) ---
+        // --- 0. テキスト自動生成機能 ---
         const textCountInput = document.getElementById('textCountInput');
         const generateTextBtn = document.getElementById('generateTextBtn');
         const generatedTextOutput = document.getElementById('generatedTextOutput');
@@ -315,7 +309,6 @@
                 return;
             }
 
-            // Sử dụng DocumentFragment để tối ưu hiệu năng khi render số lượng lớn (300+, 1000+)
             const fragment = document.createDocumentFragment();
 
             for (let i = 1; i <= count; i++) {
@@ -326,7 +319,6 @@
                 fragment.appendChild(p);
             }
 
-            // Xóa内容 cũ và chèn danh sách mới
             generatedTextOutput.innerHTML = '';
             generatedTextOutput.appendChild(fragment);
         });
@@ -383,16 +375,13 @@
         const btnAppend = document.getElementById('btnAppend');
 
         const customPopup = document.getElementById('customPopup');
-        const customToast = document.getElementById('customToast');
         const appendArea = document.getElementById('appendArea');
 
         // ポップアップの開閉
         btnPopup.addEventListener('click', () => customPopup.style.display = 'flex');
         document.getElementById('closePopup').addEventListener('click', () => customPopup.style.display = 'none');
 
-        // 注文確認モダールはクリック時に初めてDOMへ追加する。
-        // そのため初回のページ走査ではモダール内テキストを取得できず、
-        // MutationObserver が childList の追加として検知できる。
+        // 注文確認モダール (Tạo động và appendChild vào body)
         btnModal.addEventListener('click', () => {
             const customModal = document.createElement('div');
             customModal.id = 'customModal';
@@ -423,11 +412,17 @@
             document.body.appendChild(customModal);
         });
 
-        // トースト通知の表示 (3秒後に自動非表示)
+        // トースト通知の動的追加 (Tạo động và appendChild vào body khi click)
         btnToast.addEventListener('click', () => {
-            customToast.style.display = 'block';
+            const toast = document.createElement('div');
+            toast.className = 'cafe-toast';
+            toast.textContent = '注文情報が正常に保存されました！';
+
+            document.body.appendChild(toast);
+
+            // Xóa element sau 3 giây
             setTimeout(() => {
-                customToast.style.display = 'none';
+                toast.remove();
             }, 3000);
         });
 
@@ -435,7 +430,7 @@
         let noteCount = 0;
         btnAppend.addEventListener('click', () => {
             noteCount++;
-            if(noteCount === 1) appendArea.innerHTML = ''; // 初回クリック時にデフォルトテキストを消去
+            if(noteCount === 1) appendArea.innerHTML = '';
             
             const newNote = document.createElement('p');
             newNote.style.color = 'var(--primary-color)';
@@ -443,10 +438,10 @@
             newNote.textContent = `• 追加要望 #${noteCount}: 甘さ控えめ、氷多め。`;
             
             appendArea.appendChild(newNote);
-            appendArea.scrollTop = appendArea.scrollHeight; // 自動スクロール
+            appendArea.scrollTop = appendArea.scrollHeight;
         });
 
-        // 背景クリックでポップアップ/モダールを閉じる
+        // 背景クリックでポップアップを閉じる
         window.addEventListener('click', (e) => {
             if (e.target === customPopup) customPopup.style.display = 'none';
         });
