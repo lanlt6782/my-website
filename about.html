@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1448"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café de L'Amour - ダッシュボード</title>
+    
+    <!-- ================= CSSスタイル ================= -->
+    <style>
+        /* カフェ風のカラー変数 */
+        :root {
+            --primary-color: #6f4e37; /* コーヒーブラウン */
+            --secondary-color: #e6ccb2; /* ミルククリーム */
+            --accent-color: #b07d62; /* ライトブラウン */
+            --dark-color: #3d2f21;
+            --bg-color: #f7f5f0;
+            --white: #ffffff;
+            --success: #52b788;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--dark-color);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* ヘッダー */
+        .cafe-header {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: var(--white);
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .cafe-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* レイアウトグリッド */
+        .cafe-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* カードデザイン */
+        .cafe-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.2s;
+        }
+
+        .cafe-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .cafe-card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 8px;
+        }
+
+        /* フォーム要素 */
+        .cafe-input, .cafe-select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .cafe-input:focus, .cafe-select:focus {
+            border-color: var(--primary-color);
+        }
+
+        /* ボタン */
+        .cafe-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .cafe-btn:hover {
+            background-color: var(--dark-color);
+        }
+
+        .cafe-btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* 動的表示エリア */
+        .cafe-result {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: var(--bg-color);
+            border-radius: 6px;
+            font-style: italic;
+            min-height: 45px;
+        }
+
+        /* 商品情報 */
+        .cafe-product-info {
+            background-color: #fdfaf6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px dashed var(--accent-color);
+        }
+
+        /* オーバーレイ (ポップアップ、モダール) */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-box, .modal-box {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* トースト通知 */
+        .cafe-toast {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-left: 5px solid var(--success);
+            z-index: 2000;
+            animation: slideUp 0.3s ease;
+        }
+
+        /* Style cho Link About Us */
+        .about-link {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 9999;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .about-link:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= ヘッダー ================= -->
+    <header class="cafe-header">
+        <h1>Café de L'Amour</h1>
+        <p>穏やかなひとときへようこそ。今日のお気に入りの一杯をお選びください。</p>
+    </header>
+
+    <!-- ================= メインコンテンツ ================= -->
+    <main class="cafe-container">
+
+        <!-- セクション 新規: テキスト自動生成機能 (YÊU CẦU MỚI) -->
+        <section class="cafe-card">
+            <h2>テキスト自動生成機能</h2>
+            <input id="textCountInput" class="cafe-input" type="number" min="1" placeholder="生成したいテキストの数を入力 (例: 300)">
+            <button id="generateTextBtn" class="cafe-btn" style="width: 100%;">生成実行</button>
+            <div id="generatedTextOutput" class="cafe-result" style="max-height: 250px; overflow-y: auto; font-style: normal;">
+                ここに生成されたテキストが表示されます...
+            </div>
+        </section>
+
+        <!-- セクション 1: ドリンク検索 -->
+        <section class="cafe-card">
+            <h2>ドリンク検索</h2>
+            <input id="drinkSearch" class="cafe-input" type="text" placeholder="ドリンク名を入力 (例: ラテ、エスプレッソ...)">
+            <div id="searchOutput" class="cafe-result">検索キーワードを入力してください...</div>
+        </section>
+
+        <!-- セクション 2: お受け取り方法 -->
+        <section class="cafe-card">
+            <h2>お受け取り方法</h2>
+            <select id="orderTypeSelect" class="cafe-select">
+                <option value="">-- 選択してください --</option>
+                <option value="dinein">店内飲食（イートイン）</option>
+                <option value="takeaway">テイクアウト</option>
+                <option value="delivery">デリバリー</option>
+            </select>
+            <div id="orderTypeOutput" class="cafe-result">お受け取り方法を選択してください Blunt。</div>
+        </section>
+
+        <!-- セクション 3: 本日の特別メニュー -->
+        <section class="cafe-card">
+            <h2>本日の特別メニュー</h2>
+            <div class="cafe-product-info">
+                <h3 id="productName">キャラメルマキアート</h3>
+                <p id="productPrice">通常価格：650円</p>
+            </div>
+            <button id="applyDiscountBtn" class="cafe-btn">クーポン適用</button>
+        </section>
+
+        <!-- セクション 4: テストコントロールパネル -->
+        <section class="cafe-card">
+            <h2>コントロールパネル</h2>
+            <div class="cafe-btn-group">
+                <button id="btnPopup" class="cafe-btn">ポップアップ</button>
+                <button id="btnModal" class="cafe-btn">注文確認</button>
+                <button id="btnToast" class="cafe-btn">トースト通知</button>
+                <button id="btnAppend" class="cafe-btn">メモ追加</button>
+            </div>
+            <div id="appendArea" class="cafe-result" style="max-height: 120px; overflow-y: auto;">注文メモがここに表示されます...</div>
+        </section>
+
+    </main>
+
+    <!-- ================= 動的要素 (ポップアップ / モダール / トースト) ================= -->
+
+    <!-- ポップアップ -->
+    <div id="customPopup" class="overlay">
+        <div class="popup-box">
+            <h3>☕ 素敵な一日を！</h3>
+            <p style="margin: 15px 0;">Café de L'Amourとともに、エネルギーに満ちた素晴らしい一日をお過ごしください！</p>
+            <button id="closePopup" class="cafe-btn">閉じる</button>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div id="customToast" class="cafe-toast">
+        注文情報が正常に保存されました！
+    </div>
+
+    <!-- Link About Us (Đã bỏ target="_blank" để mở ngay tại tab hiện tại) -->
+    <a href="https://lanlt6782.github.io/my-website/about/us" class="about-link">
+        ℹ️ About Us
+    </a>
+
+    <!-- ================= JavaScript制御 ================= -->
+    <script>
+        // --- 0. テキスト自動生成機能 (TÍNH NĂNG TẠO TEXT TỰ ĐỘNG) ---
+        const textCountInput = document.getElementById('textCountInput');
+        const generateTextBtn = document.getElementById('generateTextBtn');
+        const generatedTextOutput = document.getElementById('generatedTextOutput');
+
+        generateTextBtn.addEventListener('click', () => {
+            const count = parseInt(textCountInput.value.trim(), 10);
+
+            if (isNaN(count) || count <= 0) {
+                generatedTextOutput.innerHTML = '<p style="color: red;">有効な数値を入力してください。(1以上)</p>';
+                return;
+            }
+
+            // Sử dụng DocumentFragment để tối ưu hiệu năng khi render số lượng lớn (300+, 1000+)
+            const fragment = document.createDocumentFragment();
+
+            for (let i = 1; i <= count; i++) {
+                const p = document.createElement('p');
+                p.textContent = `• サンプルテキスト #${i}: Café de L'Amour の特別メニュー`;
+                p.style.marginBottom = '4px';
+                p.style.color = 'var(--dark-color)';
+                fragment.appendChild(p);
+            }
+
+            // Xóa内容 cũ và chèn danh sách mới
+            generatedTextOutput.innerHTML = '';
+            generatedTextOutput.appendChild(fragment);
+        });
+
+        // --- 1. ドリンク検索機能 ---
+        const drinkSearch = document.getElementById('drinkSearch');
+        const searchOutput = document.getElementById('searchOutput');
+        
+        drinkSearch.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            if(query) {
+                searchOutput.textContent = `ドリンク「${query}」を検索中...`;
+            } else {
+                searchOutput.textContent = '検索キーワードを入力してください...';
+            }
+        });
+
+        // --- 2. お受け取り方法の選択 ---
+        const orderTypeSelect = document.getElementById('orderTypeSelect');
+        const orderTypeOutput = document.getElementById('orderTypeOutput');
+
+        orderTypeSelect.addEventListener('change', (e) => {
+            const selectedValue = e.target.value;
+            const selectedText = e.target.options[e.target.selectedIndex].text;
+            
+            if(selectedValue) {
+                orderTypeOutput.textContent = `選択中: ${selectedText}`;
+            } else {
+                orderTypeOutput.textContent = 'お受け取り方法を選択してください。';
+            }
+        });
+
+        // --- 3. クーポン適用機能 (価格変更) ---
+        const applyDiscountBtn = document.getElementById('applyDiscountBtn');
+        const productPrice = document.getElementById('productPrice');
+        let isDiscounted = false;
+
+        applyDiscountBtn.addEventListener('click', () => {
+            if(!isDiscounted) {
+                productPrice.innerHTML = '特別価格：<strong style="color: #e63946;">450円</strong> (200円引き)';
+                applyDiscountBtn.textContent = '元に戻す';
+                isDiscounted = true;
+            } else {
+                productPrice.textContent = '通常価格：650円';
+                applyDiscountBtn.textContent = 'クーポン適用';
+                isDiscounted = false;
+            }
+        });
+
+        // --- 4. ポップアップ・モダール・トースト等の制御 ---
+        const btnPopup = document.getElementById('btnPopup');
+        const btnModal = document.getElementById('btnModal');
+        const btnToast = document.getElementById('btnToast');
+        const btnAppend = document.getElementById('btnAppend');
+
+        const customPopup = document.getElementById('customPopup');
+        const customToast = document.getElementById('customToast');
+        const appendArea = document.getElementById('appendArea');
+
+        // ポップアップの開閉
+        btnPopup.addEventListener('click', () => customPopup.style.display = 'flex');
+        document.getElementById('closePopup').addEventListener('click', () => customPopup.style.display = 'none');
+
+        // 注文確認モダールはクリック時に初めてDOMへ追加する。
+        // そのため初回のページ走査ではモダール内テキストを取得できず、
+        // MutationObserver が childList の追加として検知できる。
+        btnModal.addEventListener('click', () => {
+            const customModal = document.createElement('div');
+            customModal.id = 'customModal';
+            customModal.className = 'overlay';
+            customModal.innerHTML = `
+                <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+                    <h3 id="modalTitle">🔔 決済確認</h3>
+                    <p style="margin: 15px 0;">この内容で注文を確定してもよろしいですか？</p>
+                    <div style="display: flex; gap: 10px; justify-content: center;">
+                        <button type="button" data-modal-action="confirm" class="cafe-btn" style="background-color: var(--success);">はい</button>
+                        <button type="button" data-modal-action="close" class="cafe-btn" style="background-color: #aaa;">キャンセル</button>
+                    </div>
+                </div>
+            `;
+
+            const closeModal = () => customModal.remove();
+
+            customModal.querySelector('[data-modal-action="close"]').addEventListener('click', closeModal);
+            customModal.querySelector('[data-modal-action="confirm"]').addEventListener('click', () => {
+                closeModal();
+                alert('ご注文ありがとうございました！');
+            });
+            customModal.addEventListener('click', (e) => {
+                if (e.target === customModal) closeModal();
+            });
+
+            customModal.style.display = 'flex';
+            document.body.appendChild(customModal);
+        });
+
+        // トースト通知の表示 (3秒後に自動非表示)
+        btnToast.addEventListener('click', () => {
+            customToast.style.display = 'block';
+            setTimeout(() => {
+                customToast.style.display = 'none';
+            }, 3000);
+        });
+
+        // テキストの追加 (追加要望メモ)
+        let noteCount = 0;
+        btnAppend.addEventListener('click', () => {
+            noteCount++;
+            if(noteCount === 1) appendArea.innerHTML = ''; // 初回クリック時にデフォルトテキストを消去
+            
+            const newNote = document.createElement('p');
+            newNote.style.color = 'var(--primary-color)';
+            newNote.style.fontSize = '0.9rem';
+            newNote.textContent = `• 追加要望 #${noteCount}: 甘さ控えめ、氷多め。`;
+            
+            appendArea.appendChild(newNote);
+            appendArea.scrollTop = appendArea.scrollHeight; // 自動スクロール
+        });
+
+        // 背景クリックでポップアップ/モダールを閉じる
+        window.addEventListener('click', (e) => {
+            if (e.target === customPopup) customPopup.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
