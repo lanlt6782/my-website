@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="ja">
 <head>
-     <script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1448"></script>
+      <script src="https://dev-d.sc-shutto-translation.com/trans.js?id=1448"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test Extension Behavior</title>
+  <title>拡張機能動作確認用テストページ</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 30px; line-height: 1.6; }
+    body { font-family: "Helvetica Neue", Arial, sans-serif; margin: 30px; line-height: 1.6; }
     .test-case { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
     .test-case h3 { margin-top: 0; color: #333; }
     .note { background-color: #f9f9f9; border-left: 4px solid #007bff; padding: 8px 12px; margin-top: 10px; font-size: 0.9em; }
@@ -16,63 +16,64 @@
 </head>
 <body>
 
-  <h1>Bộ Test Cases cho Extension</h1>
+  <h1>拡張機能（Extension）動作テスト用ページ</h1>
 
-  <!-- TRƯỜNG HỢP 1: Chuyển trang HTML thông thường (Cần hiện Modal) -->
+  <!-- テストケース1: 通常のHTMLリンク遷移 -->
   <div class="test-case">
-    <h3>TH1: Link HTML thông thường (Cùng Tab)</h3>
-    <p>Extension cần bắt được sự kiện click, tạm dừng điều hướng và **Hiển thị Modal xác nhận**: <i>「テキスト収集を終了しますか？」</i></p>
-    <a href="/next-page" class="btn">Chuyển trang (/next-page)</a>
+    <h3>ケース1: 同一タブでの通常リンク遷移（確認モーダル表示）</h3>
+    <p>クリック時、URLが変わる前に拡張機能が検知し、確認モーダルを表示すること。</p>
+    <a href="/next-page" class="btn">ページ遷移（/next-page）</a>
     <div class="note">
-      * <b>Kịch bản kỳ vọng:</b><br>
-      - Chọn "Huỷ/Cancel": Không chuyển trang, tiếp tục thu thập text.<br>
-      - Chọn "Kết thúc/Confirm": Gửi text còn lại -> Bật lại 導入タグ -> Mới chuyển sang <code>/next-page</code>.
+      <b>【期待される挙動】</b><br>
+      - モーダル<i>「テキスト収集を終了しますか？」</i>が表示される。<br>
+      - キャンセル時：ページ遷移せず、テキスト収集を継続。<br>
+      - 終了時：残りのテキストを送信 ➔ 導入タグを再有効化 ➔ <code>/next-page</code> へ遷移。
     </div>
   </div>
 
-  <!-- TRƯỜNG HỢP 2: Mở link ở Tab/Cửa sổ mới (Không hiện Modal) -->
+  <!-- テストケース2: 別タブでのリンクオープン -->
   <div class="test-case">
-    <h3>TH2: Link mở ở Tab / Cửa sổ mới (target="_blank")</h3>
-    <p>Extension **Không hiển thị Modal xác nhận**.</p>
-    <a href="/next-page" target="_blank" class="btn">Mở trang mới ở Tab mới</a>
+    <h3>ケース2: 新規タブ／ウィンドウでのリンクオープン（モーダル非表示）</h3>
+    <p><code>target="_blank"</code> のリンクをクリック時、モーダルを表示しないこと。</p>
+    <a href="/next-page" target="_blank" class="btn">新しいタブで開く</a>
     <div class="note">
-      * <b>Kịch bản kỳ vọng:</b> Tab hiện tại tiếp tục phiên thu thập bình thường; Tab mới mở bình thường mà không can thiệp.
+      <b>【期待される挙動】</b><br>
+      - 元のタブでの収集セッションはそのまま継続。<br>
+      - 確認モーダルは表示されず、新しいタブが正常に開く。
     </div>
   </div>
 
-  <!-- TRƯỜNG HỢP 3: SPA Router / History API (Không hiện Modal) -->
+  <!-- テストケース3: SPAによるルーター遷移 -->
   <div class="test-case">
-    <h3>TH3: Chuyển Route kiểu SPA (History PushState / ReplaceState)</h3>
-    <p>Extension **Không hiển thị Modal xác nhận**. Tự động xử lý theo thay đổi của URL/PageId.</p>
+    <h3>ケース3: SPA/Routerによるページ更新（モーダル非表示）</h3>
+    <p>SPAの <code>pushState</code> 等によるURL更新時、モーダルを表示せずURL/PageIdの変化に応じて自動処理すること。</p>
     
     <div style="margin-bottom: 10px;">
-      <button onclick="changeQuerySPA()">SPA: Chỉ thay đổi Query/Fragment</button>
-      <small>(VD: <code>?filter=active#section1</code>)</small>
+      <button onclick="changeQuerySPA()">SPA: Query/Fragment のみ変更</button>
+      <small>(例: <code>?filter=active#section1</code>)</small>
     </div>
     
     <div>
-      <button onclick="changePathSPA()">SPA: Thay đổi Pathname / PageId</button>
-      <small>(VD: <code>/dashboard/new-page</code>)</small>
+      <button onclick="changePathSPA()">SPA: Pathname / PageId の変更</button>
+      <small>(例: <code>/dashboard/new-page</code>)</small>
     </div>
 
     <div class="note">
-      * <b>Kịch bản kỳ vọng:</b><br>
-      - Khi chỉ đổi Query/Fragment: Tiếp tục thu thập text trên trang hiện tại.<br>
-      - Khi đổi Pathname / PageId khác: Extension tự động dừng thu thập sau khi phát hiện route thay đổi.
+      <b>【期待される挙動】</b><br>
+      - Query/Fragmentのみ変更時：収集をそのまま継続。<br>
+      - Pathname/PageId変更時：モーダルは表示せず、変更検知後に自動で収集を終了。
     </div>
   </div>
 
-  <!-- Script giả lập điều hướng SPA -->
+  <!-- SPA遷移用スクリプト -->
   <script>
     function changeQuerySPA() {
-      // Giả lập SPA router chỉ cập nhật query params/fragment
       const newUrl = window.location.pathname + '?test=123#view';
       history.pushState({ page: 'query_change' }, '', newUrl);
       console.log('SPA Navigate (Query/Fragment):', newUrl);
     }
 
     function changePathSPA() {
-      // Giả lập SPA router làm thay đổi pathname / pageId
       const newUrl = '/spa-new-page-' + Math.floor(Math.random() * 1000);
       history.pushState({ page: 'path_change' }, '', newUrl);
       console.log('SPA Navigate (New Path/PageID):', newUrl);
