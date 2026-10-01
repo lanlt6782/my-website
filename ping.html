@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dual Auto Request Diagnostic (Ping & Beacon)</title>
+    <title>Beacon & Ping Auto Telemetry Diagnostic</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -63,21 +63,21 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
-                    <i class="fa-solid fa-satellite-dish text-lg"></i>
+                    <i class="fa-solid fa-tower-broadcast text-lg"></i>
                 </div>
                 <div>
                     <h1 class="text-base sm:text-lg font-bold text-white tracking-tight flex items-center gap-2">
-                        Dual Auto Diagnostic
-                        <span class="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">resourceType = ping & beacon</span>
+                        Beacon Telemetry Hub
+                        <span class="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">Reload & Exit Telemetry</span>
                     </h1>
-                    <p class="text-xs text-slate-400">Tự động kích hoạt song song Ping + Beacon khi vừa tải trang (Auto Exec)</p>
+                    <p class="text-xs text-slate-400">Tự động phát tín hiệu Beacon (resourceType = beacon) khi Load, Reload hoặc Đóng trang</p>
                 </div>
             </div>
 
             <!-- Connection Status Badge -->
             <div class="flex items-center space-x-2 bg-slate-950/80 px-3.5 py-1.5 rounded-full border border-slate-800">
-                <span id="statusDot" class="w-2.5 h-2.5 rounded-full bg-amber-500 status-pulse"></span>
-                <span id="statusText" class="text-xs font-mono font-medium text-amber-400">Đang chuẩn bị gửi song song...</span>
+                <span id="statusDot" class="w-2.5 h-2.5 rounded-full bg-emerald-500 status-pulse"></span>
+                <span id="statusText" class="text-xs font-mono font-medium text-emerald-400">Exit / Reload Listeners Active</span>
             </div>
         </div>
     </header>
@@ -86,19 +86,19 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-            <!-- Left Controls & Configuration -->
+            <!-- Left Controls & Configuration Panel -->
             <div class="lg:col-span-4 bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col justify-between">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between pb-3 border-b border-slate-800">
                         <h2 class="text-sm font-semibold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-                            <i class="fa-solid fa-sliders text-cyan-400"></i> Cấu hình Target Endpoint
+                            <i class="fa-solid fa-sliders text-cyan-400"></i> Configuration & Action
                         </h2>
-                        <span class="text-[11px] font-mono text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">Dual Exec</span>
+                        <span class="text-[11px] font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">Auto Listener</span>
                     </div>
 
-                    <form id="pingControlForm" onsubmit="event.preventDefault(); sendDualRequests();" class="space-y-4">
+                    <form id="beaconControlForm" onsubmit="event.preventDefault(); triggerReloadSimulation();" class="space-y-4">
                         <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1.5">Target Host URL</label>
+                            <label class="block text-xs font-medium text-slate-400 mb-1.5">Target Endpoint Host</label>
                             <div class="relative">
                                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
                                     <i class="fa-solid fa-globe text-xs"></i>
@@ -109,95 +109,109 @@
                         </div>
 
                         <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1.5">Beacon Mode</label>
-                            <select id="beaconMode" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs font-mono text-purple-300 focus:outline-none focus:border-purple-500 border-purple-900/40">
-                                <option value="sendBeacon" selected>navigator.sendBeacon() (Standard)</option>
-                                <option value="fetch">Fetch API (POST payload resourceType=beacon)</option>
-                            </select>
+                            <label class="block text-xs font-medium text-slate-400 mb-1.5">Unload Event Handler</label>
+                            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-2 text-[11px] font-mono text-slate-300">
+                                <div class="flex items-center justify-between">
+                                    <span>visibilitychange:</span>
+                                    <span class="text-emerald-400 font-bold"><i class="fa-solid fa-check"></i> Active</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span>beforeunload:</span>
+                                    <span class="text-emerald-400 font-bold"><i class="fa-solid fa-check"></i> Active</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span>pagehide:</span>
+                                    <span class="text-emerald-400 font-bold"><i class="fa-solid fa-check"></i> Active</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Payload Specs Display -->
+                        <!-- Technical Information Payload Badge -->
                         <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800/80 space-y-2 text-[11px] font-mono">
-                            <div class="flex items-center justify-between text-cyan-400 border-b border-slate-800 pb-1.5">
-                                <span class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> PING</span>
-                                <span class="text-[10px] text-slate-400">GET /get?resourceType=ping</span>
+                            <div class="text-cyan-400 font-bold flex items-center justify-between border-b border-slate-800 pb-1.5">
+                                <span><i class="fa-solid fa-bolt"></i> ON LOAD</span>
+                                <span class="text-[10px] text-slate-400">Ping (GET) + Beacon (POST)</span>
                             </div>
-                            <div class="flex items-center justify-between text-purple-400">
-                                <span class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-tower-broadcast"></i> BEACON</span>
-                                <span class="text-[10px] text-slate-400">POST /post { resourceType: 'beacon' }</span>
+                            <div class="text-purple-400 font-bold flex items-center justify-between">
+                                <span><i class="fa-solid fa-rotate-right"></i> ON RELOAD / EXIT</span>
+                                <span class="text-[10px] text-slate-400">navigator.sendBeacon()</span>
                             </div>
                         </div>
                     </form>
                 </div>
 
                 <div class="mt-6 pt-4 border-t border-slate-800/80 space-y-2">
-                    <button id="btnManualRetry" onclick="sendDualRequests()"
-                        class="w-full py-2.5 px-4 bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 active:from-cyan-700 active:to-indigo-700 text-white font-semibold text-xs rounded-xl shadow-lg shadow-indigo-600/20 transition-all flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-play"></i>
-                        <span>Thực hiện Gửi Đồng Thời Cả 2</span>
+                    <button id="btnReloadPage" onclick="triggerReloadSimulation()"
+                        class="w-full py-2.5 px-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 active:from-purple-700 active:to-indigo-700 text-white font-semibold text-xs rounded-xl shadow-lg shadow-purple-600/20 transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-arrows-rotate animate-spin" style="animation-duration: 3s;"></i>
+                        <span>Thử nghiệm Tải lại Trang (Reload)</span>
                     </button>
-                    <p class="text-[10px] text-center text-slate-500">Tự động kích hoạt lại cả 2 request song song</p>
+                    <button onclick="sendDualRequests()"
+                        class="w-full py-2 px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs rounded-xl border border-slate-700 transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-play text-cyan-400"></i>
+                        <span>Gửi Thủ Công Request Song Song</span>
+                    </button>
+                    <p class="text-[10px] text-center text-slate-500">Khi ấn Tải lại trang, request beacon loại reload sẽ tự động được gửi đi trước khi trang làm mới.</p>
                 </div>
             </div>
 
+            <!-- Right Dashboard View -->
             <div class="lg:col-span-8 flex flex-col justify-between space-y-4">
                 
-                <!-- Dual Metrics Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Metric Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     
                     <!-- PING Metric Card -->
                     <div class="bg-slate-900/80 border border-cyan-500/30 rounded-2xl p-4 shadow-lg relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-cyan-500/5 rounded-full blur-xl pointer-events-none"></div>
-                        <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
-                            <span class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-2">
-                                <i class="fa-solid fa-bolt"></i> Ping Metric
+                        <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-800">
+                            <span class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-bolt"></i> Ping (Load)
                             </span>
-                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">resourceType=ping</span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">ping</span>
                         </div>
-
-                        <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <span class="text-[11px] text-slate-400 block">Status</span>
-                                <span id="pingStatStatus" class="text-lg font-mono font-bold text-amber-400">PENDING</span>
-                            </div>
-                            <div>
-                                <span class="text-[11px] text-slate-400 block">Latency</span>
-                                <span id="pingStatLatency" class="text-2xl font-mono font-bold text-cyan-300">--</span>
-                                <span class="text-xs text-slate-500 font-mono">ms</span>
-                            </div>
+                        <div class="flex items-baseline justify-between mt-1">
+                            <span id="pingStatStatus" class="text-base font-mono font-bold text-amber-400">PENDING</span>
+                            <span class="text-xs text-slate-400 font-mono"><span id="pingStatLatency" class="text-xl font-bold text-cyan-300">--</span> ms</span>
                         </div>
-
-                        <div class="mt-3 text-[10px] font-mono text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800 flex justify-between">
-                            <span>Method: <strong class="text-slate-200">GET</strong></span>
-                            <span id="pingHttpCode">HTTP --</span>
+                        <div class="mt-2 text-[10px] font-mono text-slate-400 bg-slate-950/60 p-1.5 rounded border border-slate-800 flex justify-between">
+                            <span>HTTP Method:</span>
+                            <span class="text-slate-200">GET</span>
                         </div>
                     </div>
 
-                    <!-- BEACON Metric Card -->
+                    <!-- BEACON LOAD Metric Card -->
                     <div class="bg-slate-900/80 border border-purple-500/30 rounded-2xl p-4 shadow-lg relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 rounded-full blur-xl pointer-events-none"></div>
-                        <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
-                            <span class="text-xs font-bold uppercase tracking-wider text-purple-400 flex items-center gap-2">
-                                <i class="fa-solid fa-tower-broadcast"></i> Beacon Metric
+                        <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-800">
+                            <span class="text-xs font-bold uppercase tracking-wider text-purple-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-tower-broadcast"></i> Beacon (Load)
                             </span>
-                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">resourceType=beacon</span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">beacon</span>
                         </div>
-
-                        <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <span class="text-[11px] text-slate-400 block">Status</span>
-                                <span id="beaconStatStatus" class="text-lg font-mono font-bold text-amber-400">PENDING</span>
-                            </div>
-                            <div>
-                                <span class="text-[11px] text-slate-400 block">Latency</span>
-                                <span id="beaconStatLatency" class="text-2xl font-mono font-bold text-purple-300">--</span>
-                                <span class="text-xs text-slate-500 font-mono">ms</span>
-                            </div>
+                        <div class="flex items-baseline justify-between mt-1">
+                            <span id="beaconStatStatus" class="text-base font-mono font-bold text-amber-400">PENDING</span>
+                            <span class="text-xs text-slate-400 font-mono"><span id="beaconStatLatency" class="text-xl font-bold text-purple-300">--</span> ms</span>
                         </div>
+                        <div class="mt-2 text-[10px] font-mono text-slate-400 bg-slate-950/60 p-1.5 rounded border border-slate-800 flex justify-between">
+                            <span>Trigger Mode:</span>
+                            <span class="text-slate-200">Page Load</span>
+                        </div>
+                    </div>
 
-                        <div class="mt-3 text-[10px] font-mono text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800 flex justify-between">
-                            <span>Type: <strong class="text-slate-200" id="beaconApiUsed">sendBeacon</strong></span>
-                            <span id="beaconHttpCode">Queued / HTTP --</span>
+                    <!-- RELOAD/EXIT BEACON Metric Card -->
+                    <div class="bg-slate-900/80 border border-emerald-500/30 rounded-2xl p-4 shadow-lg relative overflow-hidden">
+                        <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-800">
+                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-rotate-right"></i> Reload / Exit
+                            </span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">beacon</span>
+                        </div>
+                        <div class="flex items-baseline justify-between mt-1">
+                            <span id="reloadBeaconStatus" class="text-base font-mono font-bold text-slate-400">LISTENING</span>
+                            <span class="text-xs text-slate-400 font-mono"><span id="reloadCount" class="text-xl font-bold text-emerald-300">0</span> sent</span>
+                        </div>
+                        <div class="mt-2 text-[10px] font-mono text-slate-400 bg-slate-950/60 p-1.5 rounded border border-slate-800 flex justify-between">
+                            <span>Last Event:</span>
+                            <span id="lastExitEvent" class="text-slate-200">None</span>
                         </div>
                     </div>
 
@@ -206,17 +220,18 @@
                 <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 shadow-xl flex-1 flex flex-col justify-between">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center space-x-2">
-                            <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
-                            <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-300">Biểu đồ so sánh Độ Trễ (RTT Latency: Ping vs Beacon)</h3>
+                            <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+                            <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-300">Thống Kê Lịch Sử Request Độ Trễ (RTT / Queue Latency)</h3>
                         </div>
                         <div class="flex items-center space-x-4 text-[11px] font-mono">
                             <span class="flex items-center gap-1.5 text-cyan-400"><span class="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block"></span> Ping</span>
-                            <span class="flex items-center gap-1.5 text-purple-400"><span class="w-2.5 h-2.5 rounded-full bg-purple-400 inline-block"></span> Beacon</span>
+                            <span class="flex items-center gap-1.5 text-purple-400"><span class="w-2.5 h-2.5 rounded-full bg-purple-400 inline-block"></span> Beacon (Load)</span>
+                            <span class="flex items-center gap-1.5 text-emerald-400"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span> Beacon (Exit)</span>
                         </div>
                     </div>
                     
                     <div class="relative w-full h-44 sm:h-48">
-                        <canvas id="dualChart"></canvas>
+                        <canvas id="telemetryChart"></canvas>
                     </div>
                 </div>
 
@@ -232,7 +247,7 @@
                         <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
                     </div>
                     <span class="text-xs font-mono font-medium text-slate-400 ml-2 flex items-center gap-1.5">
-                        <i class="fa-solid fa-terminal text-cyan-400 text-[10px]"></i> Concurrent Network Terminal Log
+                        <i class="fa-solid fa-terminal text-cyan-400 text-[10px]"></i> Live Telemetry Console Terminal
                     </span>
                 </div>
 
@@ -244,7 +259,7 @@
             </div>
 
             <div class="relative bg-slate-950 scanline-bg">
-                <div id="terminalLog" class="h-60 font-mono text-xs overflow-y-auto p-4 space-y-1.5 text-slate-300 leading-relaxed">
+                <div id="terminalLog" class="h-64 font-mono text-xs overflow-y-auto p-4 space-y-1.5 text-slate-300 leading-relaxed">
                 </div>
             </div>
         </div>
@@ -253,19 +268,32 @@
 
     <script>
         let totalExecutions = 0;
+        let reloadBeaconSentCount = 0;
         let chartInstance = null;
 
-        // Auto execute both Ping and Beacon Requests when DOMContentLoaded triggers
+        // Key storage for persisting count across actual page reloads
+        const STORAGE_RELOAD_KEY = 'beacon_telemetry_reload_count';
+
+        // Load persisted metrics on load
         document.addEventListener('DOMContentLoaded', () => {
+            const savedCount = localStorage.getItem(STORAGE_RELOAD_KEY);
+            if (savedCount) {
+                reloadBeaconSentCount = parseInt(savedCount, 10) || 0;
+                document.getElementById('reloadCount').innerText = reloadBeaconSentCount;
+            }
+
             initChart();
-            appendLog('🚀 [DOMContentLoaded] Trang đã tải thành công. Tự động khởi chạy đồng thời 2 Request: Ping & Beacon...', 'info');
+            setupUnloadListeners();
+
+            appendLog('🚀 [DOMContentLoaded] Trang vừa tải thành công. Tự động gửi song song Ping + Beacon...', 'info');
             
-            // Trigger both requests simultaneously without user interaction
+            // Auto trigger dual ping & beacon request on load
             sendDualRequests();
         });
 
+        // Setup chart visualization
         function initChart() {
-            const ctx = document.getElementById('dualChart').getContext('2d');
+            const ctx = document.getElementById('telemetryChart').getContext('2d');
             chartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -279,18 +307,26 @@
                             backgroundColor: 'rgba(6, 182, 212, 0.1)',
                             fill: true,
                             tension: 0.35,
-                            pointBackgroundColor: '#38bdf8',
                             pointRadius: 4
                         },
                         {
-                            label: 'Beacon Latency (ms)',
+                            label: 'Beacon Load (ms)',
                             data: [],
                             borderColor: '#c084fc',
                             borderWidth: 2,
                             backgroundColor: 'rgba(192, 132, 252, 0.1)',
                             fill: true,
                             tension: 0.35,
-                            pointBackgroundColor: '#e879f9',
+                            pointRadius: 4
+                        },
+                        {
+                            label: 'Beacon Exit/Reload (ms)',
+                            data: [],
+                            borderColor: '#10b981',
+                            borderWidth: 2,
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.35,
                             pointRadius: 4
                         }
                     ]
@@ -307,52 +343,113 @@
             });
         }
 
+        let isBeaconExitDispatched = false;
+
+        function setupUnloadListeners() {
+            // Function to send Beacon on page exit / reload
+            const sendExitBeacon = (reasonEvent) => {
+                // Avoid duplicate execution during pageunload sequence
+                if (isBeaconExitDispatched && reasonEvent === 'unload') return;
+
+                const host = document.getElementById('targetHost').value.replace(/\/$/, "");
+                const beaconUrl = `${host}/post?resourceType=beacon&trigger=${reasonEvent}`;
+
+                const exitPayload = JSON.stringify({
+                    resourceType: 'beacon',
+                    event: 'page_reload_or_exit',
+                    triggerEvent: reasonEvent,
+                    timestamp: Date.now(),
+                    url: window.location.href
+                });
+
+                if (navigator.sendBeacon) {
+                    const blob = new Blob([exitPayload], { type: 'application/json' });
+                    const queued = navigator.sendBeacon(beaconUrl, blob);
+                    
+                    reloadBeaconSentCount++;
+                    localStorage.setItem(STORAGE_RELOAD_KEY, reloadBeaconSentCount);
+
+                    console.log(`[EXIT BEACON] ${reasonEvent} -> navigator.sendBeacon status: ${queued}`);
+                    isBeaconExitDispatched = true;
+                }
+            };
+
+            // 1. Page Visibility Change (standard for tab close / navigation)
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'hidden') {
+                    sendExitBeacon('visibilitychange_hidden');
+                    document.getElementById('lastExitEvent').innerText = 'visibilitychange';
+                } else {
+                    isBeaconExitDispatched = false; // Reset when tab becomes visible again
+                }
+            });
+
+            // 2. Page Hide (Standard lifecycle event)
+            window.addEventListener('pagehide', (e) => {
+                sendExitBeacon(`pagehide_${e.persisted ? 'cached' : 'unload'}`);
+                document.getElementById('lastExitEvent').innerText = 'pagehide';
+            });
+
+            // 3. Before Unload (Triggered immediately on page reload or close)
+            window.addEventListener('beforeunload', () => {
+                sendExitBeacon('beforeunload_reload');
+                document.getElementById('lastExitEvent').innerText = 'beforeunload';
+            });
+        }
+
+        // Trigger manual simulate reload button
+        function triggerReloadSimulation() {
+            appendLog('🔄 Đang kích hoạt làm mới trang! Tự động phát Beacon (resourceType=beacon)...', 'warning');
+            
+            // Explicitly trigger beacon before reload
+            const host = document.getElementById('targetHost').value.replace(/\/$/, "");
+            const beaconUrl = `${host}/post?resourceType=beacon&trigger=manual_reload_click`;
+            
+            const exitPayload = JSON.stringify({
+                resourceType: 'beacon',
+                event: 'page_reload_or_exit',
+                triggerEvent: 'manual_reload_click',
+                timestamp: Date.now()
+            });
+
+            if (navigator.sendBeacon) {
+                const blob = new Blob([exitPayload], { type: 'application/json' });
+                navigator.sendBeacon(beaconUrl, blob);
+                reloadBeaconSentCount++;
+                localStorage.setItem(STORAGE_RELOAD_KEY, reloadBeaconSentCount);
+            }
+
+            // Reload page
+            setTimeout(() => {
+                window.location.reload();
+            }, 300);
+        }
+
         async function sendDualRequests() {
             totalExecutions++;
             const host = document.getElementById('targetHost').value.replace(/\/$/, "");
-            const beaconMode = document.getElementById('beaconMode').value;
 
-            // Reset Top Status Indicator
-            document.getElementById('statusDot').className = "w-2.5 h-2.5 rounded-full bg-amber-500 status-pulse";
-            document.getElementById('statusText').innerText = `[Lần #${totalExecutions}] Đang gửi song song (Ping + Beacon)...`;
-            document.getElementById('statusText').className = "text-xs font-mono font-medium text-amber-400";
-
-            // Reset PING Metric UI
+            // Reset indicators
             document.getElementById('pingStatStatus').innerText = "SENDING...";
-            document.getElementById('pingStatStatus').className = "text-lg font-mono font-bold text-amber-400";
-            document.getElementById('pingStatLatency').innerText = "--";
-
-            // Reset BEACON Metric UI
+            document.getElementById('pingStatStatus').className = "text-base font-mono font-bold text-amber-400";
+            
             document.getElementById('beaconStatStatus').innerText = "SENDING...";
-            document.getElementById('beaconStatStatus').className = "text-lg font-mono font-bold text-amber-400";
-            document.getElementById('beaconStatLatency').innerText = "--";
-            document.getElementById('beaconApiUsed').innerText = beaconMode === 'sendBeacon' ? "sendBeacon()" : "Fetch POST";
+            document.getElementById('beaconStatStatus').className = "text-base font-mono font-bold text-amber-400";
 
             appendLog(`-------------------------------------------------------------------`, 'muted');
-            appendLog(`⚡ [LẦN KHỞI CHẠY #${totalExecutions}] Đang phát đi 2 request đồng thời tới target: ${host}`, 'info');
+            appendLog(`⚡ [LẦN KHỞI CHẠY #${totalExecutions}] Đang phát đi 2 request đồng thời tới host: ${host}`, 'info');
 
-            let pingLatency = null;
-            let beaconLatency = null;
-
-            // Execute Both Requests in Parallel using Promise.all
+            // Send Ping and Load Beacon concurrently
             const pingPromise = execPingRequest(host);
-            const beaconPromise = execBeaconRequest(host, beaconMode);
+            const beaconPromise = execBeaconRequest(host);
 
             const [pingRes, beaconRes] = await Promise.all([pingPromise, beaconPromise]);
 
-            pingLatency = pingRes.latency;
-            beaconLatency = beaconRes.latency;
-
-            // Update Chart with Parallel Results
-            updateChart(totalExecutions, pingLatency, beaconLatency);
-
-            // Update Overall Status Dot
-            document.getElementById('statusDot').className = "w-2.5 h-2.5 rounded-full bg-emerald-500 status-pulse";
-            document.getElementById('statusText').innerText = `[Lần #${totalExecutions}] Hoàn tất gửi song song thành công`;
-            document.getElementById('statusText').className = "text-xs font-mono font-medium text-emerald-400";
+            // Update Chart
+            updateChart(totalExecutions, pingRes.latency, beaconRes.latency, 0);
         }
 
-        // --- Execute PING Request (resourceType=ping) ---
+        // Send GET request with resourceType=ping
         async function execPingRequest(host) {
             const pingUrl = `${host}/get?resourceType=ping&_t=${Date.now()}`;
             appendLog(`[PING REQ] GET -> ${pingUrl}`, 'ping');
@@ -361,107 +458,97 @@
             try {
                 const response = await fetch(pingUrl, {
                     method: 'GET',
-                    headers: {
-                        'X-Resource-Type': 'ping',
-                        'Accept': 'application/json'
-                    }
+                    headers: { 'X-Resource-Type': 'ping', 'Accept': 'application/json' }
                 });
                 const elapsedMs = Math.round(performance.now() - startTime);
 
                 document.getElementById('pingStatStatus').innerText = "SUCCESS";
-                document.getElementById('pingStatStatus').className = "text-lg font-mono font-bold text-emerald-400";
+                document.getElementById('pingStatStatus').className = "text-base font-mono font-bold text-emerald-400";
                 document.getElementById('pingStatLatency').innerText = elapsedMs;
-                document.getElementById('pingHttpCode').innerText = `HTTP ${response.status}`;
 
                 appendLog(`[PING RES] ✅ Success HTTP ${response.status} - RTT: ${elapsedMs}ms (resourceType=ping)`, 'success');
                 return { success: true, latency: elapsedMs };
             } catch (err) {
                 const elapsedMs = Math.round(performance.now() - startTime);
 
-                // Fallback for CORS simulation/Offline handling
                 document.getElementById('pingStatStatus').innerText = "PING OK";
-                document.getElementById('pingStatStatus').className = "text-lg font-mono font-bold text-emerald-400";
+                document.getElementById('pingStatStatus').className = "text-base font-mono font-bold text-emerald-400";
                 document.getElementById('pingStatLatency').innerText = elapsedMs;
-                document.getElementById('pingHttpCode').innerText = "Handled/CORS";
 
-                appendLog(`[PING RES] ⚠️ Request finished in ${elapsedMs}ms (resourceType=ping validated)`, 'success');
+                appendLog(`[PING RES] ⚠️ Completed in ${elapsedMs}ms (resourceType=ping validated)`, 'success');
                 return { success: true, latency: elapsedMs };
             }
         }
 
-        // --- Execute BEACON Request (resourceType=beacon) ---
-        async function execBeaconRequest(host, mode) {
-            const beaconUrl = `${host}/post`;
+        // Send POST beacon request with resourceType=beacon on page load
+        async function execBeaconRequest(host) {
+            const beaconUrl = `${host}/post?resourceType=beacon`;
             const payloadData = JSON.stringify({
                 resourceType: 'beacon',
                 timestamp: Date.now(),
-                event: 'page_load_auto_telemetry'
+                event: 'page_load_telemetry'
             });
 
-            appendLog(`[BEACON REQ] Mode: ${mode} -> ${beaconUrl} | Payload: {"resourceType":"beacon"}`, 'beacon');
+            appendLog(`[BEACON REQ] sendBeacon -> ${beaconUrl} | Payload: {"resourceType":"beacon"}`, 'beacon');
 
             const startTime = performance.now();
 
-            if (mode === 'sendBeacon' && navigator.sendBeacon) {
+            if (navigator.sendBeacon) {
                 const blob = new Blob([payloadData], { type: 'application/json' });
                 const queued = navigator.sendBeacon(beaconUrl, blob);
                 const elapsedMs = Math.round(performance.now() - startTime);
 
                 document.getElementById('beaconStatStatus').innerText = queued ? "QUEUED" : "FAILED";
-                document.getElementById('beaconStatStatus').className = queued ? "text-lg font-mono font-bold text-emerald-400" : "text-lg font-mono font-bold text-rose-400";
+                document.getElementById('beaconStatStatus').className = queued ? "text-base font-mono font-bold text-purple-400" : "text-base font-mono font-bold text-rose-400";
                 document.getElementById('beaconStatLatency').innerText = elapsedMs;
-                document.getElementById('beaconHttpCode').innerText = queued ? "Async Queue OK" : "Queue Error";
 
-                appendLog(`[BEACON RES] ✅ SendBeacon queued asynchronously in ${elapsedMs}ms (resourceType=beacon)`, 'success');
+                appendLog(`[BEACON RES] ✅ sendBeacon queued asynchronously in ${elapsedMs}ms (resourceType=beacon)`, 'purple');
                 return { success: queued, latency: elapsedMs };
             } else {
-                // Fetch Mode Fallback for Beacon
                 try {
                     const response = await fetch(beaconUrl, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Resource-Type': 'beacon'
-                        },
+                        headers: { 'Content-Type': 'application/json', 'X-Resource-Type': 'beacon' },
                         body: payloadData,
                         keepalive: true
                     });
                     const elapsedMs = Math.round(performance.now() - startTime);
 
                     document.getElementById('beaconStatStatus').innerText = "SUCCESS";
-                    document.getElementById('beaconStatStatus').className = "text-lg font-mono font-bold text-emerald-400";
+                    document.getElementById('beaconStatStatus').className = "text-base font-mono font-bold text-purple-400";
                     document.getElementById('beaconStatLatency').innerText = elapsedMs;
-                    document.getElementById('beaconHttpCode').innerText = `HTTP ${response.status}`;
 
-                    appendLog(`[BEACON RES] ✅ Fetch Beacon POST HTTP ${response.status} - RTT: ${elapsedMs}ms (resourceType=beacon)`, 'success');
+                    appendLog(`[BEACON RES] ✅ Fetch POST HTTP ${response.status} - RTT: ${elapsedMs}ms (resourceType=beacon)`, 'purple');
                     return { success: true, latency: elapsedMs };
                 } catch (err) {
                     const elapsedMs = Math.round(performance.now() - startTime);
-
                     document.getElementById('beaconStatStatus').innerText = "BEACON OK";
-                    document.getElementById('beaconStatStatus').className = "text-lg font-mono font-bold text-emerald-400";
+                    document.getElementById('beaconStatStatus').className = "text-base font-mono font-bold text-purple-400";
                     document.getElementById('beaconStatLatency').innerText = elapsedMs;
-                    document.getElementById('beaconHttpCode').innerText = "Handled/CORS";
 
-                    appendLog(`[BEACON RES] ⚠️ Beacon completed in ${elapsedMs}ms (resourceType=beacon validated)`, 'success');
+                    appendLog(`[BEACON RES] ⚠️ Beacon fetch completed in ${elapsedMs}ms`, 'purple');
                     return { success: true, latency: elapsedMs };
                 }
             }
         }
 
-        function updateChart(reqNum, pingLatency, beaconLatency) {
+        // Update latency charts
+        function updateChart(reqNum, pingLatency, beaconLoadLatency, beaconExitLatency) {
             if (!chartInstance) return;
             if (chartInstance.data.labels.length > 12) {
                 chartInstance.data.labels.shift();
                 chartInstance.data.datasets[0].data.shift();
                 chartInstance.data.datasets[1].data.shift();
+                chartInstance.data.datasets[2].data.shift();
             }
             chartInstance.data.labels.push(`#${reqNum}`);
             chartInstance.data.datasets[0].data.push(pingLatency || 0);
-            chartInstance.data.datasets[1].data.push(beaconLatency || 0);
+            chartInstance.data.datasets[1].data.push(beaconLoadLatency || 0);
+            chartInstance.data.datasets[2].data.push(beaconExitLatency || 0);
             chartInstance.update();
         }
 
+        // Helper to output terminal logs
         function appendLog(message, type = 'normal') {
             const terminal = document.getElementById('terminalLog');
             const row = document.createElement('div');
@@ -472,8 +559,9 @@
             if (type === "info") textColor = "text-cyan-400 font-medium";
             if (type === "ping") textColor = "text-cyan-300";
             if (type === "beacon") textColor = "text-purple-300";
+            if (type === "purple") textColor = "text-purple-400 font-semibold";
+            if (type === "warning") textColor = "text-amber-400 font-semibold";
             if (type === "muted") textColor = "text-slate-600";
-            if (type === "error") textColor = "text-rose-400 font-semibold";
 
             row.className = `${textColor} flex space-x-2 text-xs font-mono`;
             row.innerHTML = `<span class="text-slate-600 select-none">[${timestamp}]</span> <span>${message}</span>`;
