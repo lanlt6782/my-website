@@ -2,8 +2,9 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>Dynamic DOM Test Page</title>
-  <!-- External CSS mẫu -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>お知らせ一覧 - External CSS/JS & Dynamic DOM Test</title>
+  <!-- External CSS -->
   <link rel="stylesheet" href="/assets/app.css" />
 </head>
 <body>
@@ -13,24 +14,23 @@
   </header>
 
   <main>
-    <!-- Vùng trống ban đầu, script sẽ tạo/cập nhật DOM động vào đây -->
+    <!-- Vùng sẽ được script tạo/cập nhật DOM động khi mở trang -->
     <div id="dynamic-box"></div>
 
-    <!-- Nút test thêm cập nhật DOM khi click -->
+    <!-- Nút test cập nhật DOM động khi click -->
     <button id="btn-add-item" type="button">項目を追加</button>
   </main>
 
-  <!-- External JS mẫu (nếu có) -->
+  <!-- External JS -->
   <script src="/assets/widget.js"></script>
 
-  <!-- Script tạo/cập nhật DOM động -->
+  <!-- Script tạo/cập nhật DOM động ngay khi tải trang -->
   <script>
     (function () {
       function renderDynamicContent() {
         const box = document.getElementById("dynamic-box");
         if (!box) return;
 
-        // 1. Tạo node mới bên trong #dynamic-box
         const notice = document.createElement("div");
         notice.className = "dynamic-notice";
         notice.id = "dynamic-notice-1";
@@ -41,7 +41,7 @@
 
         const desc = document.createElement("p");
         desc.className = "desc";
-        desc.textContent = "動的スクリプトによって追加された案内メッセージです。";
+        desc.textContent = "動的なスクリプトによって追加された案内メッセージです。";
 
         notice.appendChild(badge);
         notice.appendChild(desc);
